@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 71184341}
   - component: {fileID: 71184343}
   - component: {fileID: 71184344}
+  - component: {fileID: 71184345}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -197,6 +198,21 @@ MonoBehaviour:
   config: {fileID: 71184341}
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   color: {r: 0.4113207, g: 0, b: 0, a: 1}
+--- !u!114 &71184345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71184340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df06a70a47a3ba147b0c44e8580f1547, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.BoardGizmoDrawer
+  config: {fileID: 71184341}
+  validColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  origin: {x: 0, y: 0, z: 0}
 --- !u!1 &113109405
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,11 +540,11 @@ GameObject:
   m_Component:
   - component: {fileID: 469887685}
   - component: {fileID: 469887684}
-  - component: {fileID: 469887683}
-  - component: {fileID: 469887687}
-  - component: {fileID: 469887688}
-  - component: {fileID: 469887689}
+  - component: {fileID: 469887694}
+  - component: {fileID: 469887695}
   - component: {fileID: 469887690}
+  - component: {fileID: 469887692}
+  - component: {fileID: 469887693}
   m_Layer: 0
   m_Name: NEW
   m_TagString: Untagged
@@ -536,21 +552,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &469887683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 469887682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31edef0503578654bac8b29db1b95d6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game.Mono::Game.Mono.BlockSpawner_NEW
-  boardConfigHolder: {fileID: 71184341}
-  currentBlock: {fileID: 469887684}
-  spawnIntervalSeconds: 3
 --- !u!114 &469887684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -583,50 +584,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &469887687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 469887682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d684f60a3b9a32b4cbfc86d65d5d8f9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game.Mono::Game.Mono.PlayerBlockHorizontalMover_NEW
-  boardConfig: {fileID: 71184341}
-  currentBlock: {fileID: 469887684}
-  moveCooldownSeconds: 0.1
---- !u!114 &469887688
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 469887682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dc64d14b8391834b9313699516daaf3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game.Mono::Game.Mono.PlayerBlockVerticalMover_NEW
-  boardConfig: {fileID: 71184341}
-  currentBlock: {fileID: 469887684}
-  moveCooldownSeconds: 0.1
---- !u!114 &469887689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 469887682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e092d3f43a0f3334baee1149a0be7b38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game.Mono::Game.Mono.BlockAutoDropper
-  currentBlock: {fileID: 469887684}
-  autoDropIntervalSeconds: 1
 --- !u!114 &469887690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -641,6 +598,106 @@ MonoBehaviour:
   m_EditorClassIdentifier: Game.Mono::Game.Mono.BlockGizmoDrawer
   boardConfig: {fileID: 71184341}
   currentBlock: {fileID: 469887684}
+--- !u!114 &469887692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469887682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b384a3d84dc9284e97e5cf43a5939e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.BoardCellArrayDebuger
+--- !u!114 &469887693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469887682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a60bac020a1b074c95873b40f9858b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.MicroBehavioursExecutor
+  microBehaviours:
+  - rid: 4983845021229777182
+  - rid: 4983845021229777175
+  - rid: 4983845021229777178
+  - rid: 4983845021229777179
+  - rid: 4983845021229777180
+  - rid: 4983845021229777185
+  references:
+    version: 2
+    RefIds:
+    - rid: 4983845021229777175
+      type: {class: PlayerBlockHorizontalMover, ns: Game.Mono, asm: Game.Mono}
+      data:
+        boardConfig: {fileID: 71184341}
+        currentBlock: {fileID: 469887684}
+        moveCooldownSeconds: 0.1
+    - rid: 4983845021229777178
+      type: {class: PlayerBlockVerticalMover, ns: Game.Mono, asm: Game.Mono}
+      data:
+        boardConfig: {fileID: 71184341}
+        currentBlock: {fileID: 469887684}
+        moveCooldownSeconds: 0.1
+    - rid: 4983845021229777179
+      type: {class: BlockAutoDropper, ns: Game.Mono, asm: Game.Mono}
+      data:
+        canLockCurrentBlockTag: {fileID: 469887694}
+        boardConfig: {fileID: 71184341}
+        currentBlock: {fileID: 469887684}
+        autoDropIntervalSeconds: 0.5
+        autoDropTimer: 0
+    - rid: 4983845021229777180
+      type: {class: PlayerBlockHardDropper, ns: Game.Mono, asm: Game.Mono}
+      data:
+        canLockCurrentBlockTag: {fileID: 469887694}
+        boardConfig: {fileID: 71184341}
+        currentBlock: {fileID: 469887684}
+    - rid: 4983845021229777182
+      type: {class: BlockSpawner, ns: Game.Mono, asm: Game.Mono}
+      data:
+        blockLockedEvent: {fileID: 469887695}
+        boardConfigHolder: {fileID: 71184341}
+        currentBlock: {fileID: 469887684}
+    - rid: 4983845021229777185
+      type: {class: BlockLocker, ns: Game.Mono, asm: Game.Mono}
+      data:
+        canLockCurrentBlockTag: {fileID: 469887694}
+        blockLockedEvent: {fileID: 469887695}
+        currentBlock: {fileID: 469887684}
+--- !u!114 &469887694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469887682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52c61cd84332a944ba12dbbb6bee700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.CanLockCurrentBlockTagHolder
+  Value:
+    Value: 0
+--- !u!114 &469887695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469887682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcf0b3a2b28bc174796f5ca599ba3878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.BlockLockedEventHolder
+  Value:
+    Value: 1
 --- !u!1 &754869943
 GameObject:
   m_ObjectHideFlags: 0
