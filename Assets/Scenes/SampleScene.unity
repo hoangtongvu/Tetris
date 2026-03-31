@@ -119,6 +119,84 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &71184340
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 71184342}
+  - component: {fileID: 71184341}
+  - component: {fileID: 71184343}
+  - component: {fileID: 71184344}
+  m_Layer: 0
+  m_Name: Board
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &71184341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71184340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10c76db4bfb0b06448441ae84e356f59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.BoardConfigHolder
+  Value:
+    Width: 10
+    Height: 20
+    CellWorldSize: 0.5
+--- !u!4 &71184342
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71184340}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &71184343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71184340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 680772462dd2d9a43b1506dcd3d887b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.BoardCellArrayInitializer
+  config: {fileID: 71184341}
+--- !u!114 &71184344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71184340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eab77203cdf17514ea6b70aa9f00d4b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.CellDrawer
+  config: {fileID: 71184341}
+  material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  color: {r: 0.4113207, g: 0, b: 0, a: 1}
 --- !u!1 &113109405
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,7 +337,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 2.5, y: 5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -436,6 +514,133 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!1 &469887682
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 469887685}
+  - component: {fileID: 469887684}
+  - component: {fileID: 469887683}
+  - component: {fileID: 469887687}
+  - component: {fileID: 469887688}
+  - component: {fileID: 469887689}
+  - component: {fileID: 469887690}
+  m_Layer: 0
+  m_Name: NEW
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &469887683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469887682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31edef0503578654bac8b29db1b95d6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.BlockSpawner_NEW
+  boardConfigHolder: {fileID: 71184341}
+  currentBlock: {fileID: 469887684}
+  spawnIntervalSeconds: 3
+--- !u!114 &469887684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469887682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be0e80d9972885146bf6360a2aca484a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.CurrentBlockRef
+  Value:
+    CenterPosition:
+      x: 0
+      y: 0
+    CellOffsets: []
+--- !u!4 &469887685
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469887682}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &469887687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469887682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d684f60a3b9a32b4cbfc86d65d5d8f9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.PlayerBlockHorizontalMover_NEW
+  boardConfig: {fileID: 71184341}
+  currentBlock: {fileID: 469887684}
+  moveCooldownSeconds: 0.1
+--- !u!114 &469887688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469887682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc64d14b8391834b9313699516daaf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.PlayerBlockVerticalMover_NEW
+  boardConfig: {fileID: 71184341}
+  currentBlock: {fileID: 469887684}
+  moveCooldownSeconds: 0.1
+--- !u!114 &469887689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469887682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e092d3f43a0f3334baee1149a0be7b38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.BlockAutoDropper
+  currentBlock: {fileID: 469887684}
+  autoDropIntervalSeconds: 1
+--- !u!114 &469887690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469887682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a60e683784e52304a949a7f8e91059e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.BlockGizmoDrawer
+  boardConfig: {fileID: 71184341}
+  currentBlock: {fileID: 469887684}
 --- !u!1 &754869943
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,8 +651,9 @@ GameObject:
   m_Component:
   - component: {fileID: 754869945}
   - component: {fileID: 754869944}
+  - component: {fileID: 754869946}
   m_Layer: 0
-  m_Name: Border
+  m_Name: BorderRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -502,12 +708,7 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Positions:
-  - {x: -3, y: -3, z: 0}
-  - {x: -3, y: 3, z: 0}
-  - {x: 3, y: 3, z: 0}
-  - {x: 3, y: -3, z: 0}
-  - {x: -3, y: -3, z: 0}
+  m_Positions: []
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -581,6 +782,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &754869946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754869943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e299576559f7174eaa06b4450c9c87c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.BoardBorderDrawer
+  config: {fileID: 71184341}
+  lineRenderer: {fileID: 754869944}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,53 +845,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1818067493
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1818067495}
-  - component: {fileID: 1818067494}
-  m_Layer: 0
-  m_Name: Spawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1818067494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1818067493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31edef0503578654bac8b29db1b95d6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game.Mono::Game.Mono.BlockSpawner
-  cellPresenterPrefab: {fileID: 5502772379597430466, guid: abdb4eed7eaba1d4ca751430d687ddd1, type: 3}
-  blockPrefab: {fileID: 5928521519792604665, guid: 47aa1dd8d1d9365438c5b9fc773f4a9c, type: 3}
-  spawnIntervalSeconds: 3
---- !u!4 &1818067495
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1818067493}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -685,5 +853,6 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 113109407}
+  - {fileID: 71184342}
   - {fileID: 754869945}
-  - {fileID: 1818067495}
+  - {fileID: 469887685}
