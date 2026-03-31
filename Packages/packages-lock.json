@@ -40,6 +40,13 @@
       "dependencies": {},
       "hash": "1144b7d80b818447855412521f4c85cca046246c"
     },
+    "com.mackysoft.serializereference-extensions": {
+      "version": "https://github.com/mackysoft/Unity-SerializeReferenceExtensions.git?path=Assets/MackySoft/MackySoft.SerializeReferenceExtensions#1.7.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "1d388a4bba9235dfca394830ca186bb477e90901"
+    },
     "com.unity.ai.navigation": {
       "version": "2.0.11",
       "depth": 0,
