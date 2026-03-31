@@ -1,49 +1,50 @@
 using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 
-namespace Game.Mono
+namespace Game.Mono;
+
+[Serializable]
+public class PlayerBlockVerticalMover : MicroBehaviour
 {
-    [RequireComponent(typeof(CurrentBlockRef))]
-    public class PlayerBlockVerticalMover : MonoBehaviour
+    [SerializeField] private BoardConfigHolder boardConfig;
+    [SerializeField] private CurrentBlockRef currentBlock;
+    [SerializeField] private float moveCooldownSeconds = 0.1f;
+
+    public override void Start()
     {
-        [SerializeField] private BoardConfigHolder boardConfig;
-        [SerializeField] private CurrentBlockRef currentBlock;
-        [SerializeField] private float moveCooldownSeconds = 0.1f;
+        this.GetTask().Forget();
+    }
 
-        private void Start()
+    private async UniTaskVoid GetTask()
+    {
+        while (true)
         {
-            this.GetTask().Forget();
-        }
+            await UniTask.WaitForSeconds(this.moveCooldownSeconds);
 
-        private async UniTaskVoid GetTask()
-        {
-            while (true)
+            if (currentBlock.Value == null)
+                continue;
+
+            if (Input.GetKey(KeyCode.DownArrow))
             {
-                await UniTask.WaitForSeconds(this.moveCooldownSeconds);
-
-                if (currentBlock.Value == null)
-                    continue;
-
-                if (Input.GetKey(KeyCode.DownArrow))
-                {
-                    this.MoveBlockY(-1);
-                }
+                this.MoveBlockY(-1);
             }
         }
+    }
 
-        private void MoveBlockY(sbyte input)
-        {
-            var blockData = this.currentBlock.Value;
+    private void MoveBlockY(sbyte input)
+    {
+        var blockData = this.currentBlock.Value;
 
-            var tempPos = blockData.CenterPosition;
-            tempPos.y += input;
+        var tempPos = blockData.CenterPosition;
+        tempPos.y += input;
 
-            bool canMove =
-                BlockPositionCheckingHelpers.CheckBottomBorder(tempPos, blockData.CellOffsets);
+        bool canMove =
+            BlockPositionCheckingHelpers.CheckBottomBorder(tempPos, blockData.CellOffsets) &&
+            BlockPositionCheckingHelpers.CheckCollision(boardConfig.Value, BoardCellArrayHolder.Instance.Value, tempPos, blockData.CellOffsets);
 
-            if (!canMove) return;
+        if (!canMove) return;
 
-            blockData.CenterPosition = tempPos;
-        }
+        blockData.CenterPosition = tempPos;
     }
 }

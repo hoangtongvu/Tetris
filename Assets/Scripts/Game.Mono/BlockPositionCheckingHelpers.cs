@@ -38,6 +38,10 @@ public static class BlockPositionCheckingHelpers
         foreach (var cellOffset in cellOffsets)
         {
             var cellPos = blockPos + cellOffset;
+
+            if (cellPos.y >= boardConfig.Height)
+                return true;
+
             var cellData = board.Value[cellPos.x][cellPos.y];
 
             if (cellData.IsValid)

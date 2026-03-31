@@ -1,46 +1,45 @@
-using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
 
-namespace Game.Mono
+namespace Game.Mono;
+
+[Serializable]
+public class BlockAutoDropper : MicroBehaviour
 {
-    [RequireComponent(typeof(CurrentBlockRef))]
-    public class BlockAutoDropper : MonoBehaviour
+    [SerializeField] private CanLockCurrentBlockTagHolder canLockCurrentBlockTag;
+    [SerializeField] private BoardConfigHolder boardConfig;
+    [SerializeField] private CurrentBlockRef currentBlock;
+    [SerializeField] private float autoDropIntervalSeconds = 1f;
+    private float autoDropTimer = 0;
+
+    public override void Update()
     {
-        [SerializeField] private CurrentBlockRef currentBlock;
-        [SerializeField] private float autoDropIntervalSeconds = 1f;
+        this.autoDropTimer += Time.deltaTime;
 
-        private void Start()
+        if (this.autoDropTimer < this.autoDropIntervalSeconds)
+            return;
+
+        this.autoDropTimer = 0f;
+        this.DropCurrentBlock();
+    }
+
+    private void DropCurrentBlock()
+    {
+        var blockData = this.currentBlock.Value;
+
+        var tempPos = blockData.CenterPosition;
+        tempPos.y--;
+
+        bool canMove =
+            BlockPositionCheckingHelpers.CheckBottomBorder(tempPos, blockData.CellOffsets) &&
+            BlockPositionCheckingHelpers.CheckCollision(boardConfig.Value, BoardCellArrayHolder.Instance.Value, tempPos, blockData.CellOffsets);
+
+        if (!canMove)
         {
-            this.TaskRunner().Forget();
+            this.canLockCurrentBlockTag.Value.Value = true;
+            return;
         }
 
-        private async UniTaskVoid TaskRunner()
-        {
-            while (true)
-            {
-                await UniTask.Delay(TimeSpan.FromSeconds(this.autoDropIntervalSeconds));
-
-                if (currentBlock.Value == null)
-                    continue;
-
-                this.DropCurrentBlock();
-            }
-        }
-
-        private void DropCurrentBlock()
-        {
-            var blockData = this.currentBlock.Value;
-
-            var tempPos = blockData.CenterPosition;
-            tempPos.y--;
-
-            bool canMove =
-                BlockPositionCheckingHelpers.CheckBottomBorder(tempPos, blockData.CellOffsets);
-
-            if (!canMove) return;
-
-            blockData.CenterPosition = tempPos;
-        }
+        blockData.CenterPosition = tempPos;
     }
 }

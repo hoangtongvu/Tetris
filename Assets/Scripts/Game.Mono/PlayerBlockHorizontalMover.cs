@@ -1,53 +1,55 @@
 using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 
-namespace Game.Mono
+namespace Game.Mono;
+
+[Serializable]
+public class PlayerBlockHorizontalMover : MicroBehaviour
 {
-    [RequireComponent(typeof(CurrentBlockRef))]
-    public class PlayerBlockHorizontalMover : MonoBehaviour
+    [SerializeField] private BoardConfigHolder boardConfig;
+    [SerializeField] private CurrentBlockRef currentBlock;
+    [SerializeField] private float moveCooldownSeconds = 0.1f;
+
+    public override void Start()
     {
-        [SerializeField] private BoardConfigHolder boardConfig;
-        [SerializeField] private CurrentBlockRef currentBlock;
-        [SerializeField] private float moveCooldownSeconds = 0.1f;
+        this.GetTask().Forget();
+    }
 
-        private void Start()
+    private async UniTaskVoid GetTask()
+    {
+        while (true)
         {
-            this.GetTask().Forget();
-        }
+            await UniTask.WaitForSeconds(this.moveCooldownSeconds);
 
-        private async UniTaskVoid GetTask()
-        {
-            while (true)
+            if (currentBlock.Value == null)
+                continue;
+
+            if (Input.GetKey(KeyCode.RightArrow))
             {
-                await UniTask.WaitForSeconds(this.moveCooldownSeconds);
+                this.MoveBlockX(1);
+            }
 
-                if (currentBlock.Value == null)
-                    continue;
-
-                if (Input.GetKey(KeyCode.RightArrow))
-                {
-                    this.MoveBlockX(1);
-                }
-
-                if (Input.GetKey(KeyCode.LeftArrow))
-                {
-                    this.MoveBlockX(-1);
-                }
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                this.MoveBlockX(-1);
             }
         }
+    }
 
-        private void MoveBlockX(sbyte input)
-        {
-            var blockData = this.currentBlock.Value;
+    private void MoveBlockX(sbyte input)
+    {
+        var blockData = this.currentBlock.Value;
 
-            var tempPos = blockData.CenterPosition;
-            tempPos.x += input;
+        var tempPos = blockData.CenterPosition;
+        tempPos.x += input;
 
-            bool canMove =
-                BlockPositionCheckingHelpers.CheckHorizontalBorders(this.boardConfig.Value, tempPos, blockData.CellOffsets);
-            if (!canMove) return;
+        bool canMove =
+            BlockPositionCheckingHelpers.CheckHorizontalBorders(this.boardConfig.Value, tempPos, blockData.CellOffsets) &&
+            BlockPositionCheckingHelpers.CheckCollision(boardConfig.Value, BoardCellArrayHolder.Instance.Value, tempPos, blockData.CellOffsets);
 
-            blockData.CenterPosition = tempPos;
-        }
+        if (!canMove) return;
+
+        blockData.CenterPosition = tempPos;
     }
 }

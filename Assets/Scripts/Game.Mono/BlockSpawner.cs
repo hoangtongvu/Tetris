@@ -1,54 +1,50 @@
-using Cysharp.Threading.Tasks;
 using System;
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace Game.Mono
+namespace Game.Mono;
+
+[Serializable]
+public class BlockSpawner : MicroBehaviour
 {
-    [RequireComponent(typeof(CurrentBlockRef))]
-    public class BlockSpawner : MonoBehaviour
+    [SerializeField] private BlockLockedEventHolder blockLockedEvent;
+    [SerializeField] private BoardConfigHolder boardConfigHolder;
+    [SerializeField] private CurrentBlockRef currentBlock;
+
+    public static readonly int2[][] blockOffsets = new int2[][]
     {
-        [SerializeField] private BoardConfigHolder boardConfigHolder;
-        [SerializeField] private CurrentBlockRef currentBlock;
-        [SerializeField] private float spawnIntervalSeconds = 1f;
+        // T-piece
+        new int2[] { new(0,0), new(1,0), new(-1,0), new(0,1) },
+        // I-piece
+        new int2[] { new(0,0), new(-1,0), new(1,0), new(2,0) },
+        // O-piece
+        new int2[] { new(0,0), new(1,0), new(0,1), new(1,1) },
+        // S-piece
+        new int2[] { new(0,0), new(1,0), new(0,1), new(-1,1) },
+        // Z-piece
+        new int2[] { new(0,0), new(-1,0), new(0,1), new(1,1) },
+        // J-piece
+        new int2[] { new(0,0), new(-1,0), new(1,0), new(-1,1) },
+        // L-piece
+        new int2[] { new(0,0), new(-1,0), new(1,0), new(1,1) },
+    };
 
-        public static readonly int2[][] blockOffsets = new int2[][]
+    public override void Update()
+    {
+        if (!this.blockLockedEvent.Value.Value)
+            return;
+
+        this.SpawnNewBlock();
+    }
+
+    private void SpawnNewBlock()
+    {
+        int blockIndex = UnityEngine.Random.Range(0, blockOffsets.Length);
+
+        this.currentBlock.Value = new BlockData
         {
-            // T-piece
-            new int2[] { new(0,0), new(1,0), new(-1,0), new(0,1) },
-            // I-piece
-            new int2[] { new(0,0), new(-1,0), new(1,0), new(2,0) },
-            // O-piece
-            new int2[] { new(0,0), new(1,0), new(0,1), new(1,1) },
-            // S-piece
-            new int2[] { new(0,0), new(1,0), new(0,1), new(-1,1) },
-            // Z-piece
-            new int2[] { new(0,0), new(-1,0), new(0,1), new(1,1) },
-            // J-piece
-            new int2[] { new(0,0), new(-1,0), new(1,0), new(-1,1) },
-            // L-piece
-            new int2[] { new(0,0), new(-1,0), new(1,0), new(1,1) },
+            CenterPosition = new(this.boardConfigHolder.Value.Width / 2, this.boardConfigHolder.Value.Height + 1),
+            CellOffsets = blockOffsets[blockIndex],
         };
-
-        private void Start()
-        {
-            this.TaskRunner().Forget();
-        }
-
-        private async UniTaskVoid TaskRunner()
-        {
-            while (true)
-            {
-                await UniTask.Delay(TimeSpan.FromSeconds(this.spawnIntervalSeconds));
-
-                int blockIndex = UnityEngine.Random.Range(0, blockOffsets.Length);
-
-                this.currentBlock.Value = new BlockData
-                {
-                    CenterPosition = new(this.boardConfigHolder.Value.Width / 2, this.boardConfigHolder.Value.Height + 1),
-                    CellOffsets = blockOffsets[blockIndex],
-                };
-            }
-        }
     }
 }
