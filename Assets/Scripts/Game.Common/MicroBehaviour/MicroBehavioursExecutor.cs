@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Mono
+namespace Game.Common
 {
     public class MicroBehavioursExecutor : MonoBehaviour
     {

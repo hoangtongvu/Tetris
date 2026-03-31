@@ -1,6 +1,6 @@
 using System;
 
-namespace Game.Mono;
+namespace Game.Common;
 
 [Serializable]
 public abstract class MicroBehaviour
