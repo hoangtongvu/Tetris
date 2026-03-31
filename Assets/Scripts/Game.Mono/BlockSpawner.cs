@@ -1,4 +1,5 @@
 using Game.Common;
+using Game.Domain;
 using System;
 using Unity.Mathematics;
 using UnityEngine;

@@ -1,3 +1,4 @@
+using Game.Domain;
 using System;
 using UnityEngine;
 

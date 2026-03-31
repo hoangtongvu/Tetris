@@ -1,4 +1,5 @@
 using Game.Common;
+using Game.Domain;
 using System;
 using System.Collections.Generic;
 using UnityEngine;

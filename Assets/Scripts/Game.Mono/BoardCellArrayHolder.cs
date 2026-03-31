@@ -1,3 +1,4 @@
+using Game.Domain;
 using UnityEngine;
 
 namespace Game.Mono

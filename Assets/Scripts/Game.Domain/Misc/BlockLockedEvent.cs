@@ -1,6 +1,6 @@
 using System;
 
-namespace Game.Mono;
+namespace Game.Domain;
 
 [Serializable]
 public struct BlockLockedEvent

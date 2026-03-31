@@ -1,7 +1,7 @@
 using System;
 using Unity.Mathematics;
 
-namespace Game.Mono;
+namespace Game.Domain;
 
 [Serializable]
 public class BlockData

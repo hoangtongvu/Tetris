@@ -1,3 +1,4 @@
+using Game.Domain;
 using Unity.Mathematics;
 
 namespace Game.Mono;
