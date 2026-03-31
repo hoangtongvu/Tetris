@@ -617,6 +617,7 @@ MonoBehaviour:
   - rid: 4983845021229777179
   - rid: 4983845021229777180
   - rid: 4983845021229777185
+  - rid: 4983845024387825758
   references:
     version: 2
     RefIds:
@@ -662,6 +663,11 @@ MonoBehaviour:
       data:
         boardConfig: {fileID: 71184341}
         currentBlock: {fileID: 469887684}
+    - rid: 4983845024387825758
+      type: {class: CompletedLinesCheckAndClearer, ns: Game.Mono, asm: Game.Mono}
+      data:
+        blockLockedEvent: {fileID: 469887695}
+        boardConfig: {fileID: 71184341}
 --- !u!114 &469887694
 MonoBehaviour:
   m_ObjectHideFlags: 0
