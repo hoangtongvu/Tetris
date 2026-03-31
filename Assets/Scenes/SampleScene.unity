@@ -543,7 +543,6 @@ GameObject:
   - component: {fileID: 469887694}
   - component: {fileID: 469887695}
   - component: {fileID: 469887690}
-  - component: {fileID: 469887692}
   - component: {fileID: 469887693}
   m_Layer: 0
   m_Name: NEW
@@ -598,18 +597,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Game.Mono::Game.Mono.BlockGizmoDrawer
   boardConfig: {fileID: 71184341}
   currentBlock: {fileID: 469887684}
---- !u!114 &469887692
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 469887682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b384a3d84dc9284e97e5cf43a5939e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game.Mono::Game.Mono.BoardCellArrayDebuger
 --- !u!114 &469887693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,6 +613,7 @@ MonoBehaviour:
   - rid: 4983845021229777182
   - rid: 4983845021229777175
   - rid: 4983845021229777178
+  - rid: 4983845024387825754
   - rid: 4983845021229777179
   - rid: 4983845021229777180
   - rid: 4983845021229777185
@@ -651,7 +639,6 @@ MonoBehaviour:
         boardConfig: {fileID: 71184341}
         currentBlock: {fileID: 469887684}
         autoDropIntervalSeconds: 0.5
-        autoDropTimer: 0
     - rid: 4983845021229777180
       type: {class: PlayerBlockHardDropper, ns: Game.Mono, asm: Game.Mono}
       data:
@@ -669,6 +656,11 @@ MonoBehaviour:
       data:
         canLockCurrentBlockTag: {fileID: 469887694}
         blockLockedEvent: {fileID: 469887695}
+        currentBlock: {fileID: 469887684}
+    - rid: 4983845024387825754
+      type: {class: PlayerBlockRotator, ns: Game.Mono, asm: Game.Mono}
+      data:
+        boardConfig: {fileID: 71184341}
         currentBlock: {fileID: 469887684}
 --- !u!114 &469887694
 MonoBehaviour:
