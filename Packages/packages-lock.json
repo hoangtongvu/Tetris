@@ -33,6 +33,13 @@
       },
       "hash": "20284208f48a1e563768b7da1189a7fef5a18a2f"
     },
+    "com.gustavopsantos.reflex": {
+      "version": "https://github.com/gustavopsantos/reflex.git?path=/Assets/Reflex/#14.3.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "86569ca217b989a8cec9db1e37f81c44130d23f1"
+    },
     "com.laicasaane.xml-doc-generator": {
       "version": "https://github.com/laicasaane/UnityXmlDocGenerator.git?path=/Packages/com.laicasaane.xml-doc-generator#1.0.5",
       "depth": 0,
