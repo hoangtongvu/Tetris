@@ -10,7 +10,15 @@ public class PlayerBlockHorizontalMover : MicroBehaviour
 {
     [SerializeField] private BoardConfigHolder boardConfig;
     [SerializeField] private CurrentBlockRef currentBlock;
+    [SerializeField] private CurrentBlockTransformedEventHolder currentBlockTransformedEvent;
     [SerializeField] private float moveCooldownSeconds = 0.1f;
+
+    public override void LoadComponents()
+    {
+        this.FindFirstObjectByType(out this.boardConfig);
+        this.FindFirstObjectByType(out this.currentBlock);
+        this.FindFirstObjectByType(out this.currentBlockTransformedEvent);
+    }
 
     public override void Start()
     {
@@ -51,6 +59,7 @@ public class PlayerBlockHorizontalMover : MicroBehaviour
 
         if (!canMove) return;
 
+        this.currentBlockTransformedEvent.Value.Value = true;
         blockData.CenterPosition = tempPos;
     }
 }

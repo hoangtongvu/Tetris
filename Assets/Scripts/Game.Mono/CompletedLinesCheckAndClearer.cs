@@ -12,6 +12,12 @@ public class CompletedLinesCheckAndClearer : MicroBehaviour
     [SerializeField] private BlockLockedEventHolder blockLockedEvent;
     [SerializeField] private BoardConfigHolder boardConfig;
 
+    public override void LoadComponents()
+    {
+        this.FindFirstObjectByType(out this.blockLockedEvent);
+        this.FindFirstObjectByType(out this.boardConfig);
+    }
+
     public override void Update()
     {
         if (!this.blockLockedEvent.Value.Value)

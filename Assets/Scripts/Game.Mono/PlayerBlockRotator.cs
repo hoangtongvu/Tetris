@@ -11,6 +11,14 @@ public class PlayerBlockRotator : MicroBehaviour
 {
     [SerializeField] private BoardConfigHolder boardConfig;
     [SerializeField] private CurrentBlockRef currentBlock;
+    [SerializeField] private CurrentBlockTransformedEventHolder currentBlockTransformedEvent;
+
+    public override void LoadComponents()
+    {
+        this.FindFirstObjectByType(out this.boardConfig);
+        this.FindFirstObjectByType(out this.currentBlock);
+        this.FindFirstObjectByType(out this.currentBlockTransformedEvent);
+    }
 
     public override void Update()
     {
@@ -40,6 +48,7 @@ public class PlayerBlockRotator : MicroBehaviour
 
         if (!canMove) return;
 
+        this.currentBlockTransformedEvent.Value.Value = true;
         blockData.CellOffsets = tempOffsets;
     }
 

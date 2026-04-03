@@ -10,8 +10,17 @@ public class BlockAutoDropper : MicroBehaviour
     [SerializeField] private CanLockCurrentBlockTagHolder canLockCurrentBlockTag;
     [SerializeField] private BoardConfigHolder boardConfig;
     [SerializeField] private CurrentBlockRef currentBlock;
+    [SerializeField] private CurrentBlockTransformedEventHolder currentBlockTransformedEvent;
     [SerializeField] private float autoDropIntervalSeconds = 1f;
     private float autoDropTimer = 0;
+
+    public override void LoadComponents()
+    {
+        this.FindFirstObjectByType(out this.canLockCurrentBlockTag);
+        this.FindFirstObjectByType(out this.boardConfig);
+        this.FindFirstObjectByType(out this.currentBlock);
+        this.FindFirstObjectByType(out this.currentBlockTransformedEvent);
+    }
 
     public override void Update()
     {
@@ -41,6 +50,7 @@ public class BlockAutoDropper : MicroBehaviour
             return;
         }
 
+        this.currentBlockTransformedEvent.Value.Value = true;
         blockData.CenterPosition = tempPos;
     }
 }

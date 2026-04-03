@@ -11,6 +11,13 @@ public class BlockLocker : MicroBehaviour
     [SerializeField] private BlockLockedEventHolder blockLockedEvent;
     [SerializeField] private CurrentBlockRef currentBlock;
 
+    public override void LoadComponents()
+    {
+        this.FindFirstObjectByType(out this.canLockCurrentBlockTag);
+        this.FindFirstObjectByType(out this.blockLockedEvent);
+        this.FindFirstObjectByType(out this.currentBlock);
+    }
+
     public override void Update()
     {
         this.blockLockedEvent.Value.Value = false;

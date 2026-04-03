@@ -10,6 +10,15 @@ public class PlayerBlockHardDropper : MicroBehaviour
     [SerializeField] private CanLockCurrentBlockTagHolder canLockCurrentBlockTag;
     [SerializeField] private BoardConfigHolder boardConfig;
     [SerializeField] private CurrentBlockRef currentBlock;
+    [SerializeField] private CurrentBlockTransformedEventHolder currentBlockTransformedEvent;
+
+    public override void LoadComponents()
+    {
+        this.FindFirstObjectByType(out this.canLockCurrentBlockTag);
+        this.FindFirstObjectByType(out this.boardConfig);
+        this.FindFirstObjectByType(out this.currentBlock);
+        this.FindFirstObjectByType(out this.currentBlockTransformedEvent);
+    }
 
     public override void Update()
     {
@@ -29,6 +38,7 @@ public class PlayerBlockHardDropper : MicroBehaviour
             tempPos.y++;
             blockData.CenterPosition = tempPos;
             this.canLockCurrentBlockTag.Value.Value = true;
+            this.currentBlockTransformedEvent.Value.Value = true;
         }
     }
 }

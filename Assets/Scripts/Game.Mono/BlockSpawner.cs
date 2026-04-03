@@ -12,6 +12,7 @@ public class BlockSpawner : MicroBehaviour
     [SerializeField] private BlockLockedEventHolder blockLockedEvent;
     [SerializeField] private BoardConfigHolder boardConfigHolder;
     [SerializeField] private CurrentBlockRef currentBlock;
+    [SerializeField] private CurrentBlockTransformedEventHolder currentBlockTransformedEvent;
 
     public static readonly int2[][] blockOffsets = new int2[][]
     {
@@ -31,6 +32,14 @@ public class BlockSpawner : MicroBehaviour
         new int2[] { new(0,0), new(-1,0), new(1,0), new(1,1) },
     };
 
+    public override void LoadComponents()
+    {
+        this.FindFirstObjectByType(out this.blockLockedEvent);
+        this.FindFirstObjectByType(out this.boardConfigHolder);
+        this.FindFirstObjectByType(out this.currentBlock);
+        this.FindFirstObjectByType(out this.currentBlockTransformedEvent);
+    }
+
     public override void Update()
     {
         if (!this.blockLockedEvent.Value.Value)
@@ -41,6 +50,7 @@ public class BlockSpawner : MicroBehaviour
 
     private void SpawnNewBlock()
     {
+        this.currentBlockTransformedEvent.Value.Value = true;
         int blockIndex = UnityEngine.Random.Range(0, blockOffsets.Length);
 
         this.currentBlock.Value = new BlockData

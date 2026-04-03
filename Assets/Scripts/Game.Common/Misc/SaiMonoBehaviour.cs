@@ -64,4 +64,10 @@ public abstract class SaiMonoBehaviour : MonoBehaviour
 
         Debug.LogError($"Can't find child Transform with name {name}", gameObject);
     }
+
+    protected void FindFirstObjectByType<T>(out T t)
+        where T : UnityEngine.Object
+    {
+        t = UnityEngine.Object.FindFirstObjectByType<T>();
+    }
 }
