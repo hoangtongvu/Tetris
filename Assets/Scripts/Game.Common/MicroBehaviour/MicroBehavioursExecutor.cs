@@ -3,16 +3,32 @@ using UnityEngine;
 
 namespace Game.Common
 {
-    public class MicroBehavioursExecutor : MonoBehaviour
+    public class MicroBehavioursExecutor : SaiMonoBehaviour
     {
         [SerializeReference, SubclassSelector]
         private List<MicroBehaviour> microBehaviours;
+
+        private void OnValidate()
+        {
+            foreach (var microBehaviour in this.microBehaviours)
+            {
+                microBehaviour.Init(this);
+            }
+        }
 
         private void Awake()
         {
             foreach (var microBehaviour in this.microBehaviours)
             {
                 microBehaviour.Awake();
+            }
+        }
+
+        protected override void LoadComponents()
+        {
+            foreach (var microBehaviour in this.microBehaviours)
+            {
+                microBehaviour.LoadComponents();
             }
         }
 
