@@ -43,7 +43,7 @@ namespace Game.Mono
                 this.material,
                 transform);
 
-            this.currentBlockPresenter.GetComponent<MeshRenderer>().material.color = this.color;
+            this.currentBlockPresenter.GetComponent<MeshRenderer>().material.SetColor("_Color", this.color);
         }
     }
 }

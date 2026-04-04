@@ -868,7 +868,7 @@ MonoBehaviour:
   boardConfig: {fileID: 71184341}
   currentBlock: {fileID: 1022639244}
   currentBlockPresenter: {fileID: 0}
-  material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  material: {fileID: -876546973899608171, guid: b49b5897e28a3fc459b8431ef4e51b7b, type: 3}
   color: {r: 0.2134102, g: 0.5320754, b: 0, a: 1}
 --- !u!4 &1022639242
 Transform:
