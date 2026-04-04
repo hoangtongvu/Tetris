@@ -10,6 +10,7 @@ public class ComponentQuickView : EditorWindow
     private Dictionary<Component, Editor> _editors = new Dictionary<Component, Editor>();
 
     private Vector2 _scroll;
+    private bool _isLocked = false;
 
     [MenuItem("Tools/Component Quick View")]
     public static void Open()
@@ -29,6 +30,8 @@ public class ComponentQuickView : EditorWindow
 
     private void OnSelectionChange()
     {
+        if (_isLocked) return;
+
         RefreshSelection();
         Repaint();
     }
@@ -87,6 +90,32 @@ public class ComponentQuickView : EditorWindow
         GUILayout.Label("Component Quick View", EditorStyles.boldLabel);
 
         GUILayout.FlexibleSpace();
+
+        // 🔒 Lock toggle
+        if (_isLocked && _target != null)
+        {
+            EditorGUILayout.HelpBox(
+                $"🔒: {_target.name}",
+                MessageType.None
+            );
+        }
+
+        GUIContent lockIcon = EditorGUIUtility.IconContent(
+            _isLocked ? "LockIcon-On" : "LockIcon"
+        );
+
+        if (GUILayout.Button(lockIcon, EditorStyles.toolbarButton, GUILayout.Width(30)))
+        {
+            bool wasLocked = _isLocked;
+            _isLocked = !_isLocked;
+
+            // 🔓 Just unlocked → immediately follow current selection
+            if (wasLocked && !_isLocked)
+            {
+                RefreshSelection();
+                Repaint();
+            }
+        }
 
         if (GUILayout.Button("Show All", EditorStyles.toolbarButton))
         {
