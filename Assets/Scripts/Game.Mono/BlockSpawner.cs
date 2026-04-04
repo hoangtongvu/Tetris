@@ -1,7 +1,7 @@
 using Game.Common;
 using Game.Domain;
 using System;
-using Unity.Mathematics;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Mono;
@@ -13,24 +13,15 @@ public class BlockSpawner : MicroBehaviour
     [SerializeField] private BoardConfigHolder boardConfigHolder;
     [SerializeField] private CurrentBlockRef currentBlock;
     [SerializeField] private CurrentBlockTransformedEventHolder currentBlockTransformedEvent;
+    [SerializeField] private int batchIndexCount = 4;
+    private Queue<int> batchIndexes;
 
-    public static readonly int2[][] blockOffsets = new int2[][]
+    public IEnumerable<int> BatchIndexes => this.batchIndexes;
+
+    public override void Awake()
     {
-        // T-piece
-        new int2[] { new(0,0), new(1,0), new(-1,0), new(0,1) },
-        // I-piece
-        new int2[] { new(0,0), new(-1,0), new(1,0), new(2,0) },
-        // O-piece
-        new int2[] { new(0,0), new(1,0), new(0,1), new(1,1) },
-        // S-piece
-        new int2[] { new(0,0), new(1,0), new(0,1), new(-1,1) },
-        // Z-piece
-        new int2[] { new(0,0), new(-1,0), new(0,1), new(1,1) },
-        // J-piece
-        new int2[] { new(0,0), new(-1,0), new(1,0), new(-1,1) },
-        // L-piece
-        new int2[] { new(0,0), new(-1,0), new(1,0), new(1,1) },
-    };
+        this.batchIndexes = new(this.batchIndexCount);
+    }
 
     public override void LoadComponents()
     {
@@ -50,13 +41,30 @@ public class BlockSpawner : MicroBehaviour
 
     private void SpawnNewBlock()
     {
+        this.TryFillIndexQueue();
         this.currentBlockTransformedEvent.Value.Value = true;
-        int blockIndex = UnityEngine.Random.Range(0, blockOffsets.Length);
+        int blockIndex = this.batchIndexes.Dequeue();
 
         this.currentBlock.Value = new BlockData
         {
             CenterPosition = new(this.boardConfigHolder.Value.Width / 2, this.boardConfigHolder.Value.Height + 1),
-            CellOffsets = blockOffsets[blockIndex],
+            CellOffsets = BlockOffsets.Value[blockIndex],
         };
+    }
+
+    private bool TryFillIndexQueue()
+    {
+        if (this.batchIndexes.Count >= this.batchIndexCount)
+            return false;
+
+        int count = this.batchIndexCount - this.batchIndexes.Count;
+
+        for (int i = 0; i < count; i++)
+        {
+            int blockIndex = UnityEngine.Random.Range(0, BlockOffsets.Value.Length);
+            this.batchIndexes.Enqueue(blockIndex);
+        }
+
+        return true;
     }
 }
