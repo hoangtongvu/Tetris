@@ -208,7 +208,6 @@ public class ComponentQuickView : EditorWindow
     }
 
     // ---------------- INSPECTORS ----------------
-
     private void DrawComponentInspectors()
     {
         var components = _target.GetComponents<Component>();
@@ -233,19 +232,36 @@ public class ComponentQuickView : EditorWindow
 
     private void DrawSingleComponent(Component component, Editor editor)
     {
-        EditorGUILayout.BeginVertical("box");
+        Rect rect = EditorGUILayout.BeginVertical();
 
         // Title
-        EditorGUILayout.BeginHorizontal();
+        var titleRect = EditorGUILayout.BeginHorizontal();
+        GUILayout.Space(4);
+
+        // Draw lighter background ONLY for title
+        if (Event.current.type == EventType.Repaint)
+        {
+            EditorGUI.DrawRect(titleRect, new Color(0.25f, 0.25f, 0.25f));
+        }
 
         Texture icon = AssetPreview.GetMiniThumbnail(component);
-
         GUILayout.Label(icon, GUILayout.Width(20), GUILayout.Height(20));
-        GUILayout.Label(component.GetType().Name, EditorStyles.boldLabel);
+        GUILayout.Label(
+            component.GetType().Name,
+            EditorStyles.boldLabel,
+            GUILayout.Height(20) // match icon height
+        );
 
         GUILayout.FlexibleSpace();
 
-        if (GUILayout.Button("Hide", GUILayout.Width(50)))
+        // Hide button
+        var hideButtonStyle = new GUIStyle(GUI.skin.button);
+        hideButtonStyle.border = new RectOffset(0, 0, 0, 0);
+        hideButtonStyle.margin = new RectOffset(0, 0, 0, 0);
+        hideButtonStyle.padding = new RectOffset(0, 0, 0, 0);
+
+        var eyeIcon = EditorGUIUtility.IconContent("animationvisibilitytoggleon");
+        if (GUILayout.Button(eyeIcon, hideButtonStyle, GUILayout.Width(24), GUILayout.Height(20)))
         {
             _visibility[component] = false;
         }
@@ -257,8 +273,20 @@ public class ComponentQuickView : EditorWindow
         // Inspector
         editor.OnInspectorGUI();
 
+        EditorGUILayout.Space(4);
+
         EditorGUILayout.EndVertical();
 
-        EditorGUILayout.Space(4);
+        // Draw border AFTER layout
+        if (Event.current.type == EventType.Repaint)
+        {
+            Handles.DrawSolidRectangleWithOutline(
+                rect,
+                Color.clear,
+                new Color(0.3f, 0.3f, 0.3f)
+            );
+        }
+
+        EditorGUILayout.Space(5);
     }
 }
