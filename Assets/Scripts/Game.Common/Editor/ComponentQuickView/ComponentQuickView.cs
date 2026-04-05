@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Reflection;
 using UnityEditor;
-using System.Collections.Generic;
+using UnityEngine;
 
 public class ComponentQuickView : EditorWindow
 {
@@ -198,8 +199,10 @@ public class ComponentQuickView : EditorWindow
             GUI.backgroundColor = Color.white;
 
             x += buttonWidth + 2f;
-            GUILayout.Space(2);
+            GUILayout.Space(0);
         }
+
+        DrawAddComponentButton();
 
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.EndVertical();
@@ -288,5 +291,39 @@ public class ComponentQuickView : EditorWindow
         }
 
         EditorGUILayout.Space(5);
+    }
+
+    // ---------------- ADD COMPONENT BUTTON ----------------
+    private void DrawAddComponentButton()
+    {
+        EditorGUILayout.BeginHorizontal();
+
+        var buttonRect = GUILayoutUtility.GetRect(
+            GUIContent.none,
+            GUI.skin.button,
+            GUILayout.Width(20),
+            GUILayout.Height(20)
+        );
+
+        if (GUI.Button(buttonRect, EditorGUIUtility.IconContent("d_CreateAddNew")))
+        {
+            // Use 230 width so the popup renders at the correct size,
+            // regardless of the button's actual visual width
+            var screenRect = new Rect(buttonRect.x, buttonRect.y, 230, buttonRect.height);
+
+            var addComponentWindow = System.Type.GetType(
+                "UnityEditor.AddComponent.AddComponentWindow, UnityEditor");
+
+            if (addComponentWindow != null)
+            {
+                var method = addComponentWindow.GetMethod(
+                    "Show",
+                    BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+
+                method?.Invoke(null, new object[] { screenRect, new[] { _target } });
+            }
+        }
+
+        EditorGUILayout.EndHorizontal();
     }
 }
