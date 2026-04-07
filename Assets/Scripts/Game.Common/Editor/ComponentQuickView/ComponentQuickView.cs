@@ -217,6 +217,12 @@ public class ComponentQuickView : EditorWindow
 
         _scroll = EditorGUILayout.BeginScrollView(_scroll);
 
+        EditorGUILayout.BeginHorizontal();
+        GUILayout.Space(1); // left padding
+
+        EditorGUILayout.BeginVertical();
+        GUILayout.Space(1); // top padding
+
         foreach (var c in components)
         {
             if (c == null) continue;
@@ -229,6 +235,10 @@ public class ComponentQuickView : EditorWindow
 
             DrawSingleComponent(c, _editors[c]);
         }
+
+        EditorGUILayout.EndVertical();
+        GUILayout.Space(1); // right padding
+        EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.EndScrollView();
     }
