@@ -248,6 +248,7 @@ public partial class ComponentQuickView : EditorWindow
         Rect rect = EditorGUILayout.BeginVertical();
 
         // Title
+        const int titleHeight = 18;
         var titleRect = EditorGUILayout.BeginHorizontal();
         GUILayout.Space(4);
 
@@ -258,11 +259,11 @@ public partial class ComponentQuickView : EditorWindow
         }
 
         Texture icon = AssetPreview.GetMiniThumbnail(component);
-        GUILayout.Label(icon, GUILayout.Width(20), GUILayout.Height(20));
+        GUILayout.Label(icon, GUILayout.Width(titleHeight), GUILayout.Height(titleHeight));
         GUILayout.Label(
             component.GetType().Name,
             EditorStyles.boldLabel,
-            GUILayout.Height(20) // match icon height
+            GUILayout.Height(titleHeight) // match icon height
         );
 
         GUILayout.FlexibleSpace();
