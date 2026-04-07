@@ -173,7 +173,7 @@ public partial class ComponentQuickView : EditorWindow
 
             Vector2 size = style.CalcSize(new GUIContent(name));
             float buttonWidth = Mathf.Min(size.x + 15f, 500f); // clamp width
-            float buttonHeight = 20f;
+            float buttonHeight = 18f;
 
             // 🔁 Wrap line
             if (x + buttonWidth > viewWidth)
@@ -315,7 +315,7 @@ public partial class ComponentQuickView : EditorWindow
             GUIContent.none,
             GUI.skin.button,
             GUILayout.Width(20),
-            GUILayout.Height(20)
+            GUILayout.Height(18)
         );
 
         if (GUI.Button(buttonRect, EditorGUIUtility.IconContent("d_CreateAddNew")))
