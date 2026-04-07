@@ -3,7 +3,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-public class ComponentQuickView : EditorWindow
+public partial class ComponentQuickView : EditorWindow
 {
     private GameObject _target;
 
@@ -278,6 +278,8 @@ public class ComponentQuickView : EditorWindow
         {
             _visibility[component] = false;
         }
+
+        DrawContextMenu(titleRect, component, hideButtonStyle);
 
         EditorGUILayout.EndHorizontal();
 
