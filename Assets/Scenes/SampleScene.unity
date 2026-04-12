@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 71184341}
   - component: {fileID: 71184343}
   - component: {fileID: 71184345}
+  - component: {fileID: 71184346}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -197,6 +198,22 @@ MonoBehaviour:
   config: {fileID: 71184341}
   validColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   origin: {x: 0, y: 0, z: 0}
+--- !u!114 &71184346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71184340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4bf21caff0299c4ebf30f6fd1dd4cdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.BoardDrawer
+  boardConfig: {fileID: 71184341}
+  currentBoardPresenter: {fileID: 0}
+  material: {fileID: -876546973899608171, guid: b49b5897e28a3fc459b8431ef4e51b7b, type: 3}
+  color: {r: 0.7056604, g: 0.67798746, b: 0, a: 1}
 --- !u!1 &113109405
 GameObject:
   m_ObjectHideFlags: 0
@@ -568,6 +585,7 @@ MonoBehaviour:
   - rid: 4983845021229777185
   - rid: 4983845024387825758
   - rid: 1866159385106448618
+  - rid: 1866159582270980312
   references:
     version: 2
     RefIds:
@@ -575,6 +593,10 @@ MonoBehaviour:
       type: {class: RedrawCurrentBlockMessagePublisher, ns: Game.Mono, asm: Game.Mono}
       data:
         currentBlockTransformedEvent: {fileID: 1022639243}
+    - rid: 1866159582270980312
+      type: {class: DrawBoardMessagePublisher, ns: Game.Mono, asm: Game.Mono}
+      data:
+        blockLockedEvent: {fileID: 1022639246}
     - rid: 4983845021229777175
       type: {class: PlayerBlockHorizontalMover, ns: Game.Mono, asm: Game.Mono}
       data:
@@ -611,6 +633,7 @@ MonoBehaviour:
         boardConfigHolder: {fileID: 71184341}
         currentBlock: {fileID: 1022639244}
         currentBlockTransformedEvent: {fileID: 1022639243}
+        batchIndexCount: 4
     - rid: 4983845021229777185
       type: {class: BlockLocker, ns: Game.Mono, asm: Game.Mono}
       data:
