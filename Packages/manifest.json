@@ -19,6 +19,7 @@
     "com.unity.test-framework": "1.6.0",
     "com.unity.timeline": "1.8.12",
     "com.unity.ugui": "2.0.0",
+    "com.yasirkula.assetusagedetector": "https://github.com/yasirkula/UnityAssetUsageDetector.git#v2.6.2",
     "com.yasirkula.ingamedebugconsole": "https://github.com/yasirkula/UnityIngameDebugConsole.git",
     "jp.hadashikick.vitalrouter.unity": "https://github.com/hadashiA/VitalRouter.git?path=/src/VitalRouter.Unity/Assets/VitalRouter#2.0.3",
     "today.comes.saintsfield": "https://github.com/TylerTemp/SaintsField.git",
