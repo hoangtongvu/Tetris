@@ -106,9 +106,15 @@ public partial class ComponentQuickView : EditorWindow
     {
         EditorGUILayout.BeginHorizontal(EditorStyles.toolbar);
 
-        GUILayout.Label("Component Quick View", EditorStyles.boldLabel);
+        if (GUILayout.Button("All", EditorStyles.toolbarButton))
+        {
+            SetAllVisibility(true);
+        }
 
-        GUILayout.FlexibleSpace();
+        if (GUILayout.Button("None", EditorStyles.toolbarButton))
+        {
+            SetAllVisibility(false);
+        }
 
         // 🔒 Lock toggle
         if (_isLocked && _target != null)
@@ -136,15 +142,9 @@ public partial class ComponentQuickView : EditorWindow
             }
         }
 
-        if (GUILayout.Button("Show All", EditorStyles.toolbarButton))
-        {
-            SetAllVisibility(true);
-        }
+        GUILayout.FlexibleSpace();
 
-        if (GUILayout.Button("Hide All", EditorStyles.toolbarButton))
-        {
-            SetAllVisibility(false);
-        }
+        GUILayout.Label("Component Quick View", EditorStyles.boldLabel);
 
         EditorGUILayout.EndHorizontal();
     }
