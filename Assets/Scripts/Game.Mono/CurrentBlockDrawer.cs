@@ -36,12 +36,13 @@ namespace Game.Mono
             if (this.currentBlockPresenter)
                 Destroy(this.currentBlockPresenter);
 
-            this.currentBlockPresenter = BlockMeshBuilder.CreateBlock(
-                this.boardConfig.Value,
+            this.currentBlockPresenter = CellsMeshBuilder.CreateCellsPresenterGO(
+                this.boardConfig.Value.CellWorldSize,
                 this.currentBlock.Value.CenterPosition,
                 this.currentBlock.Value.CellOffsets,
-                this.material,
-                transform);
+                this.material);
+
+            this.currentBlockPresenter.transform.SetParent(transform);
 
             this.currentBlockPresenter.GetComponent<MeshRenderer>().material.SetColor("_Color", this.color);
         }

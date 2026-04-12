@@ -1,36 +1,41 @@
+using System;
 using Unity.Mathematics;
 using UnityEngine;
 
 namespace Game.Mono;
 
-public static class BlockMeshBuilder
+public static class CellsMeshBuilder
 {
-    public static GameObject CreateBlock(
-        BoardConfig config,
-        int2 position,
-        int2[] cellOffsets,
-        Material material,
-        Transform parent = null)
+    public static readonly Vector2[] QuadUVs =
     {
-        GameObject go = new GameObject("BlockMesh");
-        if (parent != null)
-            go.transform.SetParent(parent, false);
+        new(0, 0),
+        new(1, 0),
+        new(1, 1),
+        new(0, 1)
+    };
+
+    public static GameObject CreateCellsPresenterGO(
+        float cellWorldSize,
+        int2 startPos,
+        ReadOnlySpan<int2> offsets,
+        Material material,
+        string gameObjName = "CellsMesh")
+    {
+        var go = new GameObject(gameObjName);
 
         var meshFilter = go.AddComponent<MeshFilter>();
         var meshRenderer = go.AddComponent<MeshRenderer>();
 
         meshRenderer.material = material;
-
-        Mesh mesh = BuildMesh(config, position, cellOffsets);
-        meshFilter.mesh = mesh;
+        meshFilter.mesh = BuildCellsMesh(cellWorldSize, startPos, offsets);
 
         return go;
     }
 
-    private static Mesh BuildMesh(
-        BoardConfig config,
-        int2 position,
-        int2[] offsets)
+    public static Mesh BuildCellsMesh(
+        float cellWorldSize,
+        int2 startPos,
+        ReadOnlySpan<int2> offsets)
     {
         int cellCount = offsets.Length;
 
@@ -38,14 +43,14 @@ public static class BlockMeshBuilder
         int[] triangles = new int[cellCount * 6];
         Vector2[] uvs = new Vector2[cellCount * 4];
 
-        float size = config.CellWorldSize;
+        float size = cellWorldSize;
 
         for (int i = 0; i < cellCount; i++)
         {
             int vIndex = i * 4;
             int tIndex = i * 6;
 
-            var cell = position + offsets[i];
+            var cell = startPos + offsets[i];
 
             float x = cell.x * size;
             float y = cell.y * size;
@@ -66,16 +71,18 @@ public static class BlockMeshBuilder
             triangles[tIndex + 5] = vIndex + 2;
 
             // UVs (simple full quad)
-            uvs[vIndex + 0] = new Vector2(0, 0);
-            uvs[vIndex + 1] = new Vector2(1, 0);
-            uvs[vIndex + 2] = new Vector2(1, 1);
-            uvs[vIndex + 3] = new Vector2(0, 1);
+            uvs[vIndex + 0] = QuadUVs[0];
+            uvs[vIndex + 1] = QuadUVs[1];
+            uvs[vIndex + 2] = QuadUVs[2];
+            uvs[vIndex + 3] = QuadUVs[3];
         }
 
-        Mesh mesh = new Mesh();
-        mesh.vertices = vertices;
-        mesh.triangles = triangles;
-        mesh.uv = uvs;
+        var mesh = new Mesh
+        {
+            vertices = vertices,
+            triangles = triangles,
+            uv = uvs
+        };
 
         mesh.RecalculateNormals();
         mesh.RecalculateBounds();
