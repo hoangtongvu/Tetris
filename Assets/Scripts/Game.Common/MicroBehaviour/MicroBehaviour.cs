@@ -58,6 +58,18 @@ public abstract class MicroBehaviour
         t = UnityEngine.Object.FindFirstObjectByType<T>();
     }
 
+    protected void FindAnyObjectByType<T>(out T t)
+        where T : UnityEngine.Object
+    {
+        t = UnityEngine.Object.FindAnyObjectByType<T>();
+    }
+
+    protected void FindObjectsByType<T>(out T[] tArray, FindObjectsSortMode findObjectsSortMode = FindObjectsSortMode.None)
+        where T : UnityEngine.Object
+    {
+        tArray = UnityEngine.Object.FindObjectsByType<T>(findObjectsSortMode);
+    }
+
     public virtual void Start() { }
 
     public virtual void OnDestroy() { }

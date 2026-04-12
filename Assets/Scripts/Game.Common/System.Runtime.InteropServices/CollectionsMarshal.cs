@@ -9,7 +9,6 @@ public static class CollectionsMarshal
     {
         if (list == null)
             return default;
-
-        return Unsafe.As<StrongBox<T[]>>(list).Value;
+        return Unsafe.As<StrongBox<T[]>>(list).Value.AsSpan(0, list.Count);
     }
 }
