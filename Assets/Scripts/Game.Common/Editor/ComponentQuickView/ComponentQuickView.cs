@@ -9,6 +9,7 @@ public partial class ComponentQuickView : EditorWindow
 
     private Dictionary<Component, bool> _visibility = new Dictionary<Component, bool>();
     private Dictionary<Component, Editor> _editors = new Dictionary<Component, Editor>();
+    private Dictionary<int, Dictionary<int, bool>> _traversedGameObjs = new();
 
     private Vector2 _scroll;
     private bool _isLocked = false;
@@ -41,10 +42,23 @@ public partial class ComponentQuickView : EditorWindow
     {
         CleanupEditors();
 
+        // Save visibility before cleaning up
+        if (_target != null)
+        {
+            var temp = new Dictionary<int, bool>();
+            foreach (var kVPair in _visibility)
+                temp.Add(kVPair.Key.GetEntityId(), kVPair.Value);
+
+            _traversedGameObjs[_target.GetEntityId()] = temp;
+        }
+
         _target = Selection.activeGameObject;
         _visibility.Clear();
 
         if (_target == null) return;
+
+        // Retrieve saved visibility
+        bool canRetrieveSavedVisibility = _traversedGameObjs.TryGetValue(_target.GetEntityId(), out var savedVisibility);
 
         var components = _target.GetComponents<Component>();
 
@@ -52,7 +66,11 @@ public partial class ComponentQuickView : EditorWindow
         {
             if (c == null) continue;
 
-            _visibility[c] = true;
+            if (canRetrieveSavedVisibility)
+                _visibility[c] = !savedVisibility.TryGetValue(c.GetEntityId(), out bool v) || v;
+            else
+                _visibility[c] = true;
+
             _editors[c] = Editor.CreateEditor(c);
         }
     }
