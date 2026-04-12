@@ -13,7 +13,6 @@ namespace Game.Mono
         [SerializeField] private BoardConfigHolder boardConfig;
         [SerializeField] private GameObject currentBoardPresenter;
         [SerializeField] private Material material;
-        [SerializeField] private Color color;
         private ISubscription drawBoardMessageSubscription;
 
         protected override void LoadComponents()
@@ -38,6 +37,7 @@ namespace Game.Mono
                 Destroy(this.currentBoardPresenter);
 
             var activeCellPositions = new List<int2>();
+            var activeCellColors = new List<Color>();
             var board = BoardCellArrayHolder.Instance.Value.Value;
 
             for (int x = 0; x < this.boardConfig.Value.Width; x++)
@@ -48,6 +48,7 @@ namespace Game.Mono
                     if (!cell.IsValid) continue;
 
                     activeCellPositions.Add(new(x, y));
+                    activeCellColors.Add(cell.Color);
                 }
             }
 
@@ -55,12 +56,11 @@ namespace Game.Mono
                 this.boardConfig.Value.CellWorldSize,
                 int2.zero,
                 CollectionsMarshal.AsSpan(activeCellPositions),
+                CollectionsMarshal.AsSpan(activeCellColors),
                 this.material,
                 "BoardPresenter");
 
             this.currentBoardPresenter.transform.SetParent(transform);
-
-            this.currentBoardPresenter.GetComponent<MeshRenderer>().material.SetColor("_Color", this.color);
         }
     }
 }

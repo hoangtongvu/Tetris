@@ -18,6 +18,7 @@ public static class CellsMeshBuilder
         float cellWorldSize,
         int2 startPos,
         ReadOnlySpan<int2> offsets,
+        ReadOnlySpan<Color> cellColors,
         Material material,
         string gameObjName = "CellsMesh")
     {
@@ -27,7 +28,7 @@ public static class CellsMeshBuilder
         var meshRenderer = go.AddComponent<MeshRenderer>();
 
         meshRenderer.material = material;
-        meshFilter.mesh = BuildCellsMesh(cellWorldSize, startPos, offsets);
+        meshFilter.mesh = BuildCellsMesh(cellWorldSize, startPos, offsets, cellColors);
 
         return go;
     }
@@ -35,13 +36,16 @@ public static class CellsMeshBuilder
     public static Mesh BuildCellsMesh(
         float cellWorldSize,
         int2 startPos,
-        ReadOnlySpan<int2> offsets)
+        ReadOnlySpan<int2> offsets,
+        ReadOnlySpan<Color> cellColors)
     {
         int cellCount = offsets.Length;
+        bool useSingleColor = cellColors.Length == 1;
 
         Vector3[] vertices = new Vector3[cellCount * 4];
         int[] triangles = new int[cellCount * 6];
         Vector2[] uvs = new Vector2[cellCount * 4];
+        Color[] colors = new Color[cellCount * 4];
 
         float size = cellWorldSize;
 
@@ -51,6 +55,7 @@ public static class CellsMeshBuilder
             int tIndex = i * 6;
 
             var cell = startPos + offsets[i];
+            var color = useSingleColor ? cellColors[0] : cellColors[i];
 
             float x = cell.x * size;
             float y = cell.y * size;
@@ -75,13 +80,20 @@ public static class CellsMeshBuilder
             uvs[vIndex + 1] = QuadUVs[1];
             uvs[vIndex + 2] = QuadUVs[2];
             uvs[vIndex + 3] = QuadUVs[3];
+
+            // Colors (same for all 4 vertices = flat color per cell)
+            colors[vIndex + 0] = color;
+            colors[vIndex + 1] = color;
+            colors[vIndex + 2] = color;
+            colors[vIndex + 3] = color;
         }
 
         var mesh = new Mesh
         {
             vertices = vertices,
             triangles = triangles,
-            uv = uvs
+            uv = uvs,
+            colors = colors
         };
 
         mesh.RecalculateNormals();

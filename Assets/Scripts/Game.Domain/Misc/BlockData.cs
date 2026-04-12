@@ -1,5 +1,6 @@
 using System;
 using Unity.Mathematics;
+using UnityEngine;
 
 namespace Game.Domain;
 
@@ -8,4 +9,5 @@ public class BlockData
 {
     public int2 CenterPosition;
     public int2[] CellOffsets;
+    public Color Color;
 }

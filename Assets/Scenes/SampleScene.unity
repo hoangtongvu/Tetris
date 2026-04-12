@@ -213,7 +213,6 @@ MonoBehaviour:
   boardConfig: {fileID: 71184341}
   currentBoardPresenter: {fileID: 0}
   material: {fileID: -876546973899608171, guid: b49b5897e28a3fc459b8431ef4e51b7b, type: 3}
-  color: {r: 0.7056604, g: 0.67798746, b: 0, a: 1}
 --- !u!1 &113109405
 GameObject:
   m_ObjectHideFlags: 0
@@ -892,7 +891,6 @@ MonoBehaviour:
   currentBlock: {fileID: 1022639244}
   currentBlockPresenter: {fileID: 0}
   material: {fileID: -876546973899608171, guid: b49b5897e28a3fc459b8431ef4e51b7b, type: 3}
-  color: {r: 0.2134102, g: 0.5320754, b: 0, a: 1}
 --- !u!4 &1022639242
 Transform:
   m_ObjectHideFlags: 0
@@ -939,6 +937,7 @@ MonoBehaviour:
       x: 0
       y: 0
     CellOffsets: []
+    Color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1022639245
 MonoBehaviour:
   m_ObjectHideFlags: 0

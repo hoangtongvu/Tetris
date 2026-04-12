@@ -11,7 +11,6 @@ namespace Game.Mono
         [SerializeField] private CurrentBlockRef currentBlock;
         [SerializeField] private GameObject currentBlockPresenter;
         [SerializeField] private Material material;
-        [SerializeField] private Color color;
         private ISubscription redrawCurrentBlockMessageSubscription;
 
         protected override void LoadComponents()
@@ -36,15 +35,19 @@ namespace Game.Mono
             if (this.currentBlockPresenter)
                 Destroy(this.currentBlockPresenter);
 
+            Color[] colors = new Color[]
+            {
+                this.currentBlock.Value.Color,
+            };
+
             this.currentBlockPresenter = CellsMeshBuilder.CreateCellsPresenterGO(
                 this.boardConfig.Value.CellWorldSize,
                 this.currentBlock.Value.CenterPosition,
                 this.currentBlock.Value.CellOffsets,
+                colors,
                 this.material);
 
             this.currentBlockPresenter.transform.SetParent(transform);
-
-            this.currentBlockPresenter.GetComponent<MeshRenderer>().material.SetColor("_Color", this.color);
         }
     }
 }

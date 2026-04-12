@@ -39,6 +39,7 @@ public class BlockLocker : MicroBehaviour
         {
             var cellPos = centerPos + cellOffset;
             board[cellPos.x][cellPos.y].IsValid = true;
+            board[cellPos.x][cellPos.y].Color = this.currentBlock.Value.Color;
         }
     }
 }

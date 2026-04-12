@@ -49,6 +49,7 @@ public class BlockSpawner : MicroBehaviour
         {
             CenterPosition = new(this.boardConfigHolder.Value.Width / 2, this.boardConfigHolder.Value.Height + 1),
             CellOffsets = BlockOffsets.Value[blockIndex],
+            Color = UnityEngine.Random.ColorHSV(),
         };
     }
 
