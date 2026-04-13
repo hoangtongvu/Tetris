@@ -8,12 +8,7 @@ public partial class ComponentQuickView : EditorWindow
     {
         var button = new Button();
         button.text = "⋮";
-        button.style.height = 20;
-        button.style.width = 20;
-        button.style.marginLeft = 0;
-        button.style.marginRight = 0;
-        button.style.marginTop = 0;
-        button.style.marginBottom = 0;
+        button.AddToClassList("util-button");
 
         button.clicked += () =>
         {

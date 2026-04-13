@@ -15,6 +15,9 @@ public partial class ComponentQuickView : EditorWindow
         {
             _cqv = componentQuickView;
             this.verticalScrollerVisibility = ScrollerVisibility.AlwaysVisible;
+
+            var styleSheet = USSUtils.LoadStyleSheet("styles/component-inspectors.uss");
+            this.styleSheets.Add(styleSheet);
         }
 
         public void Refresh()
@@ -42,33 +45,20 @@ public partial class ComponentQuickView : EditorWindow
         private VisualElement CreateComponentElement(Component component)
         {
             var container = new VisualElement();
-            container.style.marginBottom = 0;
-            container.style.borderBottomWidth = 1;
-            container.style.borderTopWidth = 1;
-            container.style.borderLeftWidth = 1;
-            container.style.borderRightWidth = 1;
-            container.style.borderBottomColor = Color.black;
+            container.AddToClassList("component-element");
 
             // ===== Title Bar =====
             var title = new VisualElement();
-            title.style.flexDirection = FlexDirection.Row;
-            title.style.alignItems = Align.Center;
-            title.style.backgroundColor = new Color(0.25f, 0.25f, 0.25f);
-            title.style.height = 20;
-            title.style.paddingLeft = 4;
-            title.style.paddingRight = 4;
+            title.AddToClassList("title-bar");
 
             // Icon
             var icon = new Image();
             icon.image = AssetPreview.GetMiniThumbnail(component);
-            icon.style.width = 15;
-            icon.style.height = 15;
+            icon.AddToClassList("component-icon");
 
             // Name
             var label = new Label(component.GetType().Name);
-            label.style.unityFontStyleAndWeight = FontStyle.Bold;
-            label.style.marginLeft = 4;
-            label.style.flexGrow = 1;
+            label.AddToClassList("component-name-label");
 
             title.Add(icon);
             title.Add(label);
@@ -108,12 +98,7 @@ public partial class ComponentQuickView : EditorWindow
         {
             var hideBtn = new Button();
             hideBtn.text = "👁";
-            hideBtn.style.height = 20;
-            hideBtn.style.width = 20;
-            hideBtn.style.marginLeft = 0;
-            hideBtn.style.marginRight = 0;
-            hideBtn.style.marginTop = 0;
-            hideBtn.style.marginBottom = 0;
+            hideBtn.AddToClassList("util-button");
 
             hideBtn.clicked += () =>
             {

@@ -13,23 +13,11 @@ public partial class ComponentQuickView : EditorWindow
         {
             public ToolBarButton() : base()
             {
-                this.style.height = 22;
-
-                this.style.paddingLeft = 0;
-                this.style.paddingRight = 0;
-                this.style.paddingTop = 0;
-                this.style.paddingBottom = 0;
-
-                this.style.marginLeft = 1;
-                this.style.marginRight = 1;
-                this.style.marginTop = 1;
-                this.style.marginBottom = 1;
+                this.AddToClassList("toolbar-button");
             }
         }
 
         private readonly ComponentQuickView _cqv;
-        private static readonly Color buttonBackgroundColorOn = new(0.25f, 0.37f, 0.48f);
-        private static readonly Color buttonBackgroundColorOff = Color.gray2;
         private bool _toggledAllVisible = true;
 
         public ComponentToolbar(ComponentQuickView componentQuickView) : base()
@@ -40,25 +28,9 @@ public partial class ComponentQuickView : EditorWindow
 
         private void CreateComponentToolbar()
         {
-            this.style.flexShrink = 0;
-            this.style.flexGrow = 0;
-
-            this.style.backgroundColor = Color.gray3;
-
-            this.style.borderTopWidth = 1;
-            this.style.borderBottomWidth = 1;
-            this.style.borderLeftWidth = 1;
-            this.style.borderRightWidth = 1;
-
-            this.style.borderBottomColor = Color.black;
-
-            this.style.paddingLeft = 4;
-            this.style.paddingRight = 4;
-            this.style.paddingTop = 4;
-            this.style.paddingBottom = 4;
-
-            this.style.flexDirection = FlexDirection.Row;
-            this.style.flexWrap = Wrap.Wrap;
+            var styleSheet = USSUtils.LoadStyleSheet("styles/component-toolbar.uss");
+            this.styleSheets.Add(styleSheet);
+            this.AddToClassList("container");
         }
 
         public void Refresh()
@@ -85,12 +57,17 @@ public partial class ComponentQuickView : EditorWindow
                     visible = true;
 
                 var button = CreateSingleComponentButton(c, visible);
-                button.style.paddingLeft = 3;
-                button.style.paddingRight = 3;
 
-                button.style.backgroundColor = visible
-                    ? buttonBackgroundColorOn
-                    : buttonBackgroundColorOff;
+                if (visible)
+                {
+                    button.AddToClassList("button-toggle-on");
+                    button.RemoveFromClassList("button-toggle-off");
+                }
+                else
+                {
+                    button.AddToClassList("button-toggle-off");
+                    button.RemoveFromClassList("button-toggle-on");
+                }
 
                 this.Add(button);
             }
@@ -101,7 +78,6 @@ public partial class ComponentQuickView : EditorWindow
         private ToolBarButton CreateToggleAllButton()
         {
             var button = new ToolBarButton();
-            button.style.width = button.style.height;
 
             var iconSize = new Length(15, LengthUnit.Pixel);
             UpdateToggleAllButtonUI();
@@ -121,9 +97,16 @@ public partial class ComponentQuickView : EditorWindow
                 button.style.backgroundSize = new BackgroundSize(iconSize, iconSize);
 
                 // Update color
-                button.style.backgroundColor = _toggledAllVisible
-                    ? buttonBackgroundColorOn
-                    : buttonBackgroundColorOff;
+                if (_toggledAllVisible)
+                {
+                    button.AddToClassList("button-toggle-on");
+                    button.RemoveFromClassList("button-toggle-off");
+                }
+                else
+                {
+                    button.AddToClassList("button-toggle-off");
+                    button.RemoveFromClassList("button-toggle-on");
+                }
             }
 
             return button;
@@ -134,27 +117,11 @@ public partial class ComponentQuickView : EditorWindow
             var button = new ToolBarButton();
 
             var content = new VisualElement();
-            content.style.flexDirection = FlexDirection.Row;
-            content.style.alignItems = Align.Center;
-            content.style.height = 20;
-            content.style.maxWidth = 500;
-
-            content.style.paddingLeft = 0;
-            content.style.paddingRight = 0;
-            content.style.paddingTop = 0;
-            content.style.paddingBottom = 0;
-
-            content.style.marginLeft = 0;
-            content.style.marginRight = 0;
-            content.style.marginTop = 0;
-            content.style.marginBottom = 0;
+            content.AddToClassList("content");
 
             // Icon
             var icon = new Image();
             icon.image = AssetPreview.GetMiniThumbnail(c);
-            icon.style.width = 15;
-            icon.style.height = 15;
-            icon.style.marginRight = 3;
 
             // Label
             var label = new Label(c.GetType().Name);

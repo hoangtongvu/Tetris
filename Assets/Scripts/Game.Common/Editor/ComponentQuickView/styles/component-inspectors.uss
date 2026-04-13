@@ -1,0 +1,43 @@
+.component-element {
+    margin-bottom: 0;
+    border-width: 1px;
+    border-bottom-color: black;
+}
+
+.component-element > .title-bar {
+    flex-direction: row;
+    align-items: center;
+    background-color: rgb(64, 64, 64);
+    height: 20px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.component-element > .title-bar > .component-icon {
+    width: 15px;
+    height: 15px;
+}
+
+.component-element > .title-bar > .component-name-label {
+    -unity-font-style: bold;
+    flex-grow: 1;
+    margin-left: 4px;
+}
+
+.component-element > .title-bar > .util-button {
+    width: 17px;
+    height: 17px;
+
+    margin: 0;
+    margin-right: 2px;
+    padding: 0;
+
+    background-color: transparent;
+
+    border-radius: 3px;
+    border-color: transparent;
+}
+
+.component-element > .title-bar > .util-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}

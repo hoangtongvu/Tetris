@@ -1,0 +1,5 @@
+.header {
+    height: 25px;
+    border-top-width: 1px;
+    border-top-color: black;
+}

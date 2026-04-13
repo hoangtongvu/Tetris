@@ -19,8 +19,9 @@ public partial class ComponentQuickView : EditorWindow
 
         private void CreateHeader()
         {
-            this.style.height = _headerHeight;
-            this.style.borderTopWidth = 1;
+            var styleSheet = USSUtils.LoadStyleSheet("styles/component-header.uss");
+            this.styleSheets.Add(styleSheet);
+            this.AddToClassList("header");
 
             // Lock button (icon)
             var lockButton = new ToolbarButton();
