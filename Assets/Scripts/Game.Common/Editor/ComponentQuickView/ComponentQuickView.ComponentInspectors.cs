@@ -47,7 +47,7 @@ public partial class ComponentQuickView : EditorWindow
             container.style.borderTopWidth = 1;
             container.style.borderLeftWidth = 1;
             container.style.borderRightWidth = 1;
-            container.style.borderTopColor = Color.black;
+            container.style.borderBottomColor = Color.black;
 
             // ===== Title Bar =====
             var title = new VisualElement();

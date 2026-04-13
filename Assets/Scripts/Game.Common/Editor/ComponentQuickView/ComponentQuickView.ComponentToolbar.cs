@@ -29,7 +29,7 @@ public partial class ComponentQuickView : EditorWindow
 
         private readonly ComponentQuickView _cqv;
         private static readonly Color buttonBackgroundColorOn = new(0.25f, 0.37f, 0.48f);
-        private static readonly Color buttonBackgroundColorOff = Color.gray3;
+        private static readonly Color buttonBackgroundColorOff = Color.gray2;
         private bool _toggledAllVisible = true;
 
         public ComponentToolbar(ComponentQuickView componentQuickView) : base()
@@ -49,6 +49,8 @@ public partial class ComponentQuickView : EditorWindow
             this.style.borderBottomWidth = 1;
             this.style.borderLeftWidth = 1;
             this.style.borderRightWidth = 1;
+
+            this.style.borderBottomColor = Color.black;
 
             this.style.paddingLeft = 4;
             this.style.paddingRight = 4;
