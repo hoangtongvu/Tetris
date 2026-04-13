@@ -1,26 +1,26 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public partial class ComponentQuickView : EditorWindow
 {
-    private static void DrawContextMenu(Rect titleRect, Component component, GUIStyle buttonStyle)
+    private static Button CreateShowContextMenuButton(Component component)
     {
-        var menuIcon = EditorGUIUtility.IconContent("_Menu");
-        var mouseRect = new Rect(Event.current.mousePosition, Vector2.zero);
-        var e = Event.current;
+        var button = new Button();
+        button.text = "⋮";
+        button.style.height = 20;
+        button.style.width = 20;
+        button.style.marginLeft = 0;
+        button.style.marginRight = 0;
+        button.style.marginTop = 0;
+        button.style.marginBottom = 0;
 
-        if (
-            e.type == EventType.MouseDown &&
-            e.button == 1 &&
-            titleRect.Contains(e.mousePosition))
+        button.clicked += () =>
         {
+            var mouseRect = new Rect(Event.current.mousePosition, Vector2.zero);
             EditorContextMenuUtil.Show(mouseRect, component);
-            e.Use();
-        }
+        };
 
-        if (GUILayout.Button(menuIcon, buttonStyle, GUILayout.Width(24), GUILayout.Height(20)))
-        {
-            EditorContextMenuUtil.Show(mouseRect, component);
-        }
+        return button;
     }
 }
