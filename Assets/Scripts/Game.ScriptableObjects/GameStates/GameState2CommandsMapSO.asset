@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ec7ac6ed40af4b448e105660fd19f83, type: 3}
+  m_Name: GameState2CommandsMapSO
+  m_EditorClassIdentifier: Game.ScriptableObjects::Game.ScriptableObjects.GameStates.GameState2CommandsMapSO
+  Value:
+    _saintsKeys:
+    - value: 2
+      valueField:
+        propertyType: 0
+        propertyPath: 
+        longValue: 0
+        uLongValue: 0
+        stringValue: 
+        V: {fileID: 0}
+        VRef:
+          rid: -2
+        IsVRef: 0
+      valueArray: []
+      valueList: []
+      wrapType: 4
+    - value: 3
+      valueField:
+        propertyType: 0
+        propertyPath: 
+        longValue: 0
+        uLongValue: 0
+        stringValue: 
+        V: {fileID: 0}
+        VRef:
+          rid: -2
+        IsVRef: 0
+      valueArray: []
+      valueList: []
+      wrapType: 4
+    _wrapTypeKey: 4
+    _saintsValues:
+    - value:
+        OnEnterStateCommands:
+        - Value:
+          - GameCommand:
+              rid: 1866159673251463255
+            GameCommandAsync:
+              rid: -2
+          - GameCommand:
+              rid: 1866159673251463256
+            GameCommandAsync:
+              rid: -2
+        OnExitStateCommands: []
+      valueField:
+        propertyType: 0
+        propertyPath: 
+        longValue: 0
+        uLongValue: 0
+        stringValue: 
+        V: {fileID: 0}
+        VRef:
+          rid: -2
+        IsVRef: 0
+      valueArray: []
+      valueList: []
+      wrapType: 4
+    - value:
+        OnEnterStateCommands:
+        - Value:
+          - GameCommand:
+              rid: 1866159673251463456
+            GameCommandAsync:
+              rid: -2
+        OnExitStateCommands: []
+      valueField:
+        propertyType: 0
+        propertyPath: 
+        longValue: 0
+        uLongValue: 0
+        stringValue: 
+        V: {fileID: 0}
+        VRef:
+          rid: -2
+        IsVRef: 0
+      valueArray: []
+      valueList: []
+      wrapType: 4
+    _wrapTypeValue: 4
+    saintsSerializedVersion: 2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1866159673251463255
+      type: {class: RentBootScreenCommand, ns: Game.UI.BootScreen, asm: Game.UI}
+      data: 
+    - rid: 1866159673251463256
+      type: {class: PushViewToBootScreenCommand, ns: Game.UI.BootScreen, asm: Game.UI}
+      data:
+        ViewUIType: 1
+    - rid: 1866159673251463456
+      type: {class: PopViewFromBootScreenCommand, ns: Game.UI.BootScreen, asm: Game.UI}
+      data: 
