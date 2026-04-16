@@ -1,0 +1,10 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MainMenu/MainMenuViewStyleSheet.uss?fileID=7433441132597879392&amp;guid=f9feb1534a2f41c4b820d2bafd2bd6e9&amp;type=3#MainMenuViewStyleSheet"/>
+    <ui:VisualElement name="center-panel" class="centerPanel" style="flex-grow: 1; align-items: center; justify-content: center; align-self: center;">
+        <ui:Label text="MAIN MENU" name="headline__label" style="font-size: 60px; color: rgb(255, 255, 255); -unity-text-align: upper-center; text-shadow: 5px 5px 0 rgb(0, 0, 0);"/>
+        <ui:Button text="START" name="start-game__button" class="menuRegularButton"/>
+        <ui:Button text="LEADERBOARD" name="leaderboard__button" class="menuRegularButton"/>
+        <ui:Button text="EXIT" name="exit-game__button" class="menuRegularButton"/>
+    </ui:VisualElement>
+    <Unity.UI.Builder.UnityUIBuilderSelectionMarker/>
+</ui:UXML>

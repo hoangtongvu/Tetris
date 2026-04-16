@@ -1,0 +1,30 @@
+.menuRegularButton {
+    font-size: 40px;
+    color: rgb(255, 255, 255);
+    text-shadow: 5px 5px 0 rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.24);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    width: 310px;
+    height: 93px;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    rotate: 0 0 0 0;
+}
+
+.centerPanel {
+    width: 567px;
+    height: 100%;
+}
+
+.menuRegularButton:hover {
+    scale: 1.05 1.05;
+    transition-duration: 0.2s;
+    opacity: 1;
+    rotate: -2deg;
+    background-color: rgba(0, 0, 0, 0.39);
+}
