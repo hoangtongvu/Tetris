@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7384650646791021349
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 546813611324153166}
+  - component: {fileID: 3420367179186148435}
+  - component: {fileID: 7966724649213731881}
+  - component: {fileID: 8138405302674917313}
+  - component: {fileID: 7308460098526427092}
+  - component: {fileID: 2352661593288898715}
+  m_Layer: 0
+  m_Name: CurrentBlock
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &546813611324153166
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7384650646791021349}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3420367179186148435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7384650646791021349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be0e80d9972885146bf6360a2aca484a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.CurrentBlockRef
+  Value:
+    CenterPosition:
+      x: 0
+      y: 0
+    CellOffsets: []
+    Color: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &7966724649213731881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7384650646791021349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 327330f89a2574e428ae6f02c0279429, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.CurrentBlockTransformedEventHolder
+  Value:
+    Value: 0
+--- !u!114 &8138405302674917313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7384650646791021349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52c61cd84332a944ba12dbbb6bee700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.CanLockCurrentBlockTagHolder
+  Value:
+    Value: 0
+--- !u!114 &7308460098526427092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7384650646791021349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcf0b3a2b28bc174796f5ca599ba3878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.BlockLockedEventHolder
+  Value:
+    Value: 1
+--- !u!114 &2352661593288898715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7384650646791021349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a399b5559180e41b1cd8fb7db7885f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.CurrentBlockDrawer
+  boardConfig: {fileID: 0}
+  currentBlock: {fileID: 3420367179186148435}
+  currentBlockPresenter: {fileID: 0}
+  material: {fileID: -876546973899608171, guid: b49b5897e28a3fc459b8431ef4e51b7b, type: 3}

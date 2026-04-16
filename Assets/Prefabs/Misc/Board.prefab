@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7805783501729836564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3095335713820865213}
+  - component: {fileID: 7190225556075517167}
+  - component: {fileID: 3464107851917639065}
+  - component: {fileID: 8961281464245082891}
+  - component: {fileID: 8031614403943801661}
+  m_Layer: 0
+  m_Name: Board
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3095335713820865213
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7805783501729836564}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7190225556075517167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7805783501729836564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10c76db4bfb0b06448441ae84e356f59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.BoardConfigHolder
+  Value:
+    Width: 10
+    Height: 20
+    CellWorldSize: 0.5
+--- !u!114 &3464107851917639065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7805783501729836564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 680772462dd2d9a43b1506dcd3d887b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.BoardCellArrayInitializer
+  config: {fileID: 7190225556075517167}
+--- !u!114 &8961281464245082891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7805783501729836564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df06a70a47a3ba147b0c44e8580f1547, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.BoardGizmoDrawer
+  config: {fileID: 7190225556075517167}
+  validColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  origin: {x: 0, y: 0, z: 0}
+--- !u!114 &8031614403943801661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7805783501729836564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4bf21caff0299c4ebf30f6fd1dd4cdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.BoardDrawer
+  boardConfig: {fileID: 7190225556075517167}
+  currentBoardPresenter: {fileID: 0}
+  material: {fileID: -876546973899608171, guid: b49b5897e28a3fc459b8431ef4e51b7b, type: 3}
