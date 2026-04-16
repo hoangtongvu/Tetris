@@ -7,6 +7,15 @@
       "dependencies": {},
       "hash": "73a63b7f672b88f7e9992f6917eb458a8cbb6fa9"
     },
+    "com.darksun.ds-pool": {
+      "version": "https://github.com/hoangtongvu/DSPool.git?path=/Assets/DSPool#1.1.1",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.cysharp.unitask": "2.5.10"
+      },
+      "hash": "4eff0c1427d46c9e63892fb4a5da705078f3ef21"
+    },
     "com.darksun.entities.testing": {
       "version": "https://github.com/hoangtongvu/Entities.Testing.git",
       "depth": 0,
@@ -15,6 +24,13 @@
         "com.unity.entities": "1.2.0"
       },
       "hash": "177ecc0338d69cbf689771f0f43b4708fcddb6be"
+    },
+    "com.darksun.enum-length-generator": {
+      "version": "https://github.com/hoangtongvu/EnumLengthGenerator.git?path=/Assets/EnumLengthGenerator",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "13348c2277a7a21ea5340ed7316dd89216378fe0"
     },
     "com.github-glitchenzo.nugetforunity": {
       "version": "https://github.com/GlitchEnzo/NuGetForUnity.git?path=/src/NuGetForUnity",
@@ -53,6 +69,22 @@
       "source": "git",
       "dependencies": {},
       "hash": "1d388a4bba9235dfca394830ca186bb477e90901"
+    },
+    "com.unity.addressables": {
+      "version": "2.9.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.profiling.core": "1.0.2",
+        "com.unity.test-framework": "1.4.5",
+        "com.unity.modules.assetbundle": "1.0.0",
+        "com.unity.modules.jsonserialize": "1.0.0",
+        "com.unity.modules.imageconversion": "1.0.0",
+        "com.unity.modules.unitywebrequest": "1.0.0",
+        "com.unity.scriptablebuildpipeline": "2.6.1",
+        "com.unity.modules.unitywebrequestassetbundle": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
     },
     "com.unity.ai.navigation": {
       "version": "2.0.12",
