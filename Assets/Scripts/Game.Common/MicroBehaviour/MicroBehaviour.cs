@@ -1,3 +1,6 @@
+using Reflex.Core;
+using Reflex.Extensions;
+using SaintsField;
 using System;
 using UnityEngine;
 
@@ -6,11 +9,24 @@ namespace Game.Common;
 [Serializable]
 public abstract class MicroBehaviour
 {
-    protected MicroBehavioursExecutor executor;
+    [SerializeField, ReadOnly] protected MicroBehavioursExecutor executor;
+    protected Container sceneContainer;
 
     public void Init(MicroBehavioursExecutor executor)
     {
         this.executor = executor;
+    }
+
+    public void AssignSceneContainer()
+    {
+        this.sceneContainer = this.executor.gameObject.scene.GetSceneContainer();
+    }
+
+    public virtual void InjectDependencies() { }
+
+    protected void InjectSingle<T>(out T t)
+    {
+        t = this.sceneContainer.Single<T>();
     }
 
     public virtual void Awake() { }

@@ -2,25 +2,24 @@ using Game.Common;
 using Game.Domain;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Game.Mono;
 
 [Serializable]
 public class CompletedLinesCheckAndClearer : MicroBehaviour
 {
-    [SerializeField] private BlockLockedEventHolder blockLockedEvent;
-    [SerializeField] private BoardConfigHolder boardConfig;
+    private BlockLockedEvent blockLockedEvent;
+    private BoardConfig boardConfig;
 
-    public override void LoadComponents()
+    public override void InjectDependencies()
     {
-        this.FindFirstObjectByType(out this.blockLockedEvent);
-        this.FindFirstObjectByType(out this.boardConfig);
+        this.InjectSingle(out this.blockLockedEvent);
+        this.InjectSingle(out this.boardConfig);
     }
 
     public override void Update()
     {
-        if (!this.blockLockedEvent.Value.Value)
+        if (!this.blockLockedEvent.Value)
             return;
 
         var board = BoardCellArrayHolder.Instance.Value;
@@ -36,11 +35,11 @@ public class CompletedLinesCheckAndClearer : MicroBehaviour
     {
         var completedLineIndexes = new List<int>();
 
-        for (int y = 0; y < this.boardConfig.Value.Height; y++)
+        for (int y = 0; y < this.boardConfig.Height; y++)
         {
             bool isLineCompleted = true;
 
-            for (int x = 0; x < this.boardConfig.Value.Width; x++)
+            for (int x = 0; x < this.boardConfig.Width; x++)
             {
                 var cell = board.Value[x][y];
 
@@ -60,7 +59,7 @@ public class CompletedLinesCheckAndClearer : MicroBehaviour
 
     private void ClearCompletedLines(BoardCellArray board, List<int> completedLineIndexes)
     {
-        int highestVerticalIndex = this.boardConfig.Value.Height - 1;
+        int highestVerticalIndex = this.boardConfig.Height - 1;
         int length = completedLineIndexes.Count;
 
         for (int i = length - 1; i >= 0; i--)
@@ -69,7 +68,7 @@ public class CompletedLinesCheckAndClearer : MicroBehaviour
 
             for (int y = lineIndex; y < highestVerticalIndex; y++)
             {
-                for (int x = 0; x < this.boardConfig.Value.Width; x++)
+                for (int x = 0; x < this.boardConfig.Width; x++)
                 {
                     board.Value[x][y] = board.Value[x][y + 1];
                 }

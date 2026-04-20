@@ -1,9 +1,11 @@
+using Reflex.Core;
+using Reflex.Injectors;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Common
 {
-    public class MicroBehavioursExecutor : SaiMonoBehaviour
+    public class MicroBehavioursExecutor : SaiMonoBehaviour, IAttributeInjectionContract
     {
         [SerializeReference, SubclassSelector]
         private List<MicroBehaviour> microBehaviours;
@@ -13,6 +15,15 @@ namespace Game.Common
             foreach (var microBehaviour in this.microBehaviours)
             {
                 microBehaviour.Init(this);
+            }
+        }
+
+        public virtual void ReflexInject(Container container)
+        {
+            foreach (var microBehaviour in this.microBehaviours)
+            {
+                microBehaviour.AssignSceneContainer();
+                microBehaviour.InjectDependencies();
             }
         }
 

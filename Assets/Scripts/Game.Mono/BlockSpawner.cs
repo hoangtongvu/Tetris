@@ -9,10 +9,10 @@ namespace Game.Mono;
 [Serializable]
 public class BlockSpawner : MicroBehaviour
 {
-    [SerializeField] private BlockLockedEventHolder blockLockedEvent;
-    [SerializeField] private BoardConfigHolder boardConfigHolder;
-    [SerializeField] private CurrentBlockRef currentBlock;
-    [SerializeField] private CurrentBlockTransformedEventHolder currentBlockTransformedEvent;
+    private BlockLockedEvent blockLockedEvent;
+    private BoardConfig boardConfig;
+    private CurrentBlockRef currentBlock;
+    private CurrentBlockTransformedEvent currentBlockTransformedEvent;
     [SerializeField] private int batchIndexCount = 4;
     private Queue<int> batchIndexes;
 
@@ -23,17 +23,17 @@ public class BlockSpawner : MicroBehaviour
         this.batchIndexes = new(this.batchIndexCount);
     }
 
-    public override void LoadComponents()
+    public override void InjectDependencies()
     {
-        this.FindFirstObjectByType(out this.blockLockedEvent);
-        this.FindFirstObjectByType(out this.boardConfigHolder);
-        this.FindFirstObjectByType(out this.currentBlock);
-        this.FindFirstObjectByType(out this.currentBlockTransformedEvent);
+        this.InjectSingle(out this.blockLockedEvent);
+        this.InjectSingle(out this.boardConfig);
+        this.InjectSingle(out this.currentBlock);
+        this.InjectSingle(out this.currentBlockTransformedEvent);
     }
 
     public override void Update()
     {
-        if (!this.blockLockedEvent.Value.Value)
+        if (!this.blockLockedEvent.Value)
             return;
 
         this.SpawnNewBlock();
@@ -42,12 +42,12 @@ public class BlockSpawner : MicroBehaviour
     private void SpawnNewBlock()
     {
         this.TryFillIndexQueue();
-        this.currentBlockTransformedEvent.Value.Value = true;
+        this.currentBlockTransformedEvent.Value = true;
         int blockIndex = this.batchIndexes.Dequeue();
 
         this.currentBlock.Value = new BlockData
         {
-            CenterPosition = new(this.boardConfigHolder.Value.Width / 2, this.boardConfigHolder.Value.Height + 1),
+            CenterPosition = new(this.boardConfig.Width / 2, this.boardConfig.Height + 1),
             CellOffsets = BlockOffsets.Value[blockIndex],
             Color = UnityEngine.Random.ColorHSV(),
         };

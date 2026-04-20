@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using Game.Common;
+using Game.Domain;
 using System;
 using UnityEngine;
 
@@ -8,16 +9,16 @@ namespace Game.Mono;
 [Serializable]
 public class PlayerBlockVerticalMover : MicroBehaviour
 {
-    [SerializeField] private BoardConfigHolder boardConfig;
-    [SerializeField] private CurrentBlockRef currentBlock;
-    [SerializeField] private CurrentBlockTransformedEventHolder currentBlockTransformedEvent;
+    private BoardConfig boardConfig;
+    private CurrentBlockRef currentBlock;
+    private CurrentBlockTransformedEvent currentBlockTransformedEvent;
     [SerializeField] private float moveCooldownSeconds = 0.1f;
 
-    public override void LoadComponents()
+    public override void InjectDependencies()
     {
-        this.FindFirstObjectByType(out this.boardConfig);
-        this.FindFirstObjectByType(out this.currentBlock);
-        this.FindFirstObjectByType(out this.currentBlockTransformedEvent);
+        this.InjectSingle(out this.boardConfig);
+        this.InjectSingle(out this.currentBlock);
+        this.InjectSingle(out this.currentBlockTransformedEvent);
     }
 
     public override void Start()
@@ -50,11 +51,11 @@ public class PlayerBlockVerticalMover : MicroBehaviour
 
         bool canMove =
             BlockPositionCheckingHelpers.CheckBottomBorder(tempPos, blockData.CellOffsets) &&
-            BlockPositionCheckingHelpers.CheckCollision(boardConfig.Value, BoardCellArrayHolder.Instance.Value, tempPos, blockData.CellOffsets);
+            BlockPositionCheckingHelpers.CheckCollision(boardConfig, BoardCellArrayHolder.Instance.Value, tempPos, blockData.CellOffsets);
 
         if (!canMove) return;
 
-        this.currentBlockTransformedEvent.Value.Value = true;
+        this.currentBlockTransformedEvent.Value = true;
         blockData.CenterPosition = tempPos;
     }
 }

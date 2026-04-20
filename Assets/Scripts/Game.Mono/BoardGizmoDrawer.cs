@@ -1,10 +1,12 @@
+using Reflex.Attributes;
 using UnityEngine;
 
 namespace Game.Mono
 {
-    public class BoardGizmoDrawer : MonoBehaviour
+    [SourceGeneratorInjectable]
+    public partial class BoardGizmoDrawer : MonoBehaviour
     {
-        [SerializeField] private BoardConfigHolder config;
+        [Inject] private BoardConfig config;
 
         [SerializeField] private Color validColor = Color.yellow;
         [SerializeField] private Vector3 origin; // bottom-left corner of the board
@@ -14,7 +16,7 @@ namespace Game.Mono
             var board = BoardCellArrayHolder.Instance;
             if (!board) return;
 
-            float size = config.Value.CellWorldSize;
+            float size = config.CellWorldSize;
 
             for (int x = 0; x < board.Value.Value.Length; x++)
             {

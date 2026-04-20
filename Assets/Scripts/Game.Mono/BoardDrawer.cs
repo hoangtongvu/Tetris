@@ -1,5 +1,6 @@
 using Game.Common;
 using Game.Domain.PubSub.Messengers;
+using Reflex.Attributes;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Unity.Mathematics;
@@ -8,17 +9,13 @@ using ZBase.Foundation.PubSub;
 
 namespace Game.Mono
 {
-    public class BoardDrawer : SaiMonoBehaviour
+    [SourceGeneratorInjectable]
+    public partial class BoardDrawer : SaiMonoBehaviour
     {
-        [SerializeField] private BoardConfigHolder boardConfig;
+        [Inject] private BoardConfig boardConfig;
         [SerializeField] private GameObject currentBoardPresenter;
         [SerializeField] private Material material;
         private ISubscription drawBoardMessageSubscription;
-
-        protected override void LoadComponents()
-        {
-            this.FindAnyObjectByType(out this.boardConfig);
-        }
 
         private void OnEnable()
         {
@@ -40,9 +37,9 @@ namespace Game.Mono
             var activeCellColors = new List<Color>();
             var board = BoardCellArrayHolder.Instance.Value.Value;
 
-            for (int x = 0; x < this.boardConfig.Value.Width; x++)
+            for (int x = 0; x < this.boardConfig.Width; x++)
             {
-                for (int y = 0; y < this.boardConfig.Value.Height; y++)
+                for (int y = 0; y < this.boardConfig.Height; y++)
                 {
                     var cell = board[x][y];
                     if (!cell.IsValid) continue;
@@ -53,7 +50,7 @@ namespace Game.Mono
             }
 
             this.currentBoardPresenter = CellsMeshBuilder.CreateCellsPresenterGO(
-                this.boardConfig.Value.CellWorldSize,
+                this.boardConfig.CellWorldSize,
                 int2.zero,
                 CollectionsMarshal.AsSpan(activeCellPositions),
                 CollectionsMarshal.AsSpan(activeCellColors),

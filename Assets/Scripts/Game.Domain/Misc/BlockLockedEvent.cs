@@ -3,7 +3,7 @@ using System;
 namespace Game.Domain;
 
 [Serializable]
-public struct BlockLockedEvent
+public class BlockLockedEvent
 {
     public bool Value;
 }

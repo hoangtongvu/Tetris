@@ -1,37 +1,37 @@
 using Game.Common;
+using Game.Domain;
 using System;
-using UnityEngine;
 
 namespace Game.Mono;
 
 [Serializable]
 public class BlockLocker : MicroBehaviour
 {
-    [SerializeField] private CanLockCurrentBlockTagHolder canLockCurrentBlockTag;
-    [SerializeField] private BlockLockedEventHolder blockLockedEvent;
-    [SerializeField] private CurrentBlockRef currentBlock;
+    private CanLockCurrentBlockTag canLockCurrentBlockTag;
+    private BlockLockedEvent blockLockedEvent;
+    private CurrentBlockRef currentBlock;
 
-    public override void LoadComponents()
+    public override void InjectDependencies()
     {
-        this.FindFirstObjectByType(out this.canLockCurrentBlockTag);
-        this.FindFirstObjectByType(out this.blockLockedEvent);
-        this.FindFirstObjectByType(out this.currentBlock);
+        this.InjectSingle(out this.canLockCurrentBlockTag);
+        this.InjectSingle(out this.blockLockedEvent);
+        this.InjectSingle(out this.currentBlock);
     }
 
     public override void Update()
     {
-        this.blockLockedEvent.Value.Value = false;
+        this.blockLockedEvent.Value = false;
 
-        if (!this.canLockCurrentBlockTag.Value.Value)
+        if (!this.canLockCurrentBlockTag.Value)
             return;
 
-        this.canLockCurrentBlockTag.Value.Value = false;
+        this.canLockCurrentBlockTag.Value = false;
         this.LockCurrentBlock();
     }
 
     private void LockCurrentBlock()
     {
-        this.blockLockedEvent.Value.Value = true;
+        this.blockLockedEvent.Value = true;
         var board = BoardCellArrayHolder.Instance.Value.Value;
         var centerPos = this.currentBlock.Value.CenterPosition;
 

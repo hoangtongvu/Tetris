@@ -1,7 +1,7 @@
 using Game.Common;
+using Game.Domain;
 using Game.Domain.PubSub.Messengers;
 using System;
-using UnityEngine;
 using ZBase.Foundation.PubSub;
 
 namespace Game.Mono;
@@ -11,11 +11,11 @@ public record struct DrawBoardMessage : IMessage;
 [Serializable]
 public class DrawBoardMessagePublisher : MicroBehaviour
 {
-    [SerializeField] private BlockLockedEventHolder blockLockedEvent;
+    private BlockLockedEvent blockLockedEvent;
 
-    public override void LoadComponents()
+    public override void InjectDependencies()
     {
-        this.FindAnyObjectByType(out this.blockLockedEvent);
+        this.InjectSingle(out this.blockLockedEvent);
     }
 
     public override void Start()
@@ -25,7 +25,7 @@ public class DrawBoardMessagePublisher : MicroBehaviour
 
     public override void Update()
     {
-        bool canDraw = this.blockLockedEvent.Value.Value;
+        bool canDraw = this.blockLockedEvent.Value;
         if (!canDraw) return;
 
         this.SendDrawMessage();
@@ -34,6 +34,5 @@ public class DrawBoardMessagePublisher : MicroBehaviour
     private void SendDrawMessage()
     {
         GameplayMessenger.MessagePublisher.Publish(new DrawBoardMessage());
-
     }
 }

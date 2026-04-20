@@ -3,7 +3,7 @@ using System;
 namespace Game.Domain;
 
 [Serializable]
-public struct CanLockCurrentBlockTag
+public class CanLockCurrentBlockTag
 {
     public bool Value;
 }

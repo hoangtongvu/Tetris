@@ -1,4 +1,5 @@
 using Game.Common;
+using Game.Domain;
 using System;
 using System.Linq;
 using Unity.Mathematics;
@@ -9,15 +10,15 @@ namespace Game.Mono;
 [Serializable]
 public class PlayerBlockRotator : MicroBehaviour
 {
-    [SerializeField] private BoardConfigHolder boardConfig;
-    [SerializeField] private CurrentBlockRef currentBlock;
-    [SerializeField] private CurrentBlockTransformedEventHolder currentBlockTransformedEvent;
+    private BoardConfig boardConfig;
+    private CurrentBlockRef currentBlock;
+    private CurrentBlockTransformedEvent currentBlockTransformedEvent;
 
-    public override void LoadComponents()
+    public override void InjectDependencies()
     {
-        this.FindFirstObjectByType(out this.boardConfig);
-        this.FindFirstObjectByType(out this.currentBlock);
-        this.FindFirstObjectByType(out this.currentBlockTransformedEvent);
+        this.InjectSingle(out this.boardConfig);
+        this.InjectSingle(out this.currentBlock);
+        this.InjectSingle(out this.currentBlockTransformedEvent);
     }
 
     public override void Update()
@@ -42,13 +43,13 @@ public class PlayerBlockRotator : MicroBehaviour
         }
 
         bool canMove =
-            BlockPositionCheckingHelpers.CheckHorizontalBorders(boardConfig.Value, blockData.CenterPosition, tempOffsets) &&
+            BlockPositionCheckingHelpers.CheckHorizontalBorders(boardConfig, blockData.CenterPosition, tempOffsets) &&
             BlockPositionCheckingHelpers.CheckBottomBorder(blockData.CenterPosition, tempOffsets) &&
-            BlockPositionCheckingHelpers.CheckCollision(boardConfig.Value, BoardCellArrayHolder.Instance.Value, blockData.CenterPosition, tempOffsets);
+            BlockPositionCheckingHelpers.CheckCollision(boardConfig, BoardCellArrayHolder.Instance.Value, blockData.CenterPosition, tempOffsets);
 
         if (!canMove) return;
 
-        this.currentBlockTransformedEvent.Value.Value = true;
+        this.currentBlockTransformedEvent.Value = true;
         blockData.CellOffsets = tempOffsets;
     }
 

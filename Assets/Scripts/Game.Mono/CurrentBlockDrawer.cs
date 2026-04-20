@@ -1,28 +1,24 @@
 using Game.Common;
 using Game.Domain.PubSub.Messengers;
+using Reflex.Attributes;
 using UnityEngine;
 using ZBase.Foundation.PubSub;
 
 namespace Game.Mono
 {
-    public class CurrentBlockDrawer : SaiMonoBehaviour
+    [SourceGeneratorInjectable]
+    public partial class CurrentBlockDrawer : SaiMonoBehaviour
     {
-        [SerializeField] private BoardConfigHolder boardConfig;
-        [SerializeField] private CurrentBlockRef currentBlock;
+        [Inject] private BoardConfig boardConfig;
+        [Inject] private CurrentBlockRef currentBlock;
         [SerializeField] private GameObject currentBlockPresenter;
         [SerializeField] private Material material;
         private ISubscription redrawCurrentBlockMessageSubscription;
 
-        protected override void LoadComponents()
-        {
-            this.FindFirstObjectByType(out this.boardConfig);
-            this.FindFirstObjectByType(out this.currentBlock);
-        }
-
         private void OnEnable()
         {
             this.redrawCurrentBlockMessageSubscription = GameplayMessenger.MessageSubscriber
-                .Subscribe<RedrawCurrentBlockMessage>(_ => this.DrawCurrentBlock());
+                .Subscribe<DrawCurrentBlockMessage>(_ => this.DrawCurrentBlock());
         }
 
         private void OnDisable()
@@ -41,7 +37,7 @@ namespace Game.Mono
             };
 
             this.currentBlockPresenter = CellsMeshBuilder.CreateCellsPresenterGO(
-                this.boardConfig.Value.CellWorldSize,
+                this.boardConfig.CellWorldSize,
                 this.currentBlock.Value.CenterPosition,
                 this.currentBlock.Value.CellOffsets,
                 colors,

@@ -3,7 +3,7 @@ using System;
 namespace Game.Domain;
 
 [Serializable]
-public struct CurrentBlockTransformedEvent
+public class CurrentBlockTransformedEvent
 {
     public bool Value;
 }

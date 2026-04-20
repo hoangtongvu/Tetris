@@ -1,11 +1,13 @@
+using Reflex.Attributes;
 using UnityEngine;
 
 namespace Game.Mono
 {
+    [SourceGeneratorInjectable]
     [RequireComponent(typeof(LineRenderer))]
-    public class BoardBorderDrawer : MonoBehaviour
+    public partial class BoardBorderDrawer : MonoBehaviour
     {
-        [SerializeField] private BoardConfigHolder config;
+        [Inject] private BoardConfig config;
         [SerializeField] private LineRenderer lineRenderer;
 
         void Start()
@@ -19,8 +21,8 @@ namespace Game.Mono
             lineRenderer.loop = true; // closes the rectangle automatically
             lineRenderer.positionCount = 4;
 
-            float width = config.Value.Width * config.Value.CellWorldSize;
-            float height = config.Value.Height * config.Value.CellWorldSize;
+            float width = config.Width * config.CellWorldSize;
+            float height = config.Height * config.CellWorldSize;
 
             // Define 4 corners (clockwise or counter-clockwise)
             Vector3[] corners = new Vector3[4]

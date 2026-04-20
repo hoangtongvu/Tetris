@@ -1,12 +1,16 @@
 using Game.Domain;
-using System;
+using Reflex.Core;
 using UnityEngine;
 
 namespace Game.Mono
 {
-    [Serializable]
-    public class BlockLockedEventHolder : MonoBehaviour
+    public class BlockLockedEventHolder : MonoBehaviour, IInstaller
     {
         public BlockLockedEvent Value = new() { Value = true };
+
+        public void InstallBindings(ContainerBuilder builder)
+        {
+            builder.RegisterValue(this.Value);
+        }
     }
 }

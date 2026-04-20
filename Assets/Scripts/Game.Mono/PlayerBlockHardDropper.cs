@@ -1,4 +1,5 @@
 using Game.Common;
+using Game.Domain;
 using System;
 using UnityEngine;
 
@@ -7,17 +8,17 @@ namespace Game.Mono;
 [Serializable]
 public class PlayerBlockHardDropper : MicroBehaviour
 {
-    [SerializeField] private CanLockCurrentBlockTagHolder canLockCurrentBlockTag;
-    [SerializeField] private BoardConfigHolder boardConfig;
-    [SerializeField] private CurrentBlockRef currentBlock;
-    [SerializeField] private CurrentBlockTransformedEventHolder currentBlockTransformedEvent;
+    private CanLockCurrentBlockTag canLockCurrentBlockTag;
+    private BoardConfig boardConfig;
+    private CurrentBlockRef currentBlock;
+    private CurrentBlockTransformedEvent currentBlockTransformedEvent;
 
-    public override void LoadComponents()
+    public override void InjectDependencies()
     {
-        this.FindFirstObjectByType(out this.canLockCurrentBlockTag);
-        this.FindFirstObjectByType(out this.boardConfig);
-        this.FindFirstObjectByType(out this.currentBlock);
-        this.FindFirstObjectByType(out this.currentBlockTransformedEvent);
+        this.InjectSingle(out this.canLockCurrentBlockTag);
+        this.InjectSingle(out this.boardConfig);
+        this.InjectSingle(out this.currentBlock);
+        this.InjectSingle(out this.currentBlockTransformedEvent);
     }
 
     public override void Update()
@@ -32,13 +33,13 @@ public class PlayerBlockHardDropper : MicroBehaviour
                 tempPos.y--;
             } while (
                 BlockPositionCheckingHelpers.CheckBottomBorder(tempPos, blockData.CellOffsets) &&
-                BlockPositionCheckingHelpers.CheckCollision(boardConfig.Value, BoardCellArrayHolder.Instance.Value, tempPos, blockData.CellOffsets)
+                BlockPositionCheckingHelpers.CheckCollision(boardConfig, BoardCellArrayHolder.Instance.Value, tempPos, blockData.CellOffsets)
             );
 
             tempPos.y++;
             blockData.CenterPosition = tempPos;
-            this.canLockCurrentBlockTag.Value.Value = true;
-            this.currentBlockTransformedEvent.Value.Value = true;
+            this.canLockCurrentBlockTag.Value = true;
+            this.currentBlockTransformedEvent.Value = true;
         }
     }
 }
