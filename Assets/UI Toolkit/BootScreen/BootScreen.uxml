@@ -14,6 +14,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="body" style="flex-grow: 12; background-color: rgba(0, 0, 0, 0.51); flex-direction: column; flex-basis: 0;">
             <Game.UI.OverlayViewStack style="flex-basis: 0; position: absolute; top: 0; right: 0; left: 0; bottom: 0;"/>
+            <ui:Button text="BACK" name="back__button" style="margin-top: 5%; margin-left: 0; margin-right: 0; margin-bottom: 0; width: 10%; -unity-text-align: middle-right; height: 7%; font-size: 40%; position: absolute; top: 0; left: 0; bottom: 0; right: 960px;"/>
         </ui:VisualElement>
         <ui:VisualElement name="footer" style="flex-grow: 1; background-color: rgba(101, 0, 153, 0.6); flex-direction: row; height: auto; flex-basis: 0;">
             <ui:VisualElement name="left" style="flex-grow: 1; flex-direction: row; flex-basis: 0;">
