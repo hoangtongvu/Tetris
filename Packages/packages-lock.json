@@ -402,11 +402,11 @@
       "url": "https://package.openupm.com"
     },
     "today.comes.saintsfield": {
-      "version": "https://github.com/TylerTemp/SaintsField.git",
+      "version": "https://github.com/TylerTemp/SaintsField.git#5.13.3",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "fbb4321fabbef7118e438bd9807ec55c6fd04b96"
+      "hash": "a3c8bd1606b2aa95a503693ee3b116d2b0aae380"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
