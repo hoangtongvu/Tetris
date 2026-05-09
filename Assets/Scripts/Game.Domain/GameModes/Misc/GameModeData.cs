@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Game.Domain.GameModes;
 
@@ -6,6 +7,6 @@ namespace Game.Domain.GameModes;
 public class GameModeData
 {
     public string Name;
-    public string ShortDescription;
-    public string LongDescription;
+    [TextArea] public string ShortDescription;
+    [TextArea] public string LongDescription;
 }
