@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2253177564243899101
+--- !u!1 &1856119130253215971
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 658660118401620995}
-  - component: {fileID: 7592910341374184853}
+  - component: {fileID: 5056768804056106633}
+  - component: {fileID: 9103750606282096648}
   m_Layer: 0
   m_Name: GameplayLogicExecutor
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &658660118401620995
+--- !u!4 &5056768804056106633
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2253177564243899101}
+  m_GameObject: {fileID: 1856119130253215971}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,13 +32,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7592910341374184853
+--- !u!114 &9103750606282096648
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2253177564243899101}
+  m_GameObject: {fileID: 1856119130253215971}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: beb272826cf04a84dac1196527c13b27, type: 3}
@@ -53,70 +53,42 @@ MonoBehaviour:
   - rid: 4983845021229777180
   - rid: 4983845021229777185
   - rid: 4983845024387825758
-  - rid: 1866159385106448618
+  - rid: 1866159765100691557
   - rid: 1866159582270980312
   references:
     version: 2
     RefIds:
-    - rid: 1866159385106448618
-      type: {class: RedrawCurrentBlockMessagePublisher, ns: Game.Mono, asm: Game.Mono}
-      data:
-        currentBlockTransformedEvent: {fileID: 0}
     - rid: 1866159582270980312
       type: {class: DrawBoardMessagePublisher, ns: Game.Mono, asm: Game.Mono}
-      data:
-        blockLockedEvent: {fileID: 0}
+      data: 
+    - rid: 1866159765100691557
+      type: {class: DrawCurrentBlockMessagePublisher, ns: Game.Mono, asm: Game.Mono}
+      data: 
     - rid: 4983845021229777175
       type: {class: PlayerBlockHorizontalMover, ns: Game.Mono, asm: Game.Mono}
       data:
-        boardConfig: {fileID: 0}
-        currentBlock: {fileID: 0}
-        currentBlockTransformedEvent: {fileID: 0}
         moveCooldownSeconds: 0.1
     - rid: 4983845021229777178
       type: {class: PlayerBlockVerticalMover, ns: Game.Mono, asm: Game.Mono}
       data:
-        boardConfig: {fileID: 0}
-        currentBlock: {fileID: 0}
-        currentBlockTransformedEvent: {fileID: 0}
         moveCooldownSeconds: 0.1
     - rid: 4983845021229777179
       type: {class: BlockAutoDropper, ns: Game.Mono, asm: Game.Mono}
       data:
-        canLockCurrentBlockTag: {fileID: 0}
-        boardConfig: {fileID: 0}
-        currentBlock: {fileID: 0}
-        currentBlockTransformedEvent: {fileID: 0}
         autoDropIntervalSeconds: 0.5
     - rid: 4983845021229777180
       type: {class: PlayerBlockHardDropper, ns: Game.Mono, asm: Game.Mono}
-      data:
-        canLockCurrentBlockTag: {fileID: 0}
-        boardConfig: {fileID: 0}
-        currentBlock: {fileID: 0}
-        currentBlockTransformedEvent: {fileID: 0}
+      data: 
     - rid: 4983845021229777182
       type: {class: BlockSpawner, ns: Game.Mono, asm: Game.Mono}
       data:
-        blockLockedEvent: {fileID: 0}
-        boardConfigHolder: {fileID: 0}
-        currentBlock: {fileID: 0}
-        currentBlockTransformedEvent: {fileID: 0}
         batchIndexCount: 4
     - rid: 4983845021229777185
       type: {class: BlockLocker, ns: Game.Mono, asm: Game.Mono}
-      data:
-        canLockCurrentBlockTag: {fileID: 0}
-        blockLockedEvent: {fileID: 0}
-        currentBlock: {fileID: 0}
+      data: 
     - rid: 4983845024387825754
       type: {class: PlayerBlockRotator, ns: Game.Mono, asm: Game.Mono}
-      data:
-        boardConfig: {fileID: 0}
-        currentBlock: {fileID: 0}
-        currentBlockTransformedEvent: {fileID: 0}
+      data: 
     - rid: 4983845024387825758
       type: {class: CompletedLinesCheckAndClearer, ns: Game.Mono, asm: Game.Mono}
-      data:
-        blockLockedEvent: {fileID: 0}
-        boardConfig: {fileID: 0}
+      data: 
