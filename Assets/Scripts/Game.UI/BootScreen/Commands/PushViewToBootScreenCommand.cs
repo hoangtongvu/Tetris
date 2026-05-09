@@ -13,6 +13,7 @@ public class PushViewToBootScreenCommand : IGameCommand
     public void Execute()
     {
         var newView = SharedUICtrlPoolMap.Rent(this.ViewUIType) as BaseUITKCtrl;
+        newView.gameObject.SetActive(true);
         BootScreen_Ctrl.Instance.OverlayViewStack.Push(newView);
     }
 }

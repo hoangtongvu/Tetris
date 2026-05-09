@@ -1,5 +1,8 @@
-﻿namespace Game.Domain.GameModes;
+﻿using EnumLengthGenerator;
 
+namespace Game.Domain.GameModes;
+
+[GenerateEnumLength]
 public enum GameMode : byte
 {
     None = 0,

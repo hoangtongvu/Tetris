@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb44dad46c210b84c94d284bc2343c27, type: 3}
+  m_Name: GameModeProfilesSO
+  m_EditorClassIdentifier: Game.ScriptableObjects::Game.ScriptableObjects.GameModes.GameModeProfilesSO
+  Value:
+    _serializedList:
+    - Key: 1
+      Value:
+        Name: Forty Lines
+        ShortDescription: COMPLETE 40 LINES OUICKLY POSSIBLE
+        LongDescription: CLEAR 40 LINES IN THE SHORTEST AMOUNT OF TIME POSSIBLE./nSCORE
+          DOESN'T MATTER HERE, JUST GO FOR THE WORLD RECORD!
+    - Key: 2
+      Value:
+        Name: Blitz
+        ShortDescription: TWO-MINUTE RACE AGAINST THE CLOCK
+        LongDescription: GET AS MANY POINTS POSSIBLE YITHIN 2 MINUTES!/nCLEAR LINES
+          TO LEVEL UP AND GAIN MORE POINTS AND SPEED!
+    - Key: 3
+      Value:
+        Name: Zen
+        ShortDescription: RELAX OR TRAIN IN THIS NEVERENDING MODE
+        LongDescription: RELAX OR TRAIN IN A NEVERENDING MODE! YOUR PROGRESS IS STORED
+          ACROSS GAMES./nADJUST THE FEEL OR HELP TRAIN USING THE ZEN SIDEBAR./nYOU
+          CAN UNDO AND REDO PLACEMENTS WITH CTRL+Z AND CTRL+Y!

@@ -17,10 +17,10 @@ MonoBehaviour:
     - value: 2
       valueField:
         propertyType: 0
-        propertyPath: 
         longValue: 0
         uLongValue: 0
         stringValue: 
+        intValues: 
         V: {fileID: 0}
         VRef:
           rid: -2
@@ -31,10 +31,24 @@ MonoBehaviour:
     - value: 3
       valueField:
         propertyType: 0
-        propertyPath: 
         longValue: 0
         uLongValue: 0
         stringValue: 
+        intValues: 
+        V: {fileID: 0}
+        VRef:
+          rid: -2
+        IsVRef: 0
+      valueArray: []
+      valueList: []
+      wrapType: 4
+    - value: 4
+      valueField:
+        propertyType: 0
+        longValue: 0
+        uLongValue: 0
+        stringValue: 
+        intValues: 
         V: {fileID: 0}
         VRef:
           rid: -2
@@ -48,7 +62,11 @@ MonoBehaviour:
         OnEnterStateCommands:
         - Value:
           - GameCommand:
-              rid: 1866159673251463255
+              rid: 1866159679944524089
+            GameCommandAsync:
+              rid: -2
+          - GameCommand:
+              rid: 1866159679944524072
             GameCommandAsync:
               rid: -2
           - GameCommand:
@@ -58,10 +76,10 @@ MonoBehaviour:
         OnExitStateCommands: []
       valueField:
         propertyType: 0
-        propertyPath: 
         longValue: 0
         uLongValue: 0
         stringValue: 
+        intValues: 
         V: {fileID: 0}
         VRef:
           rid: -2
@@ -76,13 +94,42 @@ MonoBehaviour:
               rid: 1866159673251463456
             GameCommandAsync:
               rid: -2
+          - GameCommand:
+              rid: 1866159679944523984
+            GameCommandAsync:
+              rid: -2
+          - GameCommand:
+              rid: 1866159689844392023
+            GameCommandAsync:
+              rid: -2
         OnExitStateCommands: []
       valueField:
         propertyType: 0
-        propertyPath: 
         longValue: 0
         uLongValue: 0
         stringValue: 
+        intValues: 
+        V: {fileID: 0}
+        VRef:
+          rid: -2
+        IsVRef: 0
+      valueArray: []
+      valueList: []
+      wrapType: 4
+    - value:
+        OnEnterStateCommands:
+        - Value:
+          - GameCommand:
+              rid: 1866159787742331126
+            GameCommandAsync:
+              rid: -2
+        OnExitStateCommands: []
+      valueField:
+        propertyType: 0
+        longValue: 0
+        uLongValue: 0
+        stringValue: 
+        intValues: 
         V: {fileID: 0}
         VRef:
           rid: -2
@@ -92,18 +139,34 @@ MonoBehaviour:
       wrapType: 4
     _wrapTypeValue: 4
     saintsSerializedVersion: 2
+    _keys: 
+    _values: []
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 1866159673251463255
-      type: {class: RentBootScreenCommand, ns: Game.UI.BootScreen, asm: Game.UI}
-      data: 
     - rid: 1866159673251463256
       type: {class: PushViewToBootScreenCommand, ns: Game.UI.BootScreen, asm: Game.UI}
       data:
-        ViewUIType: 1
+        ViewUIType: 3
     - rid: 1866159673251463456
+      type: {class: PopViewFromBootScreenCommand, ns: Game.UI.BootScreen, asm: Game.UI}
+      data: 
+    - rid: 1866159679944523984
+      type: {class: PushViewToBootScreenCommand, ns: Game.UI.BootScreen, asm: Game.UI}
+      data:
+        ViewUIType: 2
+    - rid: 1866159679944524072
+      type: {class: PopViewFromBootScreenCommand, ns: Game.UI.BootScreen, asm: Game.UI}
+      data: 
+    - rid: 1866159679944524089
+      type: {class: TryRentBootScreenCommand, ns: Game.UI.BootScreen, asm: Game.UI}
+      data: 
+    - rid: 1866159689844392023
+      type: {class: ChangeGameModeCommand, ns: Game.UI.BootScreen, asm: Game.UI}
+      data:
+        GameMode: 0
+    - rid: 1866159787742331126
       type: {class: PopViewFromBootScreenCommand, ns: Game.UI.BootScreen, asm: Game.UI}
       data: 

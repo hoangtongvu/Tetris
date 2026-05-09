@@ -1,6 +1,5 @@
 using Reflex.Core;
 using Reflex.Extensions;
-using SaintsField;
 using System;
 using UnityEngine;
 
@@ -9,7 +8,7 @@ namespace Game.Common;
 [Serializable]
 public abstract class MicroBehaviour
 {
-    [SerializeField, ReadOnly] protected MicroBehavioursExecutor executor;
+    protected MicroBehavioursExecutor executor;
     protected Container sceneContainer;
 
     public void Init(MicroBehavioursExecutor executor)

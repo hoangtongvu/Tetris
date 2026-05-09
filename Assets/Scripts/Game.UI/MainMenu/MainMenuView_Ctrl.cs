@@ -1,25 +1,17 @@
 using Game.UI.Common;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Game.UI.MainMenu
 {
     [GenerateUIType("MainMenuView")]
     public partial class MainMenuView_Ctrl : BaseUITKCtrl
     {
-        public Label Label;
         [SerializeField] private StartGameButton startGameButton = new();
 
-        protected override void LoadUIElements()
+        protected override void OnEnable()
         {
-            this.Label = this.uiDocument.rootVisualElement.Q<Label>();
-        }
-
-        protected override void Awake()
-        {
-            base.Awake();
-            this.startGameButton.Initialize(this.uiDocument.rootVisualElement);
-            this.Label.text = "Test";
+            base.OnEnable();
+            this.startGameButton.Bind(this.uiDocument.rootVisualElement);
         }
 
         public override void OnRent()

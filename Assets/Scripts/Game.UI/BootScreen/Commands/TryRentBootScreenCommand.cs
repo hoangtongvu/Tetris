@@ -6,10 +6,13 @@ using System;
 namespace Game.UI.BootScreen;
 
 [Serializable]
-public class RentBootScreenCommand : IGameCommand
+public class TryRentBootScreenCommand : IGameCommand
 {
     public void Execute()
     {
+        if (BootScreen_Ctrl.Instance)
+            return;
+
         BootScreen_Ctrl.Instance = SharedUICtrlPoolMap.Rent(UIType.BootScreen) as BootScreen_Ctrl;
     }
 }

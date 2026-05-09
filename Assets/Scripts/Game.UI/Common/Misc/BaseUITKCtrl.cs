@@ -22,5 +22,5 @@ public abstract class BaseUITKCtrl : BaseUICtrl
         this.LoadUIElements();
     }
 
-    protected abstract void LoadUIElements();
+    protected virtual void LoadUIElements() { }
 }

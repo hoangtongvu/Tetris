@@ -3,6 +3,7 @@
 public enum GameState : byte
 {
     None = 0,
+    Previous = 254,
 
     Paused = 1,
 

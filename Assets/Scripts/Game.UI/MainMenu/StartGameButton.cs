@@ -12,9 +12,13 @@ public class StartGameButton
 {
     public Button Button;
 
-    public void Initialize(VisualElement root)
+    public void Bind(VisualElement root)
     {
         this.Button = root.Q<Button>(name: "start-game__button");
-        this.Button.clicked += () => GameplayMessenger.MessagePublisher.Publish(new ChangeGameStateMessage(GameState.Playing));
+        this.Button.clicked += () =>
+        {
+            GameplayMessenger.MessagePublisher
+                .Publish(new ChangeGameStateMessage(GameState.SelectGameMode));
+        };
     }
 }
