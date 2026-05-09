@@ -1,6 +1,6 @@
+using AYellowpaper.SerializedCollections;
 using Game.Domain.GameCommands;
 using Game.Domain.GameStates;
-using SaintsField;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +17,6 @@ namespace Game.ScriptableObjects.GameStates
     [CreateAssetMenu(fileName = "GameState2CommandsMapSO", menuName = "SO/GameState2CommandsMapSO")]
     public class GameState2CommandsMapSO : ScriptableObject
     {
-        public SaintsDictionary<GameState, Commands> Value;
+        public SerializedDictionary<GameState, Commands> Value;
     }
 }
