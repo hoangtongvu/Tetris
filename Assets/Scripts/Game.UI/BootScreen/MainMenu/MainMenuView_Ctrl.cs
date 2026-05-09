@@ -1,7 +1,7 @@
 using Game.UI.Common;
 using UnityEngine;
 
-namespace Game.UI.MainMenu
+namespace Game.UI.BootScreen.MainMenu
 {
     [GenerateUIType("MainMenuView")]
     public partial class MainMenuView_Ctrl : BaseUITKCtrl

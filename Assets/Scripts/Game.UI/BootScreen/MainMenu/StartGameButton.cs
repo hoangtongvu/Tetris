@@ -5,7 +5,7 @@ using System;
 using UnityEngine.UIElements;
 using ZBase.Foundation.PubSub;
 
-namespace Game.UI.MainMenu;
+namespace Game.UI.BootScreen.MainMenu;
 
 [Serializable]
 public class StartGameButton
