@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 
 namespace Game.UI.BootScreen.SelectGameMode
 {
-    [GenerateUIType("SelectGameModeView")]
+    [GenerateUIType("SelectGameModeView", 3)]
     public partial class SelectGameModeView_Ctrl : BaseUITKCtrl
     {
         [SerializeField] private GameModeProfilesSO gameModeProfilesSO;

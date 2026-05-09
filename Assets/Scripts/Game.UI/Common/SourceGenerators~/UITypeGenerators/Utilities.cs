@@ -38,7 +38,7 @@ public static class Utilities
                 string attributeName = attribute.Name.ToString();
 
                 if (!genertateUITypeAttributeIdentifiers.Contains(attributeName)) continue;
-                if (attribute.ArgumentList?.Arguments.Count != 1) continue;
+                if (attribute.ArgumentList?.Arguments.Count != 2) continue;
 
                 return true;
             }
@@ -50,17 +50,25 @@ public static class Utilities
     public static ConcreteUIInfo GetConcreteUIInfo(GeneratorSyntaxContext context)
     {
         var classDeclaration = (ClassDeclarationSyntax)context.Node;
+        GetUITypeInfo(classDeclaration, out var uiTypeName, out var underlyingValue);
 
         return new()
         {
             ConcreteUICtrlName = classDeclaration.Identifier.ToString(),
             ConcreteUICtrlNamespace = GetNamespace(classDeclaration),
-            UITypeName = GetUITypeName(classDeclaration),
+            UITypeName = uiTypeName,
+            UITypeUnderlyingValue = underlyingValue,
         };
     }
 
-    private static string GetUITypeName(ClassDeclarationSyntax classDeclaration)
+    private static bool GetUITypeInfo(
+        ClassDeclarationSyntax classDeclaration,
+        out string uiTypeName,
+        out uint underlyingValue)
     {
+        uiTypeName = null;
+        underlyingValue = default;
+
         int attributeListCount = classDeclaration.AttributeLists.Count;
 
         for (int i = 0; i < attributeListCount; i++)
@@ -74,19 +82,34 @@ public static class Utilities
                 string attributeName = attribute.Name.ToString();
 
                 if (!genertateUITypeAttributeIdentifiers.Contains(attributeName)
-                    || attribute.ArgumentList?.Arguments.Count != 1) continue;
+                    || attribute.ArgumentList?.Arguments.Count != 2)
+                {
+                    continue;
+                }
 
-                if (attribute.ArgumentList.Arguments[0].Expression is not LiteralExpressionSyntax literalExpression)
-                    return null;
+                var arguments = attribute.ArgumentList.Arguments;
 
-                if (!literalExpression.IsKind(SyntaxKind.StringLiteralExpression))
-                    return null;
+                if (arguments[0].Expression is not LiteralExpressionSyntax stringLiteral
+                    || !stringLiteral.IsKind(SyntaxKind.StringLiteralExpression))
+                {
+                    return false;
+                }
 
-                return literalExpression.Token.ValueText;
+                if (arguments[1].Expression is not LiteralExpressionSyntax intLiteral
+                    || !intLiteral.IsKind(SyntaxKind.NumericLiteralExpression)
+                    || intLiteral.Token.Value is not int value)
+                {
+                    return false;
+                }
+
+                uiTypeName = stringLiteral.Token.ValueText;
+                underlyingValue = (uint)value;
+
+                return true;
             }
         }
 
-        return null;
+        return false;
     }
 
     public static bool IsPartialClass(ClassDeclarationSyntax classDeclaration)

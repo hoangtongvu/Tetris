@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 namespace Game.UI.BootScreen
 {
-    [GenerateUIType("BootScreen")]
+    [GenerateUIType("BootScreen", 1)]
     public partial class BootScreen_Ctrl : BaseUITKCtrl
     {
         public static BootScreen_Ctrl Instance;

@@ -34,9 +34,12 @@ public class UITypeEnumGenerator : IIncrementalGenerator
         sb.AppendLine("{");
         sb.Indent();
 
+        sb.AppendLine("None = 0,");
+
         for (int i = 0; i < length; i++)
         {
-            sb.AppendLine($"{concreteUIInfos[i].UITypeName} = {i},");
+            var uiInfo = concreteUIInfos[i];
+            sb.AppendLine($"{uiInfo.UITypeName} = {uiInfo.UITypeUnderlyingValue},");
         }
 
         sb.Unindent();
