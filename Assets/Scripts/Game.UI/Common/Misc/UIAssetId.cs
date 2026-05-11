@@ -9,9 +9,9 @@ namespace Game.UI.Common;
 [StructLayout(LayoutKind.Explicit)]
 public partial struct UIAssetId : IEquatable<UIAssetId>, ISerializableStruct, IAddressableKey
 {
-    [FieldOffset(0)] private readonly short _raw;
+    [FieldOffset(0)] private readonly long _raw;
     [FieldOffset(0)] public UIType Type;
-    [FieldOffset(1)] public byte VariantIndex;
+    [FieldOffset(5)] public byte VariantIndex;
 
     public bool Equals(UIAssetId other) => _raw == other._raw;
 

@@ -8,11 +8,11 @@ namespace Game.UI.BootScreen;
 [Serializable]
 public class PushViewToBootScreenCommand : IGameCommand
 {
-    public UIType ViewUIType;
+    public UIAssetId.SerializableWrapper UIAssetId;
 
     public void Execute()
     {
-        var newView = SharedUICtrlPoolMap.Rent(this.ViewUIType) as BaseUITKCtrl;
+        var newView = SharedUICtrlPoolMap.Rent(this.UIAssetId.Value.Type) as BaseUITKCtrl;
         newView.gameObject.SetActive(true);
         BootScreen_Ctrl.Instance.OverlayViewStack.Push(newView);
     }
