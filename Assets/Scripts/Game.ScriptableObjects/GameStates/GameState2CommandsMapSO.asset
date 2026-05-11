@@ -71,14 +71,14 @@ MonoBehaviour:
     - rid: 4378355569262067804
       type: {class: PushViewToBootScreenCommand, ns: Game.UI.BootScreen, asm: Game.UI}
       data:
-        ViewUIType: 2
+        ViewUIType: 1809686540
     - rid: 4378355569262067805
       type: {class: PopViewFromBootScreenCommand, ns: Game.UI.BootScreen, asm: Game.UI}
       data: 
     - rid: 4378355569262067806
       type: {class: PushViewToBootScreenCommand, ns: Game.UI.BootScreen, asm: Game.UI}
       data:
-        ViewUIType: 3
+        ViewUIType: -1684101584
     - rid: 4378355569262067807
       type: {class: ChangeGameModeCommand, ns: Game.UI.BootScreen, asm: Game.UI}
       data:

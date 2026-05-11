@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using UITypeGenerators.StringBuilderUtilities;
 using static UITypeGenerators.Utilities;
@@ -36,10 +37,27 @@ public class UITypeEnumGenerator : IIncrementalGenerator
 
         sb.AppendLine("None = 0,");
 
+        var hashSet = new HashSet<int>();
+
         for (int i = 0; i < length; i++)
         {
             var uiInfo = concreteUIInfos[i];
-            sb.AppendLine($"{uiInfo.UITypeName} = {uiInfo.UITypeUnderlyingValue},");
+            string elementName = uiInfo.UITypeName;
+
+            int hashCode = elementName.GetHashCode();
+            int underlyingValue;
+
+            if (hashSet.Contains(hashCode))
+            {
+                underlyingValue = uiInfo.FallbackUnderlyingValue;
+            }
+            else
+            {
+                hashSet.Add(hashCode);
+                underlyingValue = hashCode;
+            }
+
+            sb.AppendLine($"{elementName} = {underlyingValue},");
         }
 
         sb.Unindent();

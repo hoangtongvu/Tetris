@@ -38,7 +38,7 @@ public static class Utilities
                 string attributeName = attribute.Name.ToString();
 
                 if (!genertateUITypeAttributeIdentifiers.Contains(attributeName)) continue;
-                if (attribute.ArgumentList?.Arguments.Count != 2) continue;
+                //if (attribute.ArgumentList?.Arguments.Count != 2) continue;
 
                 return true;
             }
@@ -50,24 +50,24 @@ public static class Utilities
     public static ConcreteUIInfo GetConcreteUIInfo(GeneratorSyntaxContext context)
     {
         var classDeclaration = (ClassDeclarationSyntax)context.Node;
-        GetUITypeInfo(classDeclaration, out var uiTypeName, out var underlyingValue);
+        GetUITypeInfo(classDeclaration, out var uiTypeName, out var fallbackUnderlyingValue);
 
         return new()
         {
             ConcreteUICtrlName = classDeclaration.Identifier.ToString(),
             ConcreteUICtrlNamespace = GetNamespace(classDeclaration),
             UITypeName = uiTypeName,
-            UITypeUnderlyingValue = underlyingValue,
+            FallbackUnderlyingValue = fallbackUnderlyingValue,
         };
     }
 
     private static bool GetUITypeInfo(
         ClassDeclarationSyntax classDeclaration,
         out string uiTypeName,
-        out uint underlyingValue)
+        out int fallbackUnderlyingValue)
     {
         uiTypeName = null;
-        underlyingValue = default;
+        fallbackUnderlyingValue = default;
 
         int attributeListCount = classDeclaration.AttributeLists.Count;
 
@@ -81,13 +81,14 @@ public static class Utilities
                 var attribute = attributes[j];
                 string attributeName = attribute.Name.ToString();
 
-                if (!genertateUITypeAttributeIdentifiers.Contains(attributeName)
-                    || attribute.ArgumentList?.Arguments.Count != 2)
+                var arguments = attribute.ArgumentList.Arguments;
+                int argumentCount = arguments.Count;
+
+                if (!genertateUITypeAttributeIdentifiers.Contains(attributeName))
+                    //|| arguments.Count != 2)
                 {
                     continue;
                 }
-
-                var arguments = attribute.ArgumentList.Arguments;
 
                 if (arguments[0].Expression is not LiteralExpressionSyntax stringLiteral
                     || !stringLiteral.IsKind(SyntaxKind.StringLiteralExpression))
@@ -95,15 +96,23 @@ public static class Utilities
                     return false;
                 }
 
-                if (arguments[1].Expression is not LiteralExpressionSyntax intLiteral
-                    || !intLiteral.IsKind(SyntaxKind.NumericLiteralExpression)
-                    || intLiteral.Token.Value is not int value)
+                if (argumentCount == 2)
                 {
-                    return false;
+                    if (arguments[1].Expression is not LiteralExpressionSyntax intLiteral
+                        || !intLiteral.IsKind(SyntaxKind.NumericLiteralExpression)
+                        || intLiteral.Token.Value is not int value)
+                    {
+                        return false;
+                    }
+
+                    fallbackUnderlyingValue = value;
+                }
+                else
+                {
+                    fallbackUnderlyingValue = 0;
                 }
 
                 uiTypeName = stringLiteral.Token.ValueText;
-                underlyingValue = (uint)value;
 
                 return true;
             }

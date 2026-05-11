@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.UI.BootScreen.MainMenu
 {
-    [GenerateUIType("MainMenuView", 2)]
+    [GenerateUIType("MainMenuView")]
     public partial class MainMenuView_Ctrl : BaseUITKCtrl
     {
         [SerializeField] private StartGameButton startGameButton = new();
