@@ -3,10 +3,11 @@ using UnityEngine;
 
 namespace Game.UI.BootScreen.MainMenu
 {
-    [GenerateUIType("MainMenuView")]
-    public partial class MainMenuView_Ctrl : BaseUITKCtrl
+    public class MainMenuView_Ctrl : BaseUITKCtrl
     {
         [SerializeField] private StartGameButton startGameButton = new();
+
+        public override UIType GetUIType() => UIType.MainMenuView;
 
         protected override void OnEnable()
         {

@@ -3,10 +3,11 @@ using UnityEngine;
 
 namespace Game.UI.BootScreen.SelectGameMode
 {
-    [GenerateUIType("SelectGameModeButton")]
-    public partial class SelectGameModeButton_Ctrl : BaseUITKCtrl
+    public class SelectGameModeButton_Ctrl : BaseUITKCtrl
     {
         [SerializeField] private CommandButton button;
+
+        public override UIType GetUIType() => UIType.SelectGameModeButton;
 
         protected override void LoadUIElements()
         {

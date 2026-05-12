@@ -4,8 +4,7 @@ using UnityEngine.UIElements;
 
 namespace Game.UI.BootScreen
 {
-    [GenerateUIType("BootScreen")]
-    public partial class BootScreen_Ctrl : BaseUITKCtrl
+    public class BootScreen_Ctrl : BaseUITKCtrl
     {
         public static BootScreen_Ctrl Instance;
 
@@ -14,6 +13,8 @@ namespace Game.UI.BootScreen
         public BeforeGameplayData BeforeGameplayData = new();
 
         public OverlayViewStack OverlayViewStack => overlayViewStack;
+
+        public override UIType GetUIType() => UIType.BootScreen;
 
         protected override void LoadUIElements()
         {

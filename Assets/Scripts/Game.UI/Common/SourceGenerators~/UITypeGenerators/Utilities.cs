@@ -1,124 +1,101 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
+using static UITypeGenerators.AttributeConstants;
 
 namespace UITypeGenerators;
 
 public static class Utilities
 {
-    private static readonly HashSet<string> genertateUITypeAttributeIdentifiers = new()
+    public static BaseTypeInfo? GetBaseTypeInfo(GeneratorAttributeSyntaxContext ctx)
     {
-        GenerateUITypeAttributeContants.NAME,
-        GenerateUITypeAttributeContants.IDENTIFIER,
-        $"{GenerateUITypeAttributeContants.NAME}Attribute",
-        $"{GenerateUITypeAttributeContants.IDENTIFIER}Attribute",
-    };
+        if (ctx.TargetSymbol is not INamedTypeSymbol classSymbol)
+            return null;
 
-    public static bool IsTargetNode(SyntaxNode syntaxNode)
-    {
-        return syntaxNode is ClassDeclarationSyntax classDeclaration
-            && IsPartialClass(classDeclaration)
-            && HasGenertateUITypeAttribute(classDeclaration);
+        var attribute = ctx.Attributes.FirstOrDefault(a =>
+            a.AttributeClass?.Name == AttributeName);
+
+        if (attribute is null)
+            return null;
+
+        // enumName is the first constructor argument
+        var enumName = attribute.ConstructorArguments.Length > 0
+            ? attribute.ConstructorArguments[0].Value as string
+            : null;
+
+        if (string.IsNullOrWhiteSpace(enumName))
+            return null;
+
+        var namespaceName = classSymbol.ContainingNamespace.IsGlobalNamespace
+            ? null
+            : classSymbol.ContainingNamespace.ToDisplayString();
+
+        return new BaseTypeInfo(
+            classSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
+            classSymbol.ToDisplayString(),
+            namespaceName,
+            enumName!);
     }
 
-    private static bool HasGenertateUITypeAttribute(ClassDeclarationSyntax classDeclaration)
+    public static ImmutableArray<INamedTypeSymbol> CollectAllClasses(Compilation compilation)
     {
-        int attributeListCount = classDeclaration.AttributeLists.Count;
+        var builder = ImmutableArray.CreateBuilder<INamedTypeSymbol>();
+        CollectClasses(compilation.GlobalNamespace, builder);
+        return builder.ToImmutable();
+    }
 
-        for (int i = 0; i < attributeListCount; i++)
+    private static void CollectClasses(
+        INamespaceOrTypeSymbol symbol,
+        ImmutableArray<INamedTypeSymbol>.Builder builder)
+    {
+        foreach (var member in symbol.GetMembers())
         {
-            var attributes = classDeclaration.AttributeLists[i].Attributes;
-            int attributeCount = attributes.Count;
-
-            for (int j = 0; j < attributeCount; j++)
+            switch (member)
             {
-                var attribute = attributes[j];
-                string attributeName = attribute.Name.ToString();
-
-                if (!genertateUITypeAttributeIdentifiers.Contains(attributeName)) continue;
-                //if (attribute.ArgumentList?.Arguments.Count != 2) continue;
-
-                return true;
+                case INamespaceSymbol ns:
+                    CollectClasses(ns, builder);
+                    break;
+                case INamedTypeSymbol { TypeKind: TypeKind.Class } cls:
+                    builder.Add(cls);
+                    CollectClasses(cls, builder); // support nested types
+                    break;
             }
         }
+    }
 
+    /// <summary>
+    /// Walks the base-type chain of <paramref name="symbol"/> looking for
+    /// a type whose fully-qualified name matches <paramref name="targetFqn"/>.
+    /// </summary>
+    public static bool IsDirectOrIndirectSubclass(INamedTypeSymbol symbol, string targetFqn)
+    {
+        var current = symbol.BaseType;
+        while (current is not null)
+        {
+            if (current.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat) == targetFqn)
+                return true;
+            current = current.BaseType;
+        }
         return false;
     }
 
-    public static ConcreteUIInfo GetConcreteUIInfo(GeneratorSyntaxContext context)
+    /// <summary>
+    /// Returns the value from <c>[UITypeValue(n)]</c> if present, otherwise null.
+    /// </summary>
+    public static int? GetExplicitValue(INamedTypeSymbol symbol)
     {
-        var classDeclaration = (ClassDeclarationSyntax)context.Node;
-        GetUITypeInfo(classDeclaration, out var uiTypeName, out var fallbackUnderlyingValue);
-
-        return new()
+        foreach (var attr in symbol.GetAttributes())
         {
-            ConcreteUICtrlName = classDeclaration.Identifier.ToString(),
-            ConcreteUICtrlNamespace = GetNamespace(classDeclaration),
-            UITypeName = uiTypeName,
-            FallbackUnderlyingValue = fallbackUnderlyingValue,
-        };
-    }
-
-    private static bool GetUITypeInfo(
-        ClassDeclarationSyntax classDeclaration,
-        out string uiTypeName,
-        out int fallbackUnderlyingValue)
-    {
-        uiTypeName = null;
-        fallbackUnderlyingValue = default;
-
-        int attributeListCount = classDeclaration.AttributeLists.Count;
-
-        for (int i = 0; i < attributeListCount; i++)
-        {
-            var attributes = classDeclaration.AttributeLists[i].Attributes;
-            int attributeCount = attributes.Count;
-
-            for (int j = 0; j < attributeCount; j++)
+            if (attr.AttributeClass?.Name == ValueAttributeName &&
+                attr.ConstructorArguments.Length == 1 &&
+                attr.ConstructorArguments[0].Value is int value)
             {
-                var attribute = attributes[j];
-                string attributeName = attribute.Name.ToString();
-
-                var arguments = attribute.ArgumentList.Arguments;
-                int argumentCount = arguments.Count;
-
-                if (!genertateUITypeAttributeIdentifiers.Contains(attributeName))
-                    //|| arguments.Count != 2)
-                {
-                    continue;
-                }
-
-                if (arguments[0].Expression is not LiteralExpressionSyntax stringLiteral
-                    || !stringLiteral.IsKind(SyntaxKind.StringLiteralExpression))
-                {
-                    return false;
-                }
-
-                if (argumentCount == 2)
-                {
-                    if (arguments[1].Expression is not LiteralExpressionSyntax intLiteral
-                        || !intLiteral.IsKind(SyntaxKind.NumericLiteralExpression)
-                        || intLiteral.Token.Value is not int value)
-                    {
-                        return false;
-                    }
-
-                    fallbackUnderlyingValue = value;
-                }
-                else
-                {
-                    fallbackUnderlyingValue = 0;
-                }
-
-                uiTypeName = stringLiteral.Token.ValueText;
-
-                return true;
+                return value;
             }
         }
-
-        return false;
+        return null;
     }
 
     public static bool IsPartialClass(ClassDeclarationSyntax classDeclaration)

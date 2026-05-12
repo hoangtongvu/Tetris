@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace UITypeGenerators.StringBuilderUtilities;
+namespace UITypeGenerators.Common.StringBuilderUtilities;
 
 public class CodeStringBuilder
 {

@@ -8,12 +8,13 @@ using UnityEngine.UIElements;
 
 namespace Game.UI.BootScreen.SelectGameMode
 {
-    [GenerateUIType("SelectGameModeView")]
-    public partial class SelectGameModeView_Ctrl : BaseUITKCtrl
+    public class SelectGameModeView_Ctrl : BaseUITKCtrl
     {
         [SerializeField] private GameModeProfilesSO gameModeProfilesSO;
         private VisualElement buttonsContainer;
         private List<SelectGameModeButton_Ctrl> buttonCtrls = new();
+
+        public override UIType GetUIType() => UIType.SelectGameModeView;
 
         protected override void OnEnable()
         {
