@@ -77,23 +77,3 @@ MonoBehaviour:
     CanvasAnchorPreset: 0
   State: 0
   uiDocument: {fileID: 901321814092914517}
-  gameModeProfilesSO: {fileID: 11400000, guid: e361819d3859d8244b54c846d4f6924b, type: 2}
-  backButton:
-    RootUIDocument: {fileID: 0}
-    ButtonName: back__button
-    ButtonClassName: 
-    CommandPairLists:
-    - Value:
-      - GameCommand:
-          rid: 1866159679944524061
-        GameCommandAsync:
-          rid: -2
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
-    - rid: 1866159679944524061
-      type: {class: ChangeGameStateCommand, ns: Game.Mono.GameStates, asm: Game.Mono}
-      data:
-        GameState: 254
