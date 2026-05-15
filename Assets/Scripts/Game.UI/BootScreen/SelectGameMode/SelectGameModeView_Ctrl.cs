@@ -2,19 +2,27 @@ using Game.Domain.GameModes;
 using Game.ScriptableObjects.GameModes;
 using Game.UI.Common;
 using Game.UI.Common.Pooling;
+using Reflex.Attributes;
+using Reflex.Core;
+using Reflex.Injectors;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Game.UI.BootScreen.SelectGameMode
 {
-    public class SelectGameModeView_Ctrl : BaseUITKCtrl
+    public partial class SelectGameModeView_Ctrl : BaseUITKCtrl
     {
-        [SerializeField] private GameModeProfilesSO gameModeProfilesSO;
+        [Inject] private GameModeProfilesSO gameModeProfilesSO;
         private VisualElement buttonsContainer;
         private List<SelectGameModeButton_Ctrl> buttonCtrls = new();
 
         public override UIType GetUIType() => UIType.SelectGameModeView;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            GameObjectInjector.InjectRecursive(gameObject, Container.RootContainer);
+        }
 
         protected override void OnEnable()
         {
@@ -63,7 +71,16 @@ namespace Game.UI.BootScreen.SelectGameMode
                 var description = button.Q<Label>("description__label");
                 description.text = modeData.ShortDescription.ToUpper();
 
-                button.clicked += () => BootScreen_Ctrl.Instance.BeforeGameplayData.GameMode = mode;
+                button.clicked += () =>
+                {
+                    BootScreen_Ctrl.Instance.BeforeGameplayData.GameMode = mode;
+
+                    new PopViewFromBootScreenCommand().Execute();
+                    new PushViewToBootScreenCommand
+                    {
+                        UIAssetId = new() { Value = new() { Type = modeData.ViewUIType } }
+                    }.Execute();
+                };
 
                 this.buttonsContainer.Add(button);
                 this.buttonCtrls.Add(buttonCtrl);

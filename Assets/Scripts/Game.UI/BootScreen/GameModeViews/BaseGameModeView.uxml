@@ -1,0 +1,18 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/Game.UI/BootScreen/GameModeViews/BaseGameModeView_StyleSheet.uss?fileID=7433441132597879392&amp;guid=cea1434754e48bd4ba35c3c7b898f7df&amp;type=3#BaseGameModeView_StyleSheet"/>
+    <ui:VisualElement name="root" class="screen">
+        <ui:VisualElement name="header" class="header">
+            <ui:Label name="game-mode-name__label" text="FORTY LINES" class="game-mode-title"/>
+            <ui:Label name="game-mode-description__label" text="CLEAR 40 LINES AS FAST AS POSSIBLE" class="game-mode-description"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="content" class="content">
+            <ui:VisualElement name="preview" class="preview"/>
+            <ui:VisualElement name="actions" class="actions">
+                <ui:Button name="start-button" text="START" class="start-button"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="options" class="options">
+            <ui:Label text="OPTIONS" class="section-title"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

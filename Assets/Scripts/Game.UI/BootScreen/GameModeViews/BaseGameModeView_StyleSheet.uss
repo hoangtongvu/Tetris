@@ -1,0 +1,110 @@
+.screen
+{
+    flex-grow: 1;
+
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    flex-direction: column;
+
+    background-color: rgb(18, 18, 18);
+    color: rgb(240, 240, 240);
+}
+
+.header
+{
+    margin-bottom: 24px;
+}
+
+.game-mode-title
+{
+    font-size: 32px;
+
+    -unity-font-style: bold;
+
+    margin-bottom: 6px;
+
+    color: rgb(255, 255, 255);
+}
+
+.game-mode-description
+{
+    font-size: 14px;
+
+    color: rgb(170, 170, 170);
+}
+
+.content
+{
+    flex-grow: 1;
+
+    flex-direction: row;
+
+    margin-bottom: 24px;
+}
+
+.preview
+{
+    flex-grow: 1;
+
+    margin-right: 16px;
+
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-right-width: 1px;
+
+    border-top-color: rgb(60, 60, 60);
+    border-bottom-color: rgb(60, 60, 60);
+    border-left-color: rgb(60, 60, 60);
+    border-right-color: rgb(60, 60, 60);
+
+    background-color: rgb(28, 28, 28);
+}
+
+.actions
+{
+    width: 220px;
+
+    justify-content: flex-end;
+    align-items: stretch;
+}
+
+.start-button
+{
+    height: 52px;
+
+    font-size: 18px;
+
+    -unity-font-style: bold;
+
+    background-color: rgb(70, 130, 255);
+
+    color: white;
+
+    border-radius: 6px;
+}
+
+.start-button:hover
+{
+    background-color: rgb(90, 150, 255);
+}
+
+.options
+{
+    padding-top: 16px;
+
+    border-top-width: 1px;
+    border-top-color: rgb(60, 60, 60);
+}
+
+.section-title
+{
+    font-size: 18px;
+
+    -unity-font-style: bold;
+
+    margin-bottom: 12px;
+}

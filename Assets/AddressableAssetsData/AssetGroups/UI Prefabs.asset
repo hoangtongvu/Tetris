@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: UI Prefabs
   m_GUID: 721fbb253eada4f4d95a4e0a30826adc
   m_SerializeEntries:
+  - m_GUID: 0f367319e93778644b8a41728b487b05
+    m_Address: UI/FortyLines_GameModeView-0
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI Prefab
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 271ec160e1a2e7246bfad33f1cf5252d
     m_Address: UI/SelectGameModeView-0
     m_ReadOnly: 0
