@@ -84,7 +84,7 @@ MonoBehaviour:
     CommandPairLists:
     - Value:
       - GameCommand:
-          rid: 1866159816231354489
+          rid: 4378355799157112922
         GameCommandAsync:
           rid: -2
   BeforeGameplayData:
@@ -94,7 +94,6 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 1866159816231354489
-      type: {class: ChangeGameStateCommand, ns: Game.Mono.GameStates, asm: Game.Mono}
-      data:
-        GameState: 254
+    - rid: 4378355799157112922
+      type: {class: ChangeToPreviousViewCommand, ns: Game.UI.BootScreen, asm: Game.UI}
+      data: 

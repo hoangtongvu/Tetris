@@ -1,13 +1,18 @@
 using Game.Domain.GameCommands;
+using Reflex.Attributes;
 using System;
 
 namespace Game.UI.BootScreen;
 
 [Serializable]
-public class PopViewFromBootScreenCommand : IGameCommand
+[SourceGeneratorInjectable]
+public partial class PopViewFromBootScreenCommand : IGameCommand
 {
     public void Execute()
     {
-        BootScreen_Ctrl.Instance.OverlayViewStack.Pop();
+        // TODO: These commands should know about the caller (GameScreenStateMachine)
+        var bootScreenCtrl = (BootScreen_Ctrl)GameScreenStateMachine.Instance.CurrentScreenCtrl;
+
+        bootScreenCtrl.OverlayViewStack.Pop();
     }
 }

@@ -11,6 +11,6 @@ public class ChangeGameModeCommand : IGameCommand
 
     public void Execute()
     {
-        BootScreen_Ctrl.Instance.BeforeGameplayData.GameMode = this.GameMode;
+        //BootScreen_Ctrl.Instance.BeforeGameplayData.GameMode = this.GameMode;
     }
 }

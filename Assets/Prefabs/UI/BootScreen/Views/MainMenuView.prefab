@@ -77,3 +77,30 @@ MonoBehaviour:
     CanvasAnchorPreset: 0
   State: 0
   uiDocument: {fileID: 8108491355788449055}
+  startGameButton:
+    RootUIDocument: {fileID: 0}
+    ButtonName: start-game__button
+    ButtonClassName: 
+    CommandPairLists:
+    - Value:
+      - GameCommand:
+          rid: 4378355796025802846
+        GameCommandAsync:
+          rid: -2
+      - GameCommand:
+          rid: 4378355796025802847
+        GameCommandAsync:
+          rid: -2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 4378355796025802846
+      type: {class: PopViewFromBootScreenCommand, ns: Game.UI.BootScreen, asm: Game.UI}
+      data: 
+    - rid: 4378355796025802847
+      type: {class: PushViewToBootScreenCommand, ns: Game.UI.BootScreen, asm: Game.UI}
+      data:
+        UIAssetId:
+          _key: SelectGameModeView-0

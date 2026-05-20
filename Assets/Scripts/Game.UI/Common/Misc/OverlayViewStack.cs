@@ -1,4 +1,5 @@
 using Game.UI.Common;
+using System;
 using System.Collections.Generic;
 using UnityEngine.UIElements;
 
@@ -8,6 +9,7 @@ namespace Game.UI;
 public partial class OverlayViewStack : VisualElement
 {
     public Stack<BaseUITKCtrl> Stack = new();
+    public event Action<BaseUITKCtrl> StackPushedEvent;
 
     public OverlayViewStack() : base()
     {
@@ -30,6 +32,7 @@ public partial class OverlayViewStack : VisualElement
 
         this.Add(view);
         this.Stack.Push(viewCtrl);
+        this.StackPushedEvent?.Invoke(viewCtrl);
     }
 
     public void Pop()

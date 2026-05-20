@@ -16,75 +16,12 @@ MonoBehaviour:
     _serializedList:
     - Key: 2
       Value:
-        OnEnterStateCommands:
-        - Value:
-          - GameCommand:
-              rid: 4378355569262067802
-            GameCommandAsync:
-              rid: -2
-          - GameCommand:
-              rid: 4378355569262067803
-            GameCommandAsync:
-              rid: -2
-          - GameCommand:
-              rid: 4378355569262067804
-            GameCommandAsync:
-              rid: -2
+        OnEnterStateCommands: []
         OnExitStateCommands: []
-    - Key: 3
+    - Key: 5
       Value:
-        OnEnterStateCommands:
-        - Value:
-          - GameCommand:
-              rid: 4378355569262067805
-            GameCommandAsync:
-              rid: -2
-          - GameCommand:
-              rid: 4378355569262067806
-            GameCommandAsync:
-              rid: -2
-          - GameCommand:
-              rid: 4378355569262067807
-            GameCommandAsync:
-              rid: -2
-        OnExitStateCommands: []
-    - Key: 4
-      Value:
-        OnEnterStateCommands:
-        - Value:
-          - GameCommand:
-              rid: 4378355569262067808
-            GameCommandAsync:
-              rid: -2
+        OnEnterStateCommands: []
         OnExitStateCommands: []
   references:
     version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
-    - rid: 4378355569262067802
-      type: {class: TryRentBootScreenCommand, ns: Game.UI.BootScreen, asm: Game.UI}
-      data: 
-    - rid: 4378355569262067803
-      type: {class: PopViewFromBootScreenCommand, ns: Game.UI.BootScreen, asm: Game.UI}
-      data: 
-    - rid: 4378355569262067804
-      type: {class: PushViewToBootScreenCommand, ns: Game.UI.BootScreen, asm: Game.UI}
-      data:
-        UIAssetId:
-          _key: MainMenuView-0
-    - rid: 4378355569262067805
-      type: {class: PopViewFromBootScreenCommand, ns: Game.UI.BootScreen, asm: Game.UI}
-      data: 
-    - rid: 4378355569262067806
-      type: {class: PushViewToBootScreenCommand, ns: Game.UI.BootScreen, asm: Game.UI}
-      data:
-        UIAssetId:
-          _key: SelectGameModeView-0
-    - rid: 4378355569262067807
-      type: {class: ChangeGameModeCommand, ns: Game.UI.BootScreen, asm: Game.UI}
-      data:
-        GameMode: 0
-    - rid: 4378355569262067808
-      type: {class: PopViewFromBootScreenCommand, ns: Game.UI.BootScreen, asm: Game.UI}
-      data: 
+    RefIds: []

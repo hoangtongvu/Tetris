@@ -73,7 +73,7 @@ namespace Game.UI.BootScreen.SelectGameMode
 
                 button.clicked += () =>
                 {
-                    BootScreen_Ctrl.Instance.BeforeGameplayData.GameMode = mode;
+                    //BootScreen_Ctrl.Instance.BeforeGameplayData.GameMode = mode;// NOTE: How to handle this?
 
                     new PopViewFromBootScreenCommand().Execute();
                     new PushViewToBootScreenCommand

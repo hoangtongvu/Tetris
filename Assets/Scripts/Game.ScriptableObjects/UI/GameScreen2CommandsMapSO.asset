@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 358e56aad1df0834aac6b83fea9d7215, type: 3}
+  m_Name: GameScreen2CommandsMapSO
+  m_EditorClassIdentifier: Game.ScriptableObjects::Game.ScriptableObjects.UI.GameScreen2CommandsMapSO
+  Value:
+    _serializedList:
+    - Key: -832188191
+      Value:
+        OnEnterStateCommands:
+        - Value:
+          - GameCommand:
+              rid: 4378355796025802754
+            GameCommandAsync:
+              rid: -2
+          - GameCommand:
+              rid: 4378355796025802752
+            GameCommandAsync:
+              rid: -2
+          - GameCommand:
+              rid: 4378355796025802753
+            GameCommandAsync:
+              rid: -2
+        OnExitStateCommands: []
+    - Key: -1375773375
+      Value:
+        OnEnterStateCommands:
+        - Value:
+          - GameCommand:
+              rid: 4378355796025802755
+            GameCommandAsync:
+              rid: -2
+        OnExitStateCommands: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 4378355796025802752
+      type: {class: PopViewFromBootScreenCommand, ns: Game.UI.BootScreen, asm: Game.UI}
+      data: 
+    - rid: 4378355796025802753
+      type: {class: PushViewToBootScreenCommand, ns: Game.UI.BootScreen, asm: Game.UI}
+      data:
+        UIAssetId:
+          _key: MainMenuView-0
+    - rid: 4378355796025802754
+      type: {class: ChangeGameStateCommand, ns: Game.Mono.GameStates, asm: Game.Mono}
+      data:
+        GameState: 2
+    - rid: 4378355796025802755
+      type: {class: ChangeGameStateCommand, ns: Game.Mono.GameStates, asm: Game.Mono}
+      data:
+        GameState: 5

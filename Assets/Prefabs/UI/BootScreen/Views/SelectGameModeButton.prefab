@@ -81,18 +81,7 @@ MonoBehaviour:
     RootUIDocument: {fileID: 0}
     ButtonName: 
     ButtonClassName: 
-    CommandPairLists:
-    - Value:
-      - GameCommand:
-          rid: 1866159787742331127
-        GameCommandAsync:
-          rid: -2
+    CommandPairLists: []
   references:
     version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
-    - rid: 1866159787742331127
-      type: {class: ChangeGameStateCommand, ns: Game.Mono.GameStates, asm: Game.Mono}
-      data:
-        GameState: 4
+    RefIds: []

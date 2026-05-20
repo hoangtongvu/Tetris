@@ -22,7 +22,7 @@ MonoBehaviour:
 
           SCORE
           DOESN''T MATTER HERE, JUST GO FOR THE WORLD RECORD!'
-        ViewUIType: -1607549629
+        ViewUIType: 868501419
         Settings:
           rid: 4378355612893839547
     - Key: 2
@@ -33,7 +33,7 @@ MonoBehaviour:
 
           CLEAR
           LINES TO LEVEL UP AND GAIN MORE POINTS AND SPEED!'
-        ViewUIType: 751640804
+        ViewUIType: 574460653
         Settings:
           rid: 4378355612893839548
     - Key: 3
@@ -45,7 +45,7 @@ MonoBehaviour:
 
           YOU
           CAN UNDO AND REDO PLACEMENTS WITH. CTRL+Z AND CTRL+Y!'
-        ViewUIType: -1731230093
+        ViewUIType: -1555729165
         Settings:
           rid: 4378355612893839549
   references:
