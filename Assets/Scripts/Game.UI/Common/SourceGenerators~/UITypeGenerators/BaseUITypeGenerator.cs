@@ -102,7 +102,7 @@ public sealed partial class BaseUITypeGenerator : IIncrementalGenerator
         for (var i = 0; i < members.Length; i++)
         {
             var member = members[i];
-            var underlyingValue = member.ExplicitValue ?? member.Name.GetHashCode();
+            var underlyingValue = member.ExplicitValue ?? StableHash(member.Name);
 
             sb.AppendLine($"{member.Name} = {underlyingValue},");
         }

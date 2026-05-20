@@ -122,4 +122,23 @@ public static class Utilities
 
         return null;
     }
+
+    public static int StableHash(string text)
+    {
+        unchecked
+        {
+            const uint offset = 2166136261;
+            const uint prime = 16777619;
+
+            uint hash = offset;
+
+            foreach (char c in text)
+            {
+                hash ^= c;
+                hash *= prime;
+            }
+
+            return (int)hash;
+        }
+    }
 }
