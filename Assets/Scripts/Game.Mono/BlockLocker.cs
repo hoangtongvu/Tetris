@@ -8,12 +8,14 @@ namespace Game.Mono;
 public class BlockLocker : MicroBehaviour
 {
     private CanLockCurrentBlockTag canLockCurrentBlockTag;
+    private BoardCellArray boardCellArray;
     private BlockLockedEvent blockLockedEvent;
     private CurrentBlockRef currentBlock;
 
     public override void InjectDependencies()
     {
         this.InjectSingle(out this.canLockCurrentBlockTag);
+        this.InjectSingle(out this.boardCellArray);
         this.InjectSingle(out this.blockLockedEvent);
         this.InjectSingle(out this.currentBlock);
     }
@@ -32,7 +34,7 @@ public class BlockLocker : MicroBehaviour
     private void LockCurrentBlock()
     {
         this.blockLockedEvent.Value = true;
-        var board = BoardCellArrayHolder.Instance.Value.Value;
+        var board = this.boardCellArray.Value;
         var centerPos = this.currentBlock.Value.CenterPosition;
 
         foreach (var cellOffset in this.currentBlock.Value.CellOffsets)

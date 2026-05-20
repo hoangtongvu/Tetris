@@ -10,6 +10,7 @@ public class PlayerBlockHardDropper : MicroBehaviour
 {
     private CanLockCurrentBlockTag canLockCurrentBlockTag;
     private BoardConfig boardConfig;
+    private BoardCellArray boardCellArray;
     private CurrentBlockRef currentBlock;
     private CurrentBlockTransformedEvent currentBlockTransformedEvent;
 
@@ -17,6 +18,7 @@ public class PlayerBlockHardDropper : MicroBehaviour
     {
         this.InjectSingle(out this.canLockCurrentBlockTag);
         this.InjectSingle(out this.boardConfig);
+        this.InjectSingle(out this.boardCellArray);
         this.InjectSingle(out this.currentBlock);
         this.InjectSingle(out this.currentBlockTransformedEvent);
     }
@@ -33,7 +35,7 @@ public class PlayerBlockHardDropper : MicroBehaviour
                 tempPos.y--;
             } while (
                 BlockPositionCheckingHelpers.CheckBottomBorder(tempPos, blockData.CellOffsets) &&
-                BlockPositionCheckingHelpers.CheckCollision(boardConfig, BoardCellArrayHolder.Instance.Value, tempPos, blockData.CellOffsets)
+                BlockPositionCheckingHelpers.CheckCollision(boardConfig, this.boardCellArray, tempPos, blockData.CellOffsets)
             );
 
             tempPos.y++;

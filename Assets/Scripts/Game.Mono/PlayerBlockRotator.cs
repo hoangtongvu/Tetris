@@ -11,12 +11,14 @@ namespace Game.Mono;
 public class PlayerBlockRotator : MicroBehaviour
 {
     private BoardConfig boardConfig;
+    private BoardCellArray boardCellArray;
     private CurrentBlockRef currentBlock;
     private CurrentBlockTransformedEvent currentBlockTransformedEvent;
 
     public override void InjectDependencies()
     {
         this.InjectSingle(out this.boardConfig);
+        this.InjectSingle(out this.boardCellArray);
         this.InjectSingle(out this.currentBlock);
         this.InjectSingle(out this.currentBlockTransformedEvent);
     }
@@ -45,7 +47,7 @@ public class PlayerBlockRotator : MicroBehaviour
         bool canMove =
             BlockPositionCheckingHelpers.CheckHorizontalBorders(boardConfig, blockData.CenterPosition, tempOffsets) &&
             BlockPositionCheckingHelpers.CheckBottomBorder(blockData.CenterPosition, tempOffsets) &&
-            BlockPositionCheckingHelpers.CheckCollision(boardConfig, BoardCellArrayHolder.Instance.Value, blockData.CenterPosition, tempOffsets);
+            BlockPositionCheckingHelpers.CheckCollision(boardConfig, this.boardCellArray, blockData.CenterPosition, tempOffsets);
 
         if (!canMove) return;
 

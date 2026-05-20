@@ -10,6 +10,7 @@ namespace Game.Mono;
 public class PlayerBlockVerticalMover : MicroBehaviour
 {
     private BoardConfig boardConfig;
+    private BoardCellArray boardCellArray;
     private CurrentBlockRef currentBlock;
     private CurrentBlockTransformedEvent currentBlockTransformedEvent;
     [SerializeField] private float moveCooldownSeconds = 0.1f;
@@ -17,6 +18,7 @@ public class PlayerBlockVerticalMover : MicroBehaviour
     public override void InjectDependencies()
     {
         this.InjectSingle(out this.boardConfig);
+        this.InjectSingle(out this.boardCellArray);
         this.InjectSingle(out this.currentBlock);
         this.InjectSingle(out this.currentBlockTransformedEvent);
     }
@@ -51,7 +53,7 @@ public class PlayerBlockVerticalMover : MicroBehaviour
 
         bool canMove =
             BlockPositionCheckingHelpers.CheckBottomBorder(tempPos, blockData.CellOffsets) &&
-            BlockPositionCheckingHelpers.CheckCollision(boardConfig, BoardCellArrayHolder.Instance.Value, tempPos, blockData.CellOffsets);
+            BlockPositionCheckingHelpers.CheckCollision(boardConfig, this.boardCellArray, tempPos, blockData.CellOffsets);
 
         if (!canMove) return;
 

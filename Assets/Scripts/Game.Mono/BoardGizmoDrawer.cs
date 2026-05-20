@@ -1,3 +1,4 @@
+using Game.Domain;
 using Reflex.Attributes;
 using UnityEngine;
 
@@ -7,20 +8,20 @@ namespace Game.Mono
     public partial class BoardGizmoDrawer : MonoBehaviour
     {
         [Inject] private BoardConfig config;
+        [Inject] private BoardCellArray board;
 
         [SerializeField] private Color validColor = Color.yellow;
         [SerializeField] private Vector3 origin; // bottom-left corner of the board
 
         private void OnDrawGizmos()
         {
-            var board = BoardCellArrayHolder.Instance;
-            if (!board) return;
+            if (board == null) return;
 
             float size = config.CellWorldSize;
 
-            for (int x = 0; x < board.Value.Value.Length; x++)
+            for (int x = 0; x < board.Value.Length; x++)
             {
-                var column = board.Value.Value[x];
+                var column = board.Value[x];
                 if (column == null) continue;
 
                 for (int y = 0; y < column.Length; y++)

@@ -1,4 +1,5 @@
 using Game.Common;
+using Game.Domain;
 using Game.Domain.PubSub.Messengers;
 using Reflex.Attributes;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace Game.Mono
     public partial class BoardDrawer : SaiMonoBehaviour
     {
         [Inject] private BoardConfig boardConfig;
+        [Inject] private BoardCellArray boardCellArray;
         [SerializeField] private GameObject currentBoardPresenter;
         [SerializeField] private Material material;
         private ISubscription drawBoardMessageSubscription;
@@ -35,7 +37,7 @@ namespace Game.Mono
 
             var activeCellPositions = new List<int2>();
             var activeCellColors = new List<Color>();
-            var board = BoardCellArrayHolder.Instance.Value.Value;
+            var board = this.boardCellArray.Value;
 
             for (int x = 0; x < this.boardConfig.Width; x++)
             {

@@ -10,6 +10,7 @@ public class BlockAutoDropper : MicroBehaviour
 {
     private CanLockCurrentBlockTag canLockCurrentBlockTag;
     private BoardConfig boardConfig;
+    private BoardCellArray boardCellArray;
     private CurrentBlockRef currentBlock;
     private CurrentBlockTransformedEvent currentBlockTransformedEvent;
     [SerializeField] private float autoDropIntervalSeconds = 1f;
@@ -19,6 +20,7 @@ public class BlockAutoDropper : MicroBehaviour
     {
         this.InjectSingle(out this.canLockCurrentBlockTag);
         this.InjectSingle(out this.boardConfig);
+        this.InjectSingle(out this.boardCellArray);
         this.InjectSingle(out this.currentBlock);
         this.InjectSingle(out this.currentBlockTransformedEvent);
     }
@@ -43,7 +45,7 @@ public class BlockAutoDropper : MicroBehaviour
 
         bool canMove =
             BlockPositionCheckingHelpers.CheckBottomBorder(tempPos, blockData.CellOffsets) &&
-            BlockPositionCheckingHelpers.CheckCollision(boardConfig, BoardCellArrayHolder.Instance.Value, tempPos, blockData.CellOffsets);
+            BlockPositionCheckingHelpers.CheckCollision(boardConfig, this.boardCellArray, tempPos, blockData.CellOffsets);
 
         if (!canMove)
         {

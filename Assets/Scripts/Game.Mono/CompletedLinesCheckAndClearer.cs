@@ -10,11 +10,13 @@ public class CompletedLinesCheckAndClearer : MicroBehaviour
 {
     private BlockLockedEvent blockLockedEvent;
     private BoardConfig boardConfig;
+    private BoardCellArray boardCellArray;
 
     public override void InjectDependencies()
     {
         this.InjectSingle(out this.blockLockedEvent);
         this.InjectSingle(out this.boardConfig);
+        this.InjectSingle(out this.boardCellArray);
     }
 
     public override void Update()
@@ -22,13 +24,12 @@ public class CompletedLinesCheckAndClearer : MicroBehaviour
         if (!this.blockLockedEvent.Value)
             return;
 
-        var board = BoardCellArrayHolder.Instance.Value;
-        var completedLineIndexes = this.GetCompletedLineIndexes(board);
+        var completedLineIndexes = this.GetCompletedLineIndexes(this.boardCellArray);
 
         if (completedLineIndexes.Count == 0)
             return;
 
-        this.ClearCompletedLines(board, completedLineIndexes);
+        this.ClearCompletedLines(this.boardCellArray, completedLineIndexes);
     }
 
     private List<int> GetCompletedLineIndexes(BoardCellArray board)
