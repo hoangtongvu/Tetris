@@ -20,6 +20,11 @@ namespace Game.Mono.GameStates
         [SerializeField] private GameState2CommandsMapSO gameState2CommandsMapSO;
         private ISubscription changeGameStateMessageSubscription;
 
+        private void Awake()
+        {
+            DontDestroyOnLoad(this);
+        }
+
         private void Start()
         {
             this.currentState = this.initialState;

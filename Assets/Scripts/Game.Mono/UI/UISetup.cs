@@ -5,9 +5,8 @@ using Game.UI.Common.Pooling;
 using Game.UI.Common.UIRendering;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.SceneManagement;
 
-namespace Game.Mono.GameStates
+namespace Game.Mono.UI
 {
     public class UISetup : SaiMonoBehaviour
     {
@@ -39,16 +38,17 @@ namespace Game.Mono.GameStates
                     DefaultHolderTransform = defaultHolderTransform,
                 });
             }
+
+            Destroy(gameObject);
         }
 
         private void CreateUIToolkitHolders(out Transform uitkOverlayHolder, out Transform uitkWorldSpaceHolder)
         {
-            var scene = SceneManager.CreateScene("UIToolkit Scene");
+            var overlayHolderGO = new GameObject("[UI Toolkit] OverlayUIsHolder");
+            var worldSpaceHolderGO = new GameObject("[UI Toolkit] WorldSpaceUIsHolder");
 
-            var overlayHolderGO = new GameObject("OverlayUIsHolder");
-            var worldSpaceHolderGO = new GameObject("WorldSpaceUIsHolder");
-            SceneManager.MoveGameObjectToScene(overlayHolderGO, scene);
-            SceneManager.MoveGameObjectToScene(worldSpaceHolderGO, scene);
+            DontDestroyOnLoad(overlayHolderGO);
+            DontDestroyOnLoad(worldSpaceHolderGO);
 
             uitkOverlayHolder = overlayHolderGO.transform;
             uitkWorldSpaceHolder = worldSpaceHolderGO.transform;

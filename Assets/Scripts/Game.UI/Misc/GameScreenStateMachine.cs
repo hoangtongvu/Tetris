@@ -34,6 +34,8 @@ namespace Game.UI
         {
             if (Instance == null)
                 Instance = this;
+
+            DontDestroyOnLoad(this);
         }
 
         private void Start()
