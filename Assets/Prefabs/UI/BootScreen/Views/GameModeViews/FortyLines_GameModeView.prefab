@@ -95,4 +95,4 @@ MonoBehaviour:
     - rid: 4378355796025802851
       type: {class: ChangeGameScreenCommand, ns: Game.UI, asm: Game.UI}
       data:
-        ScreenType: 1326864661
+        ScreenType: -1375773375
