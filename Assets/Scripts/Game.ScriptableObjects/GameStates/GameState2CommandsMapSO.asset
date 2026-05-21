@@ -16,12 +16,32 @@ MonoBehaviour:
     _serializedList:
     - Key: 2
       Value:
-        OnEnterStateCommands: []
+        OnEnterStateCommands:
+        - Value:
+          - GameCommand:
+              rid: 4378355835725414521
+            GameCommandAsync:
+              rid: -2
         OnExitStateCommands: []
     - Key: 5
       Value:
-        OnEnterStateCommands: []
+        OnEnterStateCommands:
+        - Value:
+          - GameCommand:
+              rid: 4378355835725414522
+            GameCommandAsync:
+              rid: -2
         OnExitStateCommands: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 4378355835725414521
+      type: {class: ChangeSceneCommand, ns: Game.Mono.GameCommands, asm: Game.Mono}
+      data:
+        SceneInt: 1
+    - rid: 4378355835725414522
+      type: {class: ChangeSceneCommand, ns: Game.Mono.GameCommands, asm: Game.Mono}
+      data:
+        SceneInt: 2
