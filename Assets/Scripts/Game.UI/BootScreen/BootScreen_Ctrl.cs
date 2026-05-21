@@ -17,8 +17,6 @@ namespace Game.UI.BootScreen
         [ShowInInspector] private readonly Stack<UIType> viewHistory = new();
         private ISubscription changeToPreviousViewMessageSub;
 
-        public BeforeGameplayData BeforeGameplayData = new();
-
         public OverlayViewStack OverlayViewStack => overlayViewStack;
 
         public override UIType GetUIType() => UIType.BootScreen;

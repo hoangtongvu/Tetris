@@ -1,4 +1,6 @@
 using Game.Domain.GameModes;
+using Game.Domain.GameSession;
+using Game.Domain.PubSub.Messengers;
 using Game.ScriptableObjects.GameModes;
 using Game.UI.Common;
 using Game.UI.Common.Pooling;
@@ -7,6 +9,7 @@ using Reflex.Core;
 using Reflex.Injectors;
 using System.Collections.Generic;
 using UnityEngine.UIElements;
+using ZBase.Foundation.PubSub;
 
 namespace Game.UI.BootScreen.SelectGameMode
 {
@@ -73,7 +76,8 @@ namespace Game.UI.BootScreen.SelectGameMode
 
                 button.clicked += () =>
                 {
-                    //BootScreen_Ctrl.Instance.BeforeGameplayData.GameMode = mode;// NOTE: How to handle this?
+                    GameplayMessenger.MessagePublisher
+                        .Publish(new ChangeGameModeMessage(mode));
 
                     new PopViewFromBootScreenCommand().Execute();
                     new PushViewToBootScreenCommand

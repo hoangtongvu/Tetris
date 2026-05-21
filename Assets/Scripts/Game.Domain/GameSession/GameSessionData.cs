@@ -1,10 +1,10 @@
 using Game.Domain.GameModes;
 using System;
 
-namespace Game.UI.BootScreen;
+namespace Game.Domain.GameSession;
 
 [Serializable]
-public class BeforeGameplayData
+public class GameSessionData
 {
     public GameMode GameMode;
 }
