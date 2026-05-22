@@ -12,6 +12,8 @@ namespace Game.Common
 
         private void OnValidate()
         {
+            if (this.microBehaviours == null) return;
+
             foreach (var microBehaviour in this.microBehaviours)
             {
                 microBehaviour.Init(this);
