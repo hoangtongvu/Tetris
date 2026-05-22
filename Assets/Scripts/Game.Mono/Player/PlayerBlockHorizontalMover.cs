@@ -4,10 +4,10 @@ using Game.Domain;
 using System;
 using UnityEngine;
 
-namespace Game.Mono;
+namespace Game.Mono.Player;
 
 [Serializable]
-public class PlayerBlockVerticalMover : MicroBehaviour
+public class PlayerBlockHorizontalMover : MicroBehaviour
 {
     private BoardConfig boardConfig;
     private BoardCellArray boardCellArray;
@@ -37,22 +37,27 @@ public class PlayerBlockVerticalMover : MicroBehaviour
             if (currentBlock.Value == null)
                 continue;
 
-            if (Input.GetKey(KeyCode.DownArrow))
+            if (Input.GetKey(KeyCode.RightArrow))
             {
-                this.MoveBlockY(-1);
+                this.MoveBlockX(1);
+            }
+
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                this.MoveBlockX(-1);
             }
         }
     }
 
-    private void MoveBlockY(sbyte input)
+    private void MoveBlockX(sbyte input)
     {
         var blockData = this.currentBlock.Value;
 
         var tempPos = blockData.CenterPosition;
-        tempPos.y += input;
+        tempPos.x += input;
 
         bool canMove =
-            BlockPositionCheckingHelpers.CheckBottomBorder(tempPos, blockData.CellOffsets) &&
+            BlockPositionCheckingHelpers.CheckHorizontalBorders(this.boardConfig, tempPos, blockData.CellOffsets) &&
             BlockPositionCheckingHelpers.CheckCollision(boardConfig, this.boardCellArray, tempPos, blockData.CellOffsets);
 
         if (!canMove) return;

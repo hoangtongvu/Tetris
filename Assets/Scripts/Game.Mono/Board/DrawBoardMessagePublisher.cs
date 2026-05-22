@@ -4,7 +4,7 @@ using Game.Domain.PubSub.Messengers;
 using System;
 using ZBase.Foundation.PubSub;
 
-namespace Game.Mono;
+namespace Game.Mono.Board;
 
 public record struct DrawBoardMessage : IMessage;
 

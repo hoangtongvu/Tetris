@@ -8,7 +8,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using ZBase.Foundation.PubSub;
 
-namespace Game.Mono
+namespace Game.Mono.Board
 {
     [SourceGeneratorInjectable]
     public partial class BoardDrawer : SaiMonoBehaviour

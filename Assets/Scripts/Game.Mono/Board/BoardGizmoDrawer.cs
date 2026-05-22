@@ -2,7 +2,7 @@ using Game.Domain;
 using Reflex.Attributes;
 using UnityEngine;
 
-namespace Game.Mono
+namespace Game.Mono.Board
 {
     [SourceGeneratorInjectable]
     public partial class BoardGizmoDrawer : MonoBehaviour

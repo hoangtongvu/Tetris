@@ -3,7 +3,7 @@ using Game.Domain;
 using System;
 using System.Collections.Generic;
 
-namespace Game.Mono;
+namespace Game.Mono.Lines;
 
 [Serializable]
 public class CompletedLinesCheckAndClearer : MicroBehaviour

@@ -3,7 +3,7 @@ using Game.Domain;
 using System;
 using UnityEngine;
 
-namespace Game.Mono;
+namespace Game.Mono.Player;
 
 [Serializable]
 public class PlayerBlockHardDropper : MicroBehaviour

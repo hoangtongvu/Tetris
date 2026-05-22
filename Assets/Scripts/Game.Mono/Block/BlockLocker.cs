@@ -2,7 +2,7 @@ using Game.Common;
 using Game.Domain;
 using System;
 
-namespace Game.Mono;
+namespace Game.Mono.Block;
 
 [Serializable]
 public class BlockLocker : MicroBehaviour

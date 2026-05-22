@@ -1,7 +1,7 @@
 using Reflex.Attributes;
 using UnityEngine;
 
-namespace Game.Mono
+namespace Game.Mono.Board
 {
     [SourceGeneratorInjectable]
     [RequireComponent(typeof(LineRenderer))]

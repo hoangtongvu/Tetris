@@ -4,7 +4,7 @@ using Reflex.Attributes;
 using UnityEngine;
 using ZBase.Foundation.PubSub;
 
-namespace Game.Mono
+namespace Game.Mono.Block
 {
     [SourceGeneratorInjectable]
     public partial class CurrentBlockDrawer : SaiMonoBehaviour

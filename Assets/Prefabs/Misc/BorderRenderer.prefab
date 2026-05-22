@@ -152,6 +152,6 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e299576559f7174eaa06b4450c9c87c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Game.Mono::Game.Mono.BoardBorderDrawer
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.Board.BoardBorderDrawer
   config: {fileID: 0}
   lineRenderer: {fileID: 6307469983625283083}

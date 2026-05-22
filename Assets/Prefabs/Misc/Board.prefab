@@ -75,7 +75,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df06a70a47a3ba147b0c44e8580f1547, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Game.Mono::Game.Mono.BoardGizmoDrawer
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.Board.BoardGizmoDrawer
   validColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   origin: {x: 0, y: 0, z: 0}
 --- !u!114 &8031614403943801661
@@ -89,6 +89,6 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b4bf21caff0299c4ebf30f6fd1dd4cdb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Game.Mono::Game.Mono.BoardDrawer
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.Board.BoardDrawer
   currentBoardPresenter: {fileID: 0}
   material: {fileID: -876546973899608171, guid: b49b5897e28a3fc459b8431ef4e51b7b, type: 3}

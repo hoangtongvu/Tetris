@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Mono;
+namespace Game.Mono.Block;
 
 [Serializable]
 public class BlockSpawner : MicroBehaviour

@@ -53,42 +53,42 @@ MonoBehaviour:
   - rid: 4983845021229777180
   - rid: 4983845021229777185
   - rid: 4983845024387825758
-  - rid: 1866159765100691557
+  - rid: 4378355857438277719
   - rid: 1866159582270980312
   references:
     version: 2
     RefIds:
     - rid: 1866159582270980312
-      type: {class: DrawBoardMessagePublisher, ns: Game.Mono, asm: Game.Mono}
+      type: {class: DrawBoardMessagePublisher, ns: Game.Mono.Board, asm: Game.Mono}
       data: 
-    - rid: 1866159765100691557
-      type: {class: DrawCurrentBlockMessagePublisher, ns: Game.Mono, asm: Game.Mono}
+    - rid: 4378355857438277719
+      type: {class: DrawCurrentBlockMessagePublisher, ns: Game.Mono.Block, asm: Game.Mono}
       data: 
     - rid: 4983845021229777175
-      type: {class: PlayerBlockHorizontalMover, ns: Game.Mono, asm: Game.Mono}
+      type: {class: PlayerBlockHorizontalMover, ns: Game.Mono.Player, asm: Game.Mono}
       data:
         moveCooldownSeconds: 0.1
     - rid: 4983845021229777178
-      type: {class: PlayerBlockVerticalMover, ns: Game.Mono, asm: Game.Mono}
+      type: {class: PlayerBlockVerticalMover, ns: Game.Mono.Player, asm: Game.Mono}
       data:
         moveCooldownSeconds: 0.1
     - rid: 4983845021229777179
-      type: {class: BlockAutoDropper, ns: Game.Mono, asm: Game.Mono}
+      type: {class: BlockAutoDropper, ns: Game.Mono.Block, asm: Game.Mono}
       data:
         autoDropIntervalSeconds: 0.5
     - rid: 4983845021229777180
-      type: {class: PlayerBlockHardDropper, ns: Game.Mono, asm: Game.Mono}
+      type: {class: PlayerBlockHardDropper, ns: Game.Mono.Player, asm: Game.Mono}
       data: 
     - rid: 4983845021229777182
-      type: {class: BlockSpawner, ns: Game.Mono, asm: Game.Mono}
+      type: {class: BlockSpawner, ns: Game.Mono.Block, asm: Game.Mono}
       data:
         batchIndexCount: 4
     - rid: 4983845021229777185
-      type: {class: BlockLocker, ns: Game.Mono, asm: Game.Mono}
+      type: {class: BlockLocker, ns: Game.Mono.Block, asm: Game.Mono}
       data: 
     - rid: 4983845024387825754
-      type: {class: PlayerBlockRotator, ns: Game.Mono, asm: Game.Mono}
+      type: {class: PlayerBlockRotator, ns: Game.Mono.Player, asm: Game.Mono}
       data: 
     - rid: 4983845024387825758
-      type: {class: CompletedLinesCheckAndClearer, ns: Game.Mono, asm: Game.Mono}
+      type: {class: CompletedLinesCheckAndClearer, ns: Game.Mono.Lines, asm: Game.Mono}
       data: 

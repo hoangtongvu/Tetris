@@ -1,7 +1,7 @@
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace Game.Mono
+namespace Game.Mono.Block
 {
     public class BlockGizmoDrawer : MonoBehaviour
     {

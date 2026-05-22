@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7966724649213731881}
   - component: {fileID: 8138405302674917313}
   - component: {fileID: 7308460098526427092}
-  - component: {fileID: 2352661593288898715}
+  - component: {fileID: 251774412081955626}
   m_Layer: 0
   m_Name: CurrentBlock
   m_TagString: Untagged
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Game.Mono::Game.Mono.BlockLockedEventHolder
   Value:
     Value: 1
---- !u!114 &2352661593288898715
+--- !u!114 &251774412081955626
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,8 +107,6 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8a399b5559180e41b1cd8fb7db7885f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Game.Mono::Game.Mono.CurrentBlockDrawer
-  boardConfig: {fileID: 0}
-  currentBlock: {fileID: 3420367179186148435}
+  m_EditorClassIdentifier: Game.Mono::Game.Mono.Block.CurrentBlockDrawer
   currentBlockPresenter: {fileID: 0}
   material: {fileID: -876546973899608171, guid: b49b5897e28a3fc459b8431ef4e51b7b, type: 3}

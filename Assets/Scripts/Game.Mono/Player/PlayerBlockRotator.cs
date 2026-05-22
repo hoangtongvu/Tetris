@@ -5,7 +5,7 @@ using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace Game.Mono;
+namespace Game.Mono.Player;
 
 [Serializable]
 public class PlayerBlockRotator : MicroBehaviour
