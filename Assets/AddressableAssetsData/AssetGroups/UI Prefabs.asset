@@ -45,6 +45,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - UI Prefab
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c6cc0eb2b3c180143b5fa261e2867bc3
+    m_Address: UI/Blitz_GameModeView-0
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI Prefab
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f6a46bd04d82f09489d27664e709a023
     m_Address: UI/BootScreen-0
     m_ReadOnly: 0
