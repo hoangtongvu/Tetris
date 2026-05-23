@@ -1,0 +1,13 @@
+/* FOT-Rodin Pro EB — project font at Assets/Fonts/FOT-Rodin Pro EB.otf */
+
+Label,
+Button,
+Toggle,
+DropdownField,
+TextField,
+.unity-base-field__label,
+.unity-base-popup-field__text
+{
+    -unity-font-definition: url("project://database/Assets/Fonts/FOT-Rodin%20Pro%20EB.otf?fileID=12800000&guid=b9f840d4e750e8f4bbb3678018db87b5&type=3#FOT-Rodin Pro EB");
+    -unity-font-style: normal;
+}

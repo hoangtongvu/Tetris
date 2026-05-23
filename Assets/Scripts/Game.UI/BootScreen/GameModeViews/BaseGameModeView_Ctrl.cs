@@ -14,7 +14,8 @@ public abstract class BaseGameModeView_Ctrl<TSettings> : BaseUITKCtrl
     where TSettings : BaseGameModeSettings
 {
     [Inject] private GameModeProfilesSO gameModeProfiles;
-    private TSettings settings;
+
+    protected TSettings Settings { get; private set; }
 
     private Label gameModeNameLabel;
     private Label gameModeDescriptionLabel;
@@ -38,11 +39,31 @@ public abstract class BaseGameModeView_Ctrl<TSettings> : BaseUITKCtrl
         this.startGameButton.Bind();
 
         var gameModeData = this.gameModeProfiles.Value[this.GetGameMode()];
-        this.gameModeNameLabel.text = gameModeData.Name;
-        this.gameModeDescriptionLabel.text = gameModeData.LongDescription;
+        this.gameModeNameLabel.text = gameModeData.Name.ToUpperInvariant();
+        this.gameModeDescriptionLabel.text = gameModeData.LongDescription.ToUpperInvariant();
+
+        this.Settings = (TSettings)gameModeData.Settings;
+        this.BindSettings();
     }
 
-    public void InjectGameModeSettings(TSettings settings) => this.settings = settings;
+    public void InjectGameModeSettings(TSettings settings) => this.Settings = settings;
+
+    protected virtual void BindSettings() { }
+
+    protected void ClearOptionsContent()
+    {
+        var options = this.uiDocument.rootVisualElement.Q<VisualElement>("options");
+
+        for (var i = options.childCount - 1; i >= 0; i--)
+        {
+            var child = options[i];
+
+            if (child.ClassListContains("section-title"))
+                continue;
+
+            child.RemoveFromHierarchy();
+        }
+    }
 
     public abstract GameMode GetGameMode();
 }

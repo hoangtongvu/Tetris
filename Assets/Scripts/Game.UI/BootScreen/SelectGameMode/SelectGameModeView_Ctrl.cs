@@ -54,6 +54,7 @@ namespace Game.UI.BootScreen.SelectGameMode
             this.buttonCtrls.Clear();
 
             var map = this.gameModeProfilesSO.Value;
+            const long delayBetweenMs = 120;
 
             for (int i = 0; i < GameMode_Length.Value; i++)
             {
@@ -67,6 +68,9 @@ namespace Game.UI.BootScreen.SelectGameMode
                 buttonCtrl.transform.SetParent(transform);
 
                 var button = buttonCtrl.UIDocument.rootVisualElement.Q<Button>();
+
+                button.AddToClassList("hidden");
+                button.schedule.Execute(() => button.RemoveFromClassList("hidden")).ExecuteLater(10 + i * delayBetweenMs);
 
                 var title = button.Q<Label>("title__label");
                 title.text = modeData.Name.ToUpper();

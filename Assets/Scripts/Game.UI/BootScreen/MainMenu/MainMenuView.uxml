@@ -1,10 +1,12 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI%20Toolkit/BootScreen/Views/MainMenuViewStyleSheet.uss?fileID=7433441132597879392&amp;guid=f9feb1534a2f41c4b820d2bafd2bd6e9&amp;type=3#MainMenuViewStyleSheet"/>
-    <ui:VisualElement name="center-panel" class="centerPanel" style="flex-grow: 1; align-items: center; justify-content: center; align-self: center;">
-        <ui:Label text="MAIN MENU" name="headline__label" style="font-size: 60px; color: rgb(255, 255, 255); -unity-text-align: upper-center; text-shadow: 5px 5px 0 rgb(0, 0, 0);"/>
-        <ui:Button text="SOLO" name="start-game__button" class="menuRegularButton"/>
-        <ui:Button text="CONFIG" name="config__button" class="menuRegularButton"/>
-        <ui:Button text="ABOUT" name="about__button" class="menuRegularButton"/>
-        <ui:Button text="EXIT" name="exit-game__button" class="menuRegularButton"/>
+    <Style src="project://database/Assets/Scripts/Game.UI/BootScreen/MainMenu/MainMenuViewStyleSheet.uss?fileID=7433441132597879392&amp;guid=f9feb1534a2f41c4b820d2bafd2bd6e9&amp;type=3#MainMenuViewStyleSheet"/>
+    <ui:VisualElement name="root" style="flex-grow: 1;">
+        <ui:Label text="T&lt;color=#0096ff&gt;E&lt;/color&gt;TRIS" name="main-menu-headline" class="main-menu-headline" style="-unity-font-definition: url(&quot;project://database/Assets/Fonts/BMSPA___.TTF?fileID=12800000&amp;guid=a336f023961b34e408b9ad64cb1a7911&amp;type=3#BMSPA___&quot;);"/>
+        <ui:VisualElement name="center-panel" class="centerPanel main-menu-root">
+            <ui:Button text="SOLO" name="start-game__button" class="menuRegularButton"/>
+            <ui:Button text="CONFIG" name="config__button" class="menuRegularButton"/>
+            <ui:Button text="ABOUT" name="about__button" class="menuRegularButton"/>
+            <ui:Button text="EXIT" name="exit-game__button" class="menuRegularButton"/>
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

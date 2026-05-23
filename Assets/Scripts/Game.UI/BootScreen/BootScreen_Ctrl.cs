@@ -5,13 +5,18 @@ using SaintsField.Playa;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.Video;
 using ZBase.Foundation.PubSub;
 
 namespace Game.UI.BootScreen
 {
+    [RequireComponent(typeof(VideoPlayer))]
     public class BootScreen_Ctrl : BaseUITKCtrl
     {
         [SerializeField] private CommandButton backButton;
+
+        [SerializeField] private VideoPlayer bgVideoPlayer;
+        [SerializeField] private RenderTexture bgRenderTexture;
 
         private OverlayViewStack overlayViewStack;
         [ShowInInspector] private readonly Stack<UIType> viewHistory = new();
@@ -20,6 +25,12 @@ namespace Game.UI.BootScreen
         public OverlayViewStack OverlayViewStack => overlayViewStack;
 
         public override UIType GetUIType() => UIType.BootScreen;
+
+        protected override void LoadComponents()
+        {
+            base.LoadComponents();
+            this.LoadComponentInCtrl(out this.bgVideoPlayer);
+        }
 
         protected override void LoadUIElements()
         {
@@ -36,6 +47,8 @@ namespace Game.UI.BootScreen
 
             this.changeToPreviousViewMessageSub = GameplayMessenger.MessageSubscriber
                 .Subscribe<ChangeToPreviousViewMessage>(_ => ChangeToPreviousView());
+
+            this.RunBackgroundVideo();
         }
 
         protected override void OnDisable()
@@ -57,6 +70,39 @@ namespace Game.UI.BootScreen
         private void PushViewToHistory(BaseUICtrl uiCtrl)
         {
             this.viewHistory.Push(uiCtrl.GetUIType());
+
+            bool inMainMenuView = this.viewHistory.Count <= 1;
+            var root = this.uiDocument.rootVisualElement;
+            var header = root.Q<VisualElement>("header");
+            var body = root.Q<VisualElement>("body");
+            var footer = root.Q<VisualElement>("footer");
+
+            if (inMainMenuView)
+            {
+                this.backButton.Button.RemoveFromClassList("visible");
+                this.backButton.Button.AddToClassList("hidden");
+
+                header.RemoveFromClassList("visible");
+                header.AddToClassList("hidden");
+
+                body.RemoveFromClassList("not-main-menu");
+
+                footer.RemoveFromClassList("visible");
+                footer.AddToClassList("hidden");
+            }
+            else
+            {
+                this.backButton.Button.RemoveFromClassList("hidden");
+                this.backButton.Button.AddToClassList("visible");
+
+                header.RemoveFromClassList("hidden");
+                header.AddToClassList("visible");
+
+                body.AddToClassList("not-main-menu");
+
+                footer.RemoveFromClassList("hidden");
+                footer.AddToClassList("visible");
+            }
         }
 
         private void ChangeToPreviousView()
@@ -71,6 +117,19 @@ namespace Game.UI.BootScreen
 
             this.overlayViewStack.Pop();
             this.overlayViewStack.Push(prevViewCtrl);
+        }
+
+        private void RunBackgroundVideo()
+        {
+            var root = uiDocument.rootVisualElement;
+
+            var videoElement = root.Q<VisualElement>("bg-video");
+
+            videoElement.style.backgroundImage =
+                Background.FromRenderTexture(this.bgRenderTexture);
+
+            this.bgVideoPlayer.targetTexture = this.bgRenderTexture;
+            this.bgVideoPlayer.Play();
         }
     }
 }

@@ -1,30 +1,84 @@
-.menuRegularButton {
-    font-size: 40px;
-    color: rgb(255, 255, 255);
-    text-shadow: 5px 5px 0 rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.24);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    width: 310px;
-    height: 93px;
-    margin-top: 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    margin-left: 5px;
-    rotate: 0 0 0 0;
+@import url("../../Common/Theme/PersonaTheme.uss");
+
+.main-menu-root
+{
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
 }
 
-.centerPanel {
-    width: 567px;
-    height: 100%;
+.centerPanel
+{
+    width: 420px;
+    align-items: stretch;
+    justify-content: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 
-.menuRegularButton:hover {
-    scale: 1.05 1.05;
-    transition-duration: 0.2s;
-    opacity: 1;
-    rotate: -2deg;
-    background-color: rgba(0, 0, 0, 0.39);
+.main-menu-headline
+{
+    font-size: 120px;
+    letter-spacing: 0px;
+    color: var(--p3-highlight);
+    -unity-text-align: upper-center;
+    text-shadow: 7px 7px 0 var(--p3-shadow);
+    align-self: flex-end;
+    margin-top: 64px;
+    margin-right: 64px;
+    margin-bottom: 32px;
+    transition-duration: 0.3s;
+    transition-property: scale, translate;
+}
+
+.main-menu-headline.hidden
+{
+    translate: 100% 0;
+}
+
+.menuRegularButton
+{
+    font-size: 64px;
+    color: var(--p3-text);
+    letter-spacing: -12px;
+    text-shadow: 3px 3px 0 var(--p3-shadow);
+    /* background-color: rgba(12, 40, 88, 0.65); */
+    background-color: transparent;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-right-width: 0;
+    border-left-width: 5px;
+    border-left-color: var(--p3-cyan-bright);
+    border-radius: 0;
+    width: 100%;
+    height: 90px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    -unity-text-align: middle-left;
+    padding-left: 20px;
+    transition-duration: 0.18s;
+    transition-property: scale, translate, border-left-width, background-color;
+}
+
+.menuRegularButton:hover
+{
+    scale: 1.04 1.04;
+    translate: 10px 0;
+    border-left-width: 10px;
+    background-color: rgba(12, 40, 88, 0.65);
+    rotate: 0;
+}
+
+.menuRegularButton:active
+{
+    scale: 0.98 0.98;
+    background-color: rgba(16, 48, 96, 1);
+}
+
+.menuRegularButton.hidden
+{
+    opacity: 0;
+    translate: 10% 0;
+    scale: 0.3;
 }

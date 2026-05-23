@@ -1,0 +1,122 @@
+@import url("../Common/Theme/PersonaColors.uss");
+
+/* Layout stays on UXML inline styles; this sheet only applies Persona look. */
+
+.boot-header
+{
+    background-color: rgba(20, 56, 120, 0.92);
+    border-bottom-width: 3px;
+    border-bottom-color: var(--p3-cyan-bright);
+    transition-duration: 0.3s;
+    transition-property: translate, opacity;
+    transition-timing-function: ease-out-sine;
+}
+
+.boot-header.hidden
+{
+    translate: -100% 0;
+    opacity: 0.75;
+}
+
+.boot-header.visible
+{
+    translate: 0 0;
+    opacity: 1;
+}
+
+.boot-header-label
+{
+    font-size: 40px;
+    color: var(--p3-cyan);
+    letter-spacing: -12px;
+    padding-left: 16px;
+    align-self: center;
+}
+
+.boot-body
+{
+    transition-duration: 0.3s;
+    transition-property: background-color;
+    transition-timing-function: ease-out-sine;
+}
+
+.boot-body.not-main-menu
+{
+    background-color: rgba(4, 12, 32, 0.35);
+}
+
+.boot-back-button
+{
+    color: var(--p3-text);
+    letter-spacing: -12px;
+    background-color: rgba(12, 36, 80, 0.5);
+    border-left-width: 4px;
+    border-left-color: var(--p3-cyan);
+    border-radius: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-right-width: 0;
+    transition-duration: 0.18s;
+    transition-property: scale, border-left-width, translate;
+}
+
+.boot-back-button:hover
+{
+    scale: 1.04 1.04;
+    background-color: rgba(24, 64, 130, 0.75);
+    border-left-width: 10px;
+}
+
+.boot-back-button:active
+{
+    background-color: rgba(24, 64, 130, 0.90);
+    scale: 0.95;
+}
+
+.boot-back-button.hidden
+{
+    translate: -100% 0;
+}
+
+.boot-back-button.visible
+{
+    translate: 0 0;
+}
+
+.boot-footer
+{
+    background-color: rgba(12, 32, 72, 0.9);
+    border-top-width: 2px;
+    border-top-color: var(--p3-blue-line);
+    transition-duration: 0.3s;
+    transition-property: translate, opacity;
+    transition-timing-function: ease-out-sine;
+}
+
+.boot-footer.hidden
+{
+    translate: 100% 0;
+    opacity: 0.75;
+}
+
+.boot-footer.visible
+{
+    translate: 0 0;
+    opacity: 1;
+}
+
+.boot-footer-description
+{
+    color: var(--p3-text-dim);
+    font-size: 30px;
+    letter-spacing: -12px;
+    padding-left: 16px;
+    align-self: center;
+}
+
+.boot-user-name
+{
+    color: var(--p3-text);
+    font-size: 14px;
+    letter-spacing: 1px;
+}
