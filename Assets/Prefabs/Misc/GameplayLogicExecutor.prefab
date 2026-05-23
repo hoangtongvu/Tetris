@@ -60,35 +60,45 @@ MonoBehaviour:
     RefIds:
     - rid: 1866159582270980312
       type: {class: DrawBoardMessagePublisher, ns: Game.Mono.Board, asm: Game.Mono}
-      data: 
+      data:
+        executor: {fileID: 9103750606282096648}
     - rid: 4378355857438277719
       type: {class: DrawCurrentBlockMessagePublisher, ns: Game.Mono.Block, asm: Game.Mono}
-      data: 
+      data:
+        executor: {fileID: 9103750606282096648}
     - rid: 4983845021229777175
       type: {class: PlayerBlockHorizontalMover, ns: Game.Mono.Player, asm: Game.Mono}
       data:
+        executor: {fileID: 9103750606282096648}
         moveCooldownSeconds: 0.1
     - rid: 4983845021229777178
       type: {class: PlayerBlockVerticalMover, ns: Game.Mono.Player, asm: Game.Mono}
       data:
+        executor: {fileID: 9103750606282096648}
         moveCooldownSeconds: 0.1
     - rid: 4983845021229777179
       type: {class: BlockAutoDropper, ns: Game.Mono.Block, asm: Game.Mono}
       data:
+        executor: {fileID: 9103750606282096648}
         autoDropIntervalSeconds: 0.5
     - rid: 4983845021229777180
       type: {class: PlayerBlockHardDropper, ns: Game.Mono.Player, asm: Game.Mono}
-      data: 
+      data:
+        executor: {fileID: 9103750606282096648}
     - rid: 4983845021229777182
       type: {class: BlockSpawner, ns: Game.Mono.Block, asm: Game.Mono}
       data:
+        executor: {fileID: 9103750606282096648}
         batchIndexCount: 4
     - rid: 4983845021229777185
       type: {class: BlockLocker, ns: Game.Mono.Block, asm: Game.Mono}
-      data: 
+      data:
+        executor: {fileID: 9103750606282096648}
     - rid: 4983845024387825754
       type: {class: PlayerBlockRotator, ns: Game.Mono.Player, asm: Game.Mono}
-      data: 
+      data:
+        executor: {fileID: 9103750606282096648}
     - rid: 4983845024387825758
       type: {class: CompletedLinesCheckAndClearer, ns: Game.Mono.Lines, asm: Game.Mono}
-      data: 
+      data:
+        executor: {fileID: 9103750606282096648}

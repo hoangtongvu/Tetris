@@ -8,7 +8,7 @@ namespace Game.Common;
 [Serializable]
 public abstract class MicroBehaviour
 {
-    protected MicroBehavioursExecutor executor;
+    [SerializeField, HideInInspector] protected MicroBehavioursExecutor executor;
     protected Container sceneContainer;
 
     public void Init(MicroBehavioursExecutor executor)
