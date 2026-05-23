@@ -9,6 +9,7 @@ namespace Game.Domain.GameModes;
 public class GameModeData
 {
     public string Name;
+    public string ThumbnailText;
     [TextArea] public string ShortDescription;
     [TextArea] public string LongDescription;
 

@@ -54,17 +54,24 @@
 .p3-mode-button-thumb
 {
     flex-grow: 1;
-    max-width: 150px;
+    max-width: 200px;
     margin-right: 12px;
-    background-color: rgba(4, 16, 40, 0.7);
     border-top-width: 1px;
     border-bottom-width: 1px;
     border-left-width: 1px;
-    border-right-width: 1px;
     border-top-color: var(--p3-blue-line);
     border-bottom-color: var(--p3-blue-line);
     border-left-color: var(--p3-blue-line);
-    border-right-color: var(--p3-blue-line);
+}
+
+.p3-mode-button-thumb .unity-text-element
+{
+    flex-grow: 1;
+    -unity-text-align: middle-center;
+    font-size: 70px;
+    letter-spacing: -10px;
+    color: var(--p3-text-dim);
+    text-shadow: 10px 10px 0 var(--p3-shadow);
 }
 
 .p3-mode-button-text

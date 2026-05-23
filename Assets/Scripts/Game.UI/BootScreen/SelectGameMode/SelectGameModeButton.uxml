@@ -1,8 +1,8 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="SelectGameModeStyleSheet.uss"/>
+    <Style src="project://database/Assets/Scripts/Game.UI/BootScreen/SelectGameMode/SelectGameModeStyleSheet.uss?fileID=7433441132597879392&amp;guid=c9a6e3d14f5b6a8c0d2e4f6a8b0c2d4e&amp;type=3#SelectGameModeStyleSheet"/>
     <ui:Button text="&#10;" class="p3-mode-button">
         <ui:VisualElement class="p3-mode-button-thumb">
-            <ui:Image/>
+            <ui:Label text="40L" name="thumb-label" style="-unity-font-definition: url(&quot;project://database/Assets/Fonts/BMSPA___.TTF?fileID=12800000&amp;guid=a336f023961b34e408b9ad64cb1a7911&amp;type=3#BMSPA___&quot;);"/>
         </ui:VisualElement>
         <ui:VisualElement class="p3-mode-button-text">
             <ui:Label text="40 LINES" name="title__label" class="p3-mode-title"/>

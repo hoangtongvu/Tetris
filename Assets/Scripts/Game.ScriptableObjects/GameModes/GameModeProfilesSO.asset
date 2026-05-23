@@ -17,6 +17,7 @@ MonoBehaviour:
     - Key: 1
       Value:
         Name: Forty Lines
+        ThumbnailText: 40L
         ShortDescription: COMPLETE 40 LINES OUICKLY POSSIBLE
         LongDescription: 'CLEAR 40 LINES IN THE SHORTEST AMOUNT OF TIME POSSIBLE.
 
@@ -28,6 +29,7 @@ MonoBehaviour:
     - Key: 2
       Value:
         Name: Blitz
+        ThumbnailText: Blz
         ShortDescription: TWO-MINUTE RACE AGAINST THE CLOCK
         LongDescription: 'GET AS MANY POINTS POSSIBLE YITHIN 2 MINUTES!
 
@@ -39,6 +41,7 @@ MonoBehaviour:
     - Key: 3
       Value:
         Name: Zen
+        ThumbnailText: Zen
         ShortDescription: RELAX OR TRAIN IN THIS NEVERENDING MODE
         LongDescription: 'RELAX OR TRAIN IN A NEVERENDING MODE! YOUR PROGRESS IS
           STORED ACROSS GAMES./nADJUST THE FEEL OR HELP TRAIN USING THE ZEN SIDEBAR.

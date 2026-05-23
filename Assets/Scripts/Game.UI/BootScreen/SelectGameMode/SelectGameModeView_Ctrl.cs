@@ -92,6 +92,9 @@ namespace Game.UI.BootScreen.SelectGameMode
 
                 this.buttonsContainer.Add(button);
                 this.buttonCtrls.Add(buttonCtrl);
+
+                var thumbLabel = button.Q<Label>("thumb-label");
+                thumbLabel.text = modeData.ThumbnailText;
             }
         }
     }
