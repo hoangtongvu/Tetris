@@ -49,14 +49,14 @@
       "hash": "34432703a177c97631a4eb1d908f086037c67969"
     },
     "com.github-joc0de.visual-studio-solution-generator": {
-      "version": "https://github.com/hoangtongvu/UnityVisualStudioSolutionGenerator.git?path=/src/UnityVisualStudioSolutionGenerator/Assets#1.1.2",
+      "version": "https://github.com/hoangtongvu/UnityVisualStudioSolutionGenerator.git?path=/src/UnityVisualStudioSolutionGenerator/Assets",
       "depth": 0,
       "source": "git",
       "dependencies": {
-        "com.unity.ide.visualstudio": "2.0.23",
+        "com.unity.ide.visualstudio": "2.0.27",
         "com.unity.settings-manager": "2.1.1"
       },
-      "hash": "20284208f48a1e563768b7da1189a7fef5a18a2f"
+      "hash": "54172a63cfa515d5d835116b619f7872d2611ca3"
     },
     "com.gustavopsantos.reflex": {
       "version": "https://github.com/gustavopsantos/reflex.git?path=/Assets/Reflex/#14.3.0",
@@ -176,11 +176,11 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.visualstudio": {
-      "version": "2.0.23",
-      "depth": 0,
+      "version": "2.0.27",
+      "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.test-framework": "1.1.9"
+        "com.unity.test-framework": "1.1.33"
       },
       "url": "https://packages.unity.com"
     },
