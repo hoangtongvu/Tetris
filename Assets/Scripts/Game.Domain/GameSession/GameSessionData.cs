@@ -7,4 +7,8 @@ namespace Game.Domain.GameSession;
 public class GameSessionData
 {
     public GameMode GameMode;
+    public int PlacedBlockCount;
+    public int CompletedLineCount;
+    public SessionTimer SessionTimer;
+    public float BlocksPerSecond;
 }

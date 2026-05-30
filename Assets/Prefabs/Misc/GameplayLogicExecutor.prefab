@@ -55,6 +55,7 @@ MonoBehaviour:
   - rid: 4983845024387825758
   - rid: 4378355857438277719
   - rid: 1866159582270980312
+  - rid: 4378356039418118233
   references:
     version: 2
     RefIds:
@@ -64,6 +65,10 @@ MonoBehaviour:
         executor: {fileID: 9103750606282096648}
     - rid: 4378355857438277719
       type: {class: DrawCurrentBlockMessagePublisher, ns: Game.Mono.Block, asm: Game.Mono}
+      data:
+        executor: {fileID: 9103750606282096648}
+    - rid: 4378356039418118233
+      type: {class: GameSessionDataController, ns: Game.Mono.GameSession, asm: Game.Mono}
       data:
         executor: {fileID: 9103750606282096648}
     - rid: 4983845021229777175

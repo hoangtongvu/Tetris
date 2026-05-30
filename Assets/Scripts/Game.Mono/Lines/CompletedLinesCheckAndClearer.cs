@@ -1,5 +1,6 @@
 using Game.Common;
 using Game.Domain;
+using Game.Domain.Lines;
 using System;
 using System.Collections.Generic;
 
@@ -11,16 +12,20 @@ public class CompletedLinesCheckAndClearer : MicroBehaviour
     private BlockLockedEvent blockLockedEvent;
     private BoardConfig boardConfig;
     private BoardCellArray boardCellArray;
+    private CompletedLinesEvent completedLinesEvent;
 
     public override void InjectDependencies()
     {
         this.InjectSingle(out this.blockLockedEvent);
         this.InjectSingle(out this.boardConfig);
         this.InjectSingle(out this.boardCellArray);
+        this.InjectSingle(out this.completedLinesEvent);
     }
 
     public override void Update()
     {
+        this.completedLinesEvent.Value = false;
+
         if (!this.blockLockedEvent.Value)
             return;
 
@@ -28,6 +33,9 @@ public class CompletedLinesCheckAndClearer : MicroBehaviour
 
         if (completedLineIndexes.Count == 0)
             return;
+
+        this.completedLinesEvent.Value = true;
+        this.completedLinesEvent.Count = completedLineIndexes.Count;
 
         this.ClearCompletedLines(this.boardCellArray, completedLineIndexes);
     }
