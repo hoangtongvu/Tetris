@@ -16,6 +16,7 @@ public static class CellsMeshBuilder
 
     public static GameObject CreateCellsPresenterGO(
         float cellWorldSize,
+        float2 worldOffset,
         int2 startPos,
         ReadOnlySpan<int2> offsets,
         ReadOnlySpan<Color> cellColors,
@@ -28,13 +29,14 @@ public static class CellsMeshBuilder
         var meshRenderer = go.AddComponent<MeshRenderer>();
 
         meshRenderer.material = material;
-        meshFilter.mesh = BuildCellsMesh(cellWorldSize, startPos, offsets, cellColors);
+        meshFilter.mesh = BuildCellsMesh(cellWorldSize, worldOffset, startPos, offsets, cellColors);
 
         return go;
     }
 
     public static Mesh BuildCellsMesh(
         float cellWorldSize,
+        float2 worldOffset,
         int2 startPos,
         ReadOnlySpan<int2> offsets,
         ReadOnlySpan<Color> cellColors)
@@ -61,10 +63,10 @@ public static class CellsMeshBuilder
             float y = cell.y * size;
 
             // Quad vertices
-            vertices[vIndex + 0] = new Vector3(x, y, 0);
-            vertices[vIndex + 1] = new Vector3(x + size, y, 0);
-            vertices[vIndex + 2] = new Vector3(x + size, y + size, 0);
-            vertices[vIndex + 3] = new Vector3(x, y + size, 0);
+            vertices[vIndex + 0] = new Vector3(x + worldOffset.x, y + worldOffset.y, 0);
+            vertices[vIndex + 1] = new Vector3(x + size + worldOffset.x, y + worldOffset.y, 0);
+            vertices[vIndex + 2] = new Vector3(x + size + worldOffset.x, y + size + worldOffset.y, 0);
+            vertices[vIndex + 3] = new Vector3(x + worldOffset.x, y + size + worldOffset.y, 0);
 
             // Triangles
             triangles[tIndex + 0] = vIndex + 0;

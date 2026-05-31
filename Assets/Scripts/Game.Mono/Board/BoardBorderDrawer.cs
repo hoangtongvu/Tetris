@@ -1,4 +1,5 @@
 using Reflex.Attributes;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Game.Mono.Board
@@ -23,14 +24,15 @@ namespace Game.Mono.Board
 
             float width = config.Width * config.CellWorldSize;
             float height = config.Height * config.CellWorldSize;
+            float2 offset = config.BoardWorldOffset;
 
             // Define 4 corners (clockwise or counter-clockwise)
             Vector3[] corners = new Vector3[4]
             {
-                new Vector3(0, 0, 0),
-                new Vector3(width, 0, 0),
-                new Vector3(width, height, 0),
-                new Vector3(0, height, 0)
+                new Vector3(offset.x, offset.y, 0),
+                new Vector3(width + offset.x, offset.y, 0),
+                new Vector3(width + offset.x, height + offset.y, 0),
+                new Vector3(offset.x, height + offset.y, 0)
             };
 
             lineRenderer.SetPositions(corners);

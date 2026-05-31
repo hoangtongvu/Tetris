@@ -53,6 +53,7 @@ namespace Game.Mono.Board
 
             this.currentBoardPresenter = CellsMeshBuilder.CreateCellsPresenterGO(
                 this.boardConfig.CellWorldSize,
+                this.boardConfig.BoardWorldOffset,
                 int2.zero,
                 CollectionsMarshal.AsSpan(activeCellPositions),
                 CollectionsMarshal.AsSpan(activeCellColors),

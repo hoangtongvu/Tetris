@@ -50,7 +50,7 @@ MonoBehaviour:
   Value:
     Width: 10
     Height: 20
-    CellWorldSize: 0.5
+    CellWorldSize: 0.4
 --- !u!114 &8522327215302895333
 MonoBehaviour:
   m_ObjectHideFlags: 0

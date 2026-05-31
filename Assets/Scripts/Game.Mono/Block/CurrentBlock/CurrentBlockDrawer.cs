@@ -38,6 +38,7 @@ namespace Game.Mono.Block
 
             this.currentBlockPresenter = CellsMeshBuilder.CreateCellsPresenterGO(
                 this.boardConfig.CellWorldSize,
+                this.boardConfig.BoardWorldOffset,
                 this.currentBlock.Value.CenterPosition,
                 this.currentBlock.Value.CellOffsets,
                 colors,
