@@ -2,24 +2,19 @@ using Game.Common;
 using Game.Domain.GameModes;
 using Game.Domain.GameSession;
 using Game.Domain.PubSub.Messengers;
+using Reflex.Attributes;
+using SaintsField.Playa;
 using ZBase.Foundation.PubSub;
 
 namespace Game.Mono.GameSession
 {
     public class GameSessionManager : SaiMonoBehaviour
     {
-        public static GameSessionManager Instance { get; private set; }
-
-        public GameSessionData SessionData;
+        [Inject, ShowInInspector] private GameSessionData SessionData;
         private ISubscription changeGameModeMessageSubscription;
 
         private void Awake()
         {
-            if (Instance == null)
-                Instance = this;
-            else
-                Destroy(gameObject);
-
             DontDestroyOnLoad(gameObject);
         }
 
