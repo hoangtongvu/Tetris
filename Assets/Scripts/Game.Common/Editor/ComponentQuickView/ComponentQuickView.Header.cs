@@ -114,6 +114,7 @@ public partial class ComponentQuickView : EditorWindow
                         if (copiedComponent.GetType() != destComponent.GetType()) continue;
 
                         EditorUtility.CopySerializedIfDifferent(copiedComponent, destComponent);
+                        EditorUtility.SetDirty(destComponent);
                         break;
                     }
                 }
@@ -145,6 +146,7 @@ public partial class ComponentQuickView : EditorWindow
                         if (copiedComponent.GetType() != destComponent.GetType()) continue;
 
                         EditorUtility.CopySerializedIfDifferent(copiedComponent, destComponent);
+                        EditorUtility.SetDirty(destComponent);
                         hasDestComponent = true;
                         break;
                     }
@@ -153,6 +155,7 @@ public partial class ComponentQuickView : EditorWindow
                     {
                         var destComponent = _cqv._targetGO.AddComponent(copiedComponent.GetType());
                         EditorUtility.CopySerialized(copiedComponent, destComponent);
+                        EditorUtility.SetDirty(destComponent);
                     }
                 }
             };
@@ -180,6 +183,8 @@ public partial class ComponentQuickView : EditorWindow
 
                     EditorUtility.CopySerialized(copiedComponent, destComponent);
                 }
+
+                EditorUtility.SetDirty(newGO);
             };
 
             return btn;
