@@ -5,7 +5,8 @@ using UnityEngine.UIElements;
 
 public partial class ComponentQuickView : EditorWindow
 {
-    private GameObject _target;
+    private Object _targetObject;
+    private GameObject _targetGO;
 
     private Dictionary<Component, ComponentInspectorState> _componentInspectorStates = new();
     private List<Component> _copiedComponents = new();
@@ -63,19 +64,20 @@ public partial class ComponentQuickView : EditorWindow
     private void RefreshSelection()
     {
         // Save states before cleaning up
-        if (_target != null)
+        if (_targetGO != null)
         {
             var temp = new Dictionary<int, ComponentInspectorState>();
             foreach (var kVPair in _componentInspectorStates)
                 temp.Add(kVPair.Key.GetEntityId(), kVPair.Value);
 
-            _cachedInspectorStateByGameObject[_target.GetEntityId()] = temp;
+            _cachedInspectorStateByGameObject[_targetGO.GetEntityId()] = temp;
         }
 
-        _target = Selection.activeGameObject;
+        _targetObject = Selection.activeObject;
+        _targetGO = Selection.activeGameObject;
         _componentInspectorStates.Clear();
 
-        if (_target == null)
+        if (_targetGO == null)
         {
             RepaintWindow();
             return;
@@ -83,9 +85,9 @@ public partial class ComponentQuickView : EditorWindow
 
         // Retrieve saved inspector states
         bool canRetrieveSavedEditorDatas = _cachedInspectorStateByGameObject
-            .TryGetValue(_target.GetEntityId(), out var savedInspectorStates);
+            .TryGetValue(_targetGO.GetEntityId(), out var savedInspectorStates);
 
-        var components = _target.GetComponents<Component>();
+        var components = _targetGO.GetComponents<Component>();
 
         foreach (var c in components)
         {
@@ -110,7 +112,7 @@ public partial class ComponentQuickView : EditorWindow
 
     private void SetAllVisibility(bool value)
     {
-        var components = _target.GetComponents<Component>();
+        var components = _targetGO.GetComponents<Component>();
 
         foreach (var c in components)
         {
@@ -124,6 +126,16 @@ public partial class ComponentQuickView : EditorWindow
 
     private void RepaintWindow()
     {
+        bool isTargetGameObject = _targetGO;
+
+        _header.style.display = isTargetGameObject
+            ? DisplayStyle.Flex
+            : DisplayStyle.None;
+
+        _componentToolBar.style.display = isTargetGameObject
+            ? DisplayStyle.Flex
+            : DisplayStyle.None;
+
         _componentToolBar.Refresh();
         _componentInspectors.Refresh();
     }

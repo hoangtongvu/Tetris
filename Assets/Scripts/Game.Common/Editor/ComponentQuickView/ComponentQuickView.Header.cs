@@ -151,7 +151,7 @@ public partial class ComponentQuickView : EditorWindow
 
                     if (!hasDestComponent)
                     {
-                        var destComponent = _cqv._target.AddComponent(copiedComponent.GetType());
+                        var destComponent = _cqv._targetGO.AddComponent(copiedComponent.GetType());
                         EditorUtility.CopySerialized(copiedComponent, destComponent);
                     }
                 }

@@ -24,7 +24,7 @@ public partial class ComponentQuickView : EditorWindow
 
             this.onGUIHandler += () =>
             {
-                var target = _cqv._target;
+                var target = _cqv._targetObject;
                 if (!target) return;
 
                 if (_editor == null || _editor.target != target)

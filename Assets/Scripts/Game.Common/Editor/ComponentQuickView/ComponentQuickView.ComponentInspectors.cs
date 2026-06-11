@@ -24,12 +24,19 @@ public partial class ComponentQuickView : EditorWindow
         {
             this.Clear();
 
-            var target = _cqv._target;
+            var targetGO = _cqv._targetGO;
+            if (!targetGO)
+            {
+                // Draw Inspector for non-GameObject Object
+                var targetObject = _cqv._targetObject;
+                var objectInspector = new InspectorElement(targetObject);
+                this.Add(objectInspector);
+
+                return;
+            }
+
             var inspectorStates = _cqv._componentInspectorStates;
-
-            if (!target) return;
-
-            var components = target.GetComponents<Component>();
+            var components = targetGO.GetComponents<Component>();
 
             foreach (var c in components)
             {

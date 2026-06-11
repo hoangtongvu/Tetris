@@ -37,7 +37,7 @@ public partial class ComponentQuickView : EditorWindow
         {
             this.Clear();
 
-            var target = _cqv._target;
+            var target = _cqv._targetGO;
             if (!target) return;
 
             this.Add(CreateToggleAllButton());
@@ -160,7 +160,7 @@ public partial class ComponentQuickView : EditorWindow
                         "Show",
                         BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
 
-                    method?.Invoke(null, new object[] { screenRect, new[] { _cqv._target } });
+                    method?.Invoke(null, new object[] { screenRect, new[] { _cqv._targetGO } });
                 }
             };
 
