@@ -8,6 +8,7 @@ public partial class ComponentQuickView : EditorWindow
     private GameObject _target;
 
     private Dictionary<Component, ComponentInspectorState> _componentInspectorStates = new();
+    private List<Component> _copiedComponents = new();
 
     // first int: id of the game object
     // second int: id of the component
