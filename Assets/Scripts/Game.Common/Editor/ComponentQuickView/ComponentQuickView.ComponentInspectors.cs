@@ -52,8 +52,6 @@ public partial class ComponentQuickView : EditorWindow
                 _cqv._componentInspectorStates[component] = componentInspectorState;
             }
 
-            componentInspectorState.Editor = Editor.CreateEditor(component);
-
             var titleBar = new VisualElement();
             titleBar.AddToClassList("title-bar");
 
@@ -61,7 +59,7 @@ public partial class ComponentQuickView : EditorWindow
             {
                 EditorGUILayout.InspectorTitlebar(
                     componentInspectorState.IsExpanded,
-                    componentInspectorState.Editor);
+                    component);
             });
 
             nativeComponentHeader.AddToClassList("native-component-header");
@@ -71,7 +69,7 @@ public partial class ComponentQuickView : EditorWindow
 
             subComponentHeader.Add(CreateHideButton(component));
 
-            var inspector = new InspectorElement(componentInspectorState.Editor);
+            var inspector = new InspectorElement(component);
 
             inspector.style.marginTop = 4;
             inspector.style.marginBottom = 4;
