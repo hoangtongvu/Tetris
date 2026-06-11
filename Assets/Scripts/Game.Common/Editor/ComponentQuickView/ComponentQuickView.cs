@@ -50,6 +50,9 @@ public partial class ComponentQuickView : EditorWindow
     {
         if (_isLocked) return;
 
+        var targetObject = Selection.activeObject;
+        rootVisualElement.style.opacity = targetObject ? 1 : 0;
+
         RefreshSelection();
     }
 
