@@ -47,49 +47,55 @@ public partial class ComponentQuickView : EditorWindow
             var container = new VisualElement();
             container.AddToClassList("component-element");
 
-            // ===== Title Bar =====
-            var title = new VisualElement();
-            title.AddToClassList("title-bar");
-
-            // Icon
-            var icon = new Image();
-            icon.image = AssetPreview.GetMiniThumbnail(component);
-            icon.AddToClassList("component-icon");
-
-            // Name
-            var label = new Label(component.GetType().Name);
-            label.AddToClassList("component-name-label");
-
-            title.Add(icon);
-            title.Add(label);
-            title.Add(CreateHideButton(component));
-            title.Add(CreateShowContextMenuButton(component));
-
-            container.Add(title);
-
             // ===== Inspector =====
-            if (!_cqv._editors.TryGetValue(component, out Editor value) || value == null)
+            if (!_cqv._editors.TryGetValue(component, out var componentInspectorData) || componentInspectorData.Editor == null)
             {
-                value = Editor.CreateEditor(component);
-                _cqv._editors[component] = value;
+                componentInspectorData = new()
+                {
+                    Editor = Editor.CreateEditor(component),
+                };
+                _cqv._editors[component] = componentInspectorData;
             }
 
-            var inspector = new InspectorElement(value);
+            var titleBar = new VisualElement();
+            titleBar.AddToClassList("title-bar");
+
+            var nativeComponentHeader = new IMGUIContainer(() =>
+            {
+                EditorGUILayout.InspectorTitlebar(
+                    componentInspectorData.IsExpanded,
+                    componentInspectorData.Editor);
+            });
+
+            nativeComponentHeader.AddToClassList("native-component-header");
+
+            var subComponentHeader = new VisualElement();
+            subComponentHeader.AddToClassList("sub-component-header");
+
+            subComponentHeader.Add(CreateHideButton(component));
+
+            var inspector = new InspectorElement(componentInspectorData.Editor);
+
             inspector.style.marginTop = 4;
             inspector.style.marginBottom = 4;
 
-            container.Add(inspector);
-
-            // ===== Context Menu =====
-            title.RegisterCallback<MouseDownEvent>(evt =>
+            nativeComponentHeader.RegisterCallback<MouseDownEvent>(evt =>
             {
-                if (evt.button != 1) return; // Right mouse button
+                if (evt.button != 0) return; // Left mouse button
 
-                var mouseRect = new Rect(Event.current.mousePosition, Vector2.zero);
-                EditorContextMenuUtil.Show(mouseRect, component);
+                componentInspectorData.IsExpanded = !componentInspectorData.IsExpanded;
+
+                inspector.style.display = componentInspectorData.IsExpanded
+                    ? DisplayStyle.Flex
+                    : DisplayStyle.None;
 
                 evt.StopPropagation();
             });
+
+            titleBar.Add(nativeComponentHeader);
+            titleBar.Add(subComponentHeader);
+            container.Add(titleBar);
+            container.Add(inspector);
 
             return container;
         }

@@ -8,7 +8,7 @@ public partial class ComponentQuickView : EditorWindow
     private GameObject _target;
 
     private Dictionary<Component, bool> _visibility = new();
-    private Dictionary<Component, Editor> _editors = new();
+    private Dictionary<Component, ComponentInspectorData> _editors = new();
     private Dictionary<int, Dictionary<int, bool>> _traversedGameObjs = new();
 
     private bool _isLocked = false;
