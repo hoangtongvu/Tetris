@@ -43,7 +43,7 @@ public partial class ComponentQuickView : EditorWindow
             this.Add(CreateToggleAllButton());
 
             var components = target.GetComponents<Component>();
-            var visibility = _cqv._visibility;
+            var inspectorStates = _cqv._componentInspectorStates;
 
             foreach (var c in components)
             {
@@ -51,8 +51,8 @@ public partial class ComponentQuickView : EditorWindow
 
                 bool visible;
 
-                if (visibility.TryGetValue(c, out bool value))
-                    visible = value;
+                if (inspectorStates.TryGetValue(c, out var state))
+                    visible = state.IsVisible;
                 else
                     visible = true;
 
@@ -133,7 +133,7 @@ public partial class ComponentQuickView : EditorWindow
 
             button.clicked += () =>
             {
-                _cqv._visibility[c] = !visible;
+                _cqv._componentInspectorStates[c].IsVisible = !visible;
                 _cqv.RepaintWindow();
             };
 

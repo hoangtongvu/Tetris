@@ -25,7 +25,7 @@ public partial class ComponentQuickView : EditorWindow
             this.Clear();
 
             var target = _cqv._target;
-            var visibility = _cqv._visibility;
+            var inspectorStates = _cqv._componentInspectorStates;
 
             if (!target) return;
 
@@ -33,10 +33,8 @@ public partial class ComponentQuickView : EditorWindow
 
             foreach (var c in components)
             {
-                if (c == null) continue;
-                if (visibility.ContainsKey(c) && !visibility[c]) continue;
+                if (inspectorStates.ContainsKey(c) && !inspectorStates[c].IsVisible) continue;
 
-                visibility[c] = true;
                 var element = CreateComponentElement(c);
                 this.Add(element);
             }
@@ -48,14 +46,13 @@ public partial class ComponentQuickView : EditorWindow
             container.AddToClassList("component-element");
 
             // ===== Inspector =====
-            if (!_cqv._editors.TryGetValue(component, out var componentInspectorData) || componentInspectorData.Editor == null)
+            if (!_cqv._componentInspectorStates.TryGetValue(component, out var componentInspectorState))
             {
-                componentInspectorData = new()
-                {
-                    Editor = Editor.CreateEditor(component),
-                };
-                _cqv._editors[component] = componentInspectorData;
+                componentInspectorState = new();
+                _cqv._componentInspectorStates[component] = componentInspectorState;
             }
+
+            componentInspectorState.Editor = Editor.CreateEditor(component);
 
             var titleBar = new VisualElement();
             titleBar.AddToClassList("title-bar");
@@ -63,8 +60,8 @@ public partial class ComponentQuickView : EditorWindow
             var nativeComponentHeader = new IMGUIContainer(() =>
             {
                 EditorGUILayout.InspectorTitlebar(
-                    componentInspectorData.IsExpanded,
-                    componentInspectorData.Editor);
+                    componentInspectorState.IsExpanded,
+                    componentInspectorState.Editor);
             });
 
             nativeComponentHeader.AddToClassList("native-component-header");
@@ -74,18 +71,21 @@ public partial class ComponentQuickView : EditorWindow
 
             subComponentHeader.Add(CreateHideButton(component));
 
-            var inspector = new InspectorElement(componentInspectorData.Editor);
+            var inspector = new InspectorElement(componentInspectorState.Editor);
 
             inspector.style.marginTop = 4;
             inspector.style.marginBottom = 4;
+            inspector.style.display = componentInspectorState.IsExpanded
+                ? DisplayStyle.Flex
+                : DisplayStyle.None;
 
             nativeComponentHeader.RegisterCallback<MouseDownEvent>(evt =>
             {
                 if (evt.button != 0) return; // Left mouse button
 
-                componentInspectorData.IsExpanded = !componentInspectorData.IsExpanded;
+                componentInspectorState.IsExpanded = !componentInspectorState.IsExpanded;
 
-                inspector.style.display = componentInspectorData.IsExpanded
+                inspector.style.display = componentInspectorState.IsExpanded
                     ? DisplayStyle.Flex
                     : DisplayStyle.None;
 
@@ -108,7 +108,7 @@ public partial class ComponentQuickView : EditorWindow
 
             hideBtn.clicked += () =>
             {
-                _cqv._visibility[component] = false;
+                _cqv._componentInspectorStates[component].IsVisible = false;
                 _cqv.RepaintWindow();
             };
 

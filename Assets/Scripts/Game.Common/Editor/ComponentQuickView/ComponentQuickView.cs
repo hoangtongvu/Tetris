@@ -7,9 +7,11 @@ public partial class ComponentQuickView : EditorWindow
 {
     private GameObject _target;
 
-    private Dictionary<Component, bool> _visibility = new();
-    private Dictionary<Component, ComponentInspectorData> _editors = new();
-    private Dictionary<int, Dictionary<int, bool>> _traversedGameObjs = new();
+    private Dictionary<Component, ComponentInspectorState> _componentInspectorStates = new();
+
+    // first int: id of the game object
+    // second int: id of the component
+    private Dictionary<int, Dictionary<int, ComponentInspectorState>> _cachedInspectorStateByGameObject = new();
 
     private bool _isLocked = false;
 
@@ -31,6 +33,7 @@ public partial class ComponentQuickView : EditorWindow
 
     public void CreateGUI()
     {
+        rootVisualElement.style.opacity = 0;
         rootVisualElement.style.flexDirection = FlexDirection.Column;
 
         _unityHeader = new(this);
@@ -58,18 +61,18 @@ public partial class ComponentQuickView : EditorWindow
 
     private void RefreshSelection()
     {
-        // Save visibility before cleaning up
+        // Save states before cleaning up
         if (_target != null)
         {
-            var temp = new Dictionary<int, bool>();
-            foreach (var kVPair in _visibility)
+            var temp = new Dictionary<int, ComponentInspectorState>();
+            foreach (var kVPair in _componentInspectorStates)
                 temp.Add(kVPair.Key.GetEntityId(), kVPair.Value);
 
-            _traversedGameObjs[_target.GetEntityId()] = temp;
+            _cachedInspectorStateByGameObject[_target.GetEntityId()] = temp;
         }
 
         _target = Selection.activeGameObject;
-        _visibility.Clear();
+        _componentInspectorStates.Clear();
 
         if (_target == null)
         {
@@ -77,8 +80,9 @@ public partial class ComponentQuickView : EditorWindow
             return;
         }
 
-        // Retrieve saved visibility
-        bool canRetrieveSavedVisibility = _traversedGameObjs.TryGetValue(_target.GetEntityId(), out var savedVisibility);
+        // Retrieve saved inspector states
+        bool canRetrieveSavedEditorDatas = _cachedInspectorStateByGameObject
+            .TryGetValue(_target.GetEntityId(), out var savedInspectorStates);
 
         var components = _target.GetComponents<Component>();
 
@@ -86,10 +90,18 @@ public partial class ComponentQuickView : EditorWindow
         {
             if (c == null) continue;
 
-            if (canRetrieveSavedVisibility)
-                _visibility[c] = !savedVisibility.TryGetValue(c.GetEntityId(), out bool v) || v;
+            if (canRetrieveSavedEditorDatas)
+            {
+                savedInspectorStates.TryGetValue(c.GetEntityId(), out var v);
+                if (v != null)
+                {
+                    _componentInspectorStates[c] = v;
+                }
+            }
             else
-                _visibility[c] = true;
+            {
+                _componentInspectorStates[c] = new();
+            }
         }
 
         RepaintWindow();
@@ -103,7 +115,7 @@ public partial class ComponentQuickView : EditorWindow
         {
             if (c == null) continue;
 
-            _visibility[c] = value;
+            _componentInspectorStates[c].IsVisible = value;
         }
 
         RepaintWindow();
