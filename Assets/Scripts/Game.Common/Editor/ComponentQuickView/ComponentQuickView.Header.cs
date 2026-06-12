@@ -1,6 +1,7 @@
 ﻿using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public partial class ComponentQuickView : EditorWindow
 {
@@ -10,6 +11,9 @@ public partial class ComponentQuickView : EditorWindow
     {
         private readonly ComponentQuickView _cqv;
         private int _headerHeight = 25;
+
+        private Label _toast;
+        private IVisualElementScheduledItem _hideToastTask;
 
         public Header(ComponentQuickView componentQuickView) : base()
         {
@@ -33,7 +37,33 @@ public partial class ComponentQuickView : EditorWindow
             this.Add(this.CreatePasteValuesOrAddComponentsButton());
 
             // Create GameObj from copied components button
-            this.Add(this.CreateCreateGameObjFromCopiedComponentsButton());
+            this.Add(this.CreateCreateGameObjFromSelectedComponentsButton());
+
+            // Create Toast
+            this.Add(CreateToast());
+        }
+
+        private Label CreateToast()
+        {
+            _toast = new();
+            _toast.AddToClassList("toast");
+
+            return _toast;
+        }
+
+        private void ShowToast(string text)
+        {
+            _toast.text = text;
+            _toast.AddToClassList("show");
+
+            _hideToastTask?.Pause();
+
+            _hideToastTask = _toast.schedule.Execute(() =>
+            {
+                _toast.RemoveFromClassList("show");
+            });
+
+            _hideToastTask.StartingIn(1500);
         }
 
         private ToolbarButton CreateCopyComponentValuesButton()
@@ -57,6 +87,8 @@ public partial class ComponentQuickView : EditorWindow
 
                     copiedComponents.Add(kvPair.Key);
                 }
+
+                this.ShowToast($"Copied {copiedComponents.Count} components");
             };
 
             return btn;
@@ -75,6 +107,8 @@ public partial class ComponentQuickView : EditorWindow
                 var inspectorStates = _cqv._componentInspectorStates;
                 var copiedComponents = _cqv._copiedComponents;
 
+                int pastedCount = 0;
+
                 foreach (var copiedComponent in copiedComponents)
                 {
                     foreach (var kvPair in inspectorStates)
@@ -84,9 +118,12 @@ public partial class ComponentQuickView : EditorWindow
 
                         EditorUtility.CopySerializedIfDifferent(copiedComponent, destComponent);
                         EditorUtility.SetDirty(destComponent);
+                        pastedCount++;
                         break;
                     }
                 }
+
+                this.ShowToast($"Pasted {pastedCount} components");
             };
 
             return btn;
@@ -105,6 +142,9 @@ public partial class ComponentQuickView : EditorWindow
                 var inspectorStates = _cqv._componentInspectorStates;
                 var copiedComponents = _cqv._copiedComponents;
 
+                int pastedCount = 0;
+                int createdCount = 0;
+
                 foreach (var copiedComponent in copiedComponents)
                 {
                     bool hasDestComponent = false;
@@ -116,6 +156,7 @@ public partial class ComponentQuickView : EditorWindow
 
                         EditorUtility.CopySerializedIfDifferent(copiedComponent, destComponent);
                         EditorUtility.SetDirty(destComponent);
+                        pastedCount++;
                         hasDestComponent = true;
                         break;
                     }
@@ -125,35 +166,44 @@ public partial class ComponentQuickView : EditorWindow
                         var destComponent = _cqv._targetGO.AddComponent(copiedComponent.GetType());
                         EditorUtility.CopySerialized(copiedComponent, destComponent);
                         EditorUtility.SetDirty(destComponent);
+                        createdCount++;
                     }
                 }
+
+                this.ShowToast($"Pasted {pastedCount}, Added {createdCount} components");
             };
 
             return btn;
         }
 
-        private ToolbarButton CreateCreateGameObjFromCopiedComponentsButton()
+        private ToolbarButton CreateCreateGameObjFromSelectedComponentsButton()
         {
             var btn = new ToolbarButton();
-            btn.tooltip = "Create GameObject from copied components";
+            btn.tooltip = "Create GameObject from selected components";
             var icon = EditorGUIUtility.IconContent("GameObject Icon");
             btn.iconImage = icon.image as Texture2D;
             btn.style.width = _headerHeight;
 
             btn.clicked += () =>
             {
-                var copiedComponents = _cqv._copiedComponents;
+                var inspectorStates = _cqv._componentInspectorStates;
                 var newGO = new GameObject();
+                int count = 0;
 
-                foreach (var copiedComponent in copiedComponents)
+                foreach (var kvPair in inspectorStates)
                 {
-                    if (!newGO.TryGetComponent(copiedComponent.GetType(), out var destComponent))
-                        destComponent = newGO.AddComponent(copiedComponent.GetType());
+                    if (!kvPair.Value.IsVisible) continue;
 
-                    EditorUtility.CopySerialized(copiedComponent, destComponent);
+                    var sourceComponent = kvPair.Key;
+                    if (!newGO.TryGetComponent(sourceComponent.GetType(), out var destComponent))
+                        destComponent = newGO.AddComponent(sourceComponent.GetType());
+
+                    EditorUtility.CopySerialized(sourceComponent, destComponent);
+                    count++;
                 }
 
                 EditorUtility.SetDirty(newGO);
+                this.ShowToast($"Created a GameObject from {count} components");
             };
 
             return btn;
