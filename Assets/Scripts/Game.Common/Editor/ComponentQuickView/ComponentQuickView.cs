@@ -49,6 +49,8 @@ public partial class ComponentQuickView : EditorWindow
 
         _componentInspectors = new(this);
         rootVisualElement.Add(_componentInspectors);
+
+        _lockInspectorButton = new(this);
     }
 
     private void OnSelectionChange()
@@ -138,5 +140,6 @@ public partial class ComponentQuickView : EditorWindow
 
         _componentToolBar.Refresh();
         _componentInspectors.Refresh();
+        _lockInspectorButton.AttachButton();
     }
 }

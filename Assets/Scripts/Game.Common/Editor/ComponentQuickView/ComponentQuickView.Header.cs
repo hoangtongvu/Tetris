@@ -23,26 +23,6 @@ public partial class ComponentQuickView : EditorWindow
             this.styleSheets.Add(styleSheet);
             this.AddToClassList("header");
 
-            // Lock button (icon)
-            var lockButton = new ToolbarButton();
-            lockButton.clicked += () =>
-            {
-                bool wasLocked = _cqv._isLocked;
-                _cqv._isLocked = !_cqv._isLocked;
-
-                if (wasLocked && !_cqv._isLocked)
-                {
-                    _cqv.RefreshSelection();
-                }
-
-                UpdateLockUI(lockButton);
-            };
-
-            lockButton.style.width = _headerHeight;
-            this.Add(lockButton);
-
-            UpdateLockUI(lockButton);
-
             // Copy component values button
             this.Add(this.CreateCopyComponentValuesButton());
 
@@ -54,17 +34,6 @@ public partial class ComponentQuickView : EditorWindow
 
             // Create GameObj from copied components button
             this.Add(this.CreateCreateGameObjFromCopiedComponentsButton());
-        }
-
-        private void UpdateLockUI(ToolbarButton lockButton)
-        {
-            var icon = EditorGUIUtility.IconContent(
-                _cqv._isLocked ? "LockIcon-On" : "LockIcon"
-            );
-
-            lockButton.iconImage = icon.image as Texture2D;
-
-            lockButton.tooltip = _cqv._isLocked ? "Unlock" : "Lock";
         }
 
         private ToolbarButton CreateCopyComponentValuesButton()
