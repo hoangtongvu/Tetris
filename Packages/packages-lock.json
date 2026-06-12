@@ -41,6 +41,13 @@
       "dependencies": {},
       "hash": "13348c2277a7a21ea5340ed7316dd89216378fe0"
     },
+    "com.darksun.lumie-component-inspector": {
+      "version": "https://github.com/hoangtongvu/LumieComponentInspector.git#1.0.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "a85fa071ad04d93b3a81e0feec2a650229e4b7fe"
+    },
     "com.github-glitchenzo.nugetforunity": {
       "version": "https://github.com/GlitchEnzo/NuGetForUnity.git?path=/src/NuGetForUnity",
       "depth": 0,
