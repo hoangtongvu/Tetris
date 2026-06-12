@@ -2,18 +2,20 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public partial class ComponentQuickView : EditorWindow
+namespace LumieComponentInspector;
+
+partial class LumieCI : EditorWindow
 {
     private UnityHeader _unityHeader;
 
     private class UnityHeader : IMGUIContainer
     {
-        private readonly ComponentQuickView _cqv;
+        private readonly LumieCI _lci;
         private Editor _editor;
 
-        public UnityHeader(ComponentQuickView componentQuickView) : base()
+        public UnityHeader(LumieCI lci) : base()
         {
-            _cqv = componentQuickView;
+            _lci = lci;
             CreateHeader();
         }
 
@@ -24,7 +26,7 @@ public partial class ComponentQuickView : EditorWindow
 
             this.onGUIHandler += () =>
             {
-                var target = _cqv._targetObject;
+                var target = _lci._targetObject;
                 if (!target) return;
 
                 if (_editor == null || _editor.target != target)

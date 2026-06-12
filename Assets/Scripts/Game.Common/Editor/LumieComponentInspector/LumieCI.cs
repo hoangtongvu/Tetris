@@ -3,7 +3,9 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public partial class ComponentQuickView : EditorWindow
+namespace LumieComponentInspector;
+
+internal partial class LumieCI : EditorWindow
 {
     private LCIConfigsSO _inspectorConfigs;
     private Object _targetObject;
@@ -18,10 +20,10 @@ public partial class ComponentQuickView : EditorWindow
 
     private bool _isLocked = false;
 
-    [MenuItem("Tools/Component Quick View")]
+    [MenuItem("Tools/Lumie Component Inspector")]
     public static void Open()
     {
-        GetWindow<ComponentQuickView>("Component View");
+        GetWindow<LumieCI>("LumieComponentInspector");
     }
 
     private void OnEnable()

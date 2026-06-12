@@ -1,29 +1,31 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-public partial class ComponentQuickView : EditorWindow
+namespace LumieComponentInspector;
+
+partial class LumieCI : EditorWindow
 {
     private LockInspectorButton _lockInspectorButton;
 
-    public class LockInspectorButton : EditorWindowTitleButton
+    private class LockInspectorButton : EditorWindowTitleButton
     {
-        public LockInspectorButton(ComponentQuickView componentQuickView) : base(componentQuickView)
+        public LockInspectorButton(LumieCI lci) : base(lci)
         {
         }
 
         protected override void DrawButton(Rect rect)
         {
             var icon = EditorGUIUtility.IconContent(
-                _cqv._isLocked ? "LockIcon-On" : "LockIcon"
+                _lci._isLocked ? "LockIcon-On" : "LockIcon"
             );
 
             if (GUI.Button(rect, GUIContent.none, EditorStyles.iconButton))
             {
-                bool wasLocked = _cqv._isLocked;
-                _cqv._isLocked = !_cqv._isLocked;
+                bool wasLocked = _lci._isLocked;
+                _lci._isLocked = !_lci._isLocked;
 
-                if (wasLocked && !_cqv._isLocked)
-                    _cqv.RefreshSelection();
+                if (wasLocked && !_lci._isLocked)
+                    _lci.RefreshSelection();
             }
 
             const float iconSize = 11f;

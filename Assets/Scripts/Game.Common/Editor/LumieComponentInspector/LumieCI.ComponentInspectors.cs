@@ -3,38 +3,40 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public partial class ComponentQuickView : EditorWindow
+namespace LumieComponentInspector;
+
+partial class LumieCI : EditorWindow
 {
     private ComponentInspectors _componentInspectors;
 
     private class ComponentInspectors : ScrollView
     {
-        private readonly ComponentQuickView _cqv;
+        private readonly LumieCI _lci;
 
-        public ComponentInspectors(ComponentQuickView componentQuickView) : base()
+        public ComponentInspectors(LumieCI lci) : base()
         {
-            _cqv = componentQuickView;
+            _lci = lci;
             this.verticalScrollerVisibility = ScrollerVisibility.AlwaysVisible;
 
-            this.styleSheets.Add(_cqv._inspectorConfigs.ComponentInspectorsStyleSheet);
+            this.styleSheets.Add(_lci._inspectorConfigs.ComponentInspectorsStyleSheet);
         }
 
         public void Refresh()
         {
             this.Clear();
 
-            var targetGO = _cqv._targetGO;
+            var targetGO = _lci._targetGO;
             if (!targetGO)
             {
                 // Draw Inspector for non-GameObject Object
-                var targetObject = _cqv._targetObject;
+                var targetObject = _lci._targetObject;
                 var objectInspector = new InspectorElement(targetObject);
                 this.Add(objectInspector);
 
                 return;
             }
 
-            var inspectorStates = _cqv._componentInspectorStates;
+            var inspectorStates = _lci._componentInspectorStates;
             var components = targetGO.GetComponents<Component>();
 
             foreach (var c in components)
@@ -52,10 +54,10 @@ public partial class ComponentQuickView : EditorWindow
             container.AddToClassList("component-element");
 
             // ===== Inspector =====
-            if (!_cqv._componentInspectorStates.TryGetValue(component, out var componentInspectorState))
+            if (!_lci._componentInspectorStates.TryGetValue(component, out var componentInspectorState))
             {
                 componentInspectorState = new();
-                _cqv._componentInspectorStates[component] = componentInspectorState;
+                _lci._componentInspectorStates[component] = componentInspectorState;
             }
 
             var titleBar = new VisualElement();
@@ -112,8 +114,8 @@ public partial class ComponentQuickView : EditorWindow
 
             hideBtn.clicked += () =>
             {
-                _cqv._componentInspectorStates[component].IsVisible = false;
-                _cqv.RepaintWindow();
+                _lci._componentInspectorStates[component].IsVisible = false;
+                _lci.RepaintWindow();
             };
 
             return hideBtn;

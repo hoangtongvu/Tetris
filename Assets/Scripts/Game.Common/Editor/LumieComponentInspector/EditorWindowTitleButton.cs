@@ -3,13 +3,15 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-public abstract class EditorWindowTitleButton
-{
-    protected readonly ComponentQuickView _cqv;
+namespace LumieComponentInspector;
 
-    public EditorWindowTitleButton(ComponentQuickView componentQuickView) : base()
+internal abstract class EditorWindowTitleButton
+{
+    protected readonly LumieCI _lci;
+
+    public EditorWindowTitleButton(LumieCI lci) : base()
     {
-        _cqv = componentQuickView;
+        _lci = lci;
     }
 
     public void AttachButton()
@@ -18,7 +20,7 @@ public abstract class EditorWindowTitleButton
             "m_Parent",
             BindingFlags.Instance | BindingFlags.NonPublic);
 
-        var hostView = parentField.GetValue(_cqv);
+        var hostView = parentField.GetValue(_lci);
 
         var showButtonField = hostView.GetType().BaseType.GetField(
             "m_ShowButton",

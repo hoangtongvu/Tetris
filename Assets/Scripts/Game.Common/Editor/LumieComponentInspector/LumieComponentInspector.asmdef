@@ -1,6 +1,6 @@
 {
-    "name": "ComponentQuickView",
-    "rootNamespace": "",
+    "name": "LumieComponentInspector",
+    "rootNamespace": "LumieComponentInspector",
     "references": [],
     "includePlatforms": [
         "Editor"

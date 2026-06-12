@@ -3,7 +3,9 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public partial class ComponentQuickView : EditorWindow
+namespace LumieComponentInspector;
+
+partial class LumieCI : EditorWindow
 {
     private ComponentToolbar _componentToolBar;
 
@@ -17,18 +19,18 @@ public partial class ComponentQuickView : EditorWindow
             }
         }
 
-        private readonly ComponentQuickView _cqv;
+        private readonly LumieCI _lci;
         private bool _toggledAllVisible = true;
 
-        public ComponentToolbar(ComponentQuickView componentQuickView) : base()
+        public ComponentToolbar(LumieCI lci) : base()
         {
-            _cqv = componentQuickView;
+            _lci = lci;
             CreateComponentToolbar();
         }
 
         private void CreateComponentToolbar()
         {
-            this.styleSheets.Add(_cqv._inspectorConfigs.ComponentToolbarStyleSheet);
+            this.styleSheets.Add(_lci._inspectorConfigs.ComponentToolbarStyleSheet);
             this.AddToClassList("container");
         }
 
@@ -36,13 +38,13 @@ public partial class ComponentQuickView : EditorWindow
         {
             this.Clear();
 
-            var target = _cqv._targetGO;
+            var target = _lci._targetGO;
             if (!target) return;
 
             this.Add(CreateToggleAllButton());
 
             var components = target.GetComponents<Component>();
-            var inspectorStates = _cqv._componentInspectorStates;
+            var inspectorStates = _lci._componentInspectorStates;
 
             foreach (var c in components)
             {
@@ -84,7 +86,7 @@ public partial class ComponentQuickView : EditorWindow
             button.clicked += () =>
             {
                 _toggledAllVisible = !_toggledAllVisible;
-                _cqv.SetAllVisibility(_toggledAllVisible);
+                _lci.SetAllVisibility(_toggledAllVisible);
                 UpdateToggleAllButtonUI();
             };
 
@@ -132,8 +134,8 @@ public partial class ComponentQuickView : EditorWindow
 
             button.clicked += () =>
             {
-                _cqv._componentInspectorStates[c].IsVisible = !visible;
-                _cqv.RepaintWindow();
+                _lci._componentInspectorStates[c].IsVisible = !visible;
+                _lci.RepaintWindow();
             };
 
             return button;
@@ -159,7 +161,7 @@ public partial class ComponentQuickView : EditorWindow
                         "Show",
                         BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
 
-                    method?.Invoke(null, new object[] { screenRect, new[] { _cqv._targetGO } });
+                    method?.Invoke(null, new object[] { screenRect, new[] { _lci._targetGO } });
                 }
             };
 

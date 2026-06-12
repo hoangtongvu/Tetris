@@ -3,27 +3,29 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public partial class ComponentQuickView : EditorWindow
+namespace LumieComponentInspector;
+
+partial class LumieCI : EditorWindow
 {
     private Header _header;
 
     private class Header : Toolbar
     {
-        private readonly ComponentQuickView _cqv;
+        private readonly LumieCI _lci;
         private int _headerHeight = 25;
 
         private Label _toast;
         private IVisualElementScheduledItem _hideToastTask;
 
-        public Header(ComponentQuickView componentQuickView) : base()
+        public Header(LumieCI lci) : base()
         {
-            _cqv = componentQuickView;
+            _lci = lci;
             CreateHeader();
         }
 
         private void CreateHeader()
         {
-            this.styleSheets.Add(_cqv._inspectorConfigs.ComponentHeaderStyleSheet);
+            this.styleSheets.Add(_lci._inspectorConfigs.ComponentHeaderStyleSheet);
             this.AddToClassList("header");
 
             // Copy component values button
@@ -75,8 +77,8 @@ public partial class ComponentQuickView : EditorWindow
 
             btn.clicked += () =>
             {
-                var inspectorStates = _cqv._componentInspectorStates;
-                var copiedComponents = _cqv._copiedComponents;
+                var inspectorStates = _lci._componentInspectorStates;
+                var copiedComponents = _lci._copiedComponents;
 
                 copiedComponents.Clear();
 
@@ -103,8 +105,8 @@ public partial class ComponentQuickView : EditorWindow
 
             btn.clicked += () =>
             {
-                var inspectorStates = _cqv._componentInspectorStates;
-                var copiedComponents = _cqv._copiedComponents;
+                var inspectorStates = _lci._componentInspectorStates;
+                var copiedComponents = _lci._copiedComponents;
 
                 int pastedCount = 0;
 
@@ -138,8 +140,8 @@ public partial class ComponentQuickView : EditorWindow
 
             btn.clicked += () =>
             {
-                var inspectorStates = _cqv._componentInspectorStates;
-                var copiedComponents = _cqv._copiedComponents;
+                var inspectorStates = _lci._componentInspectorStates;
+                var copiedComponents = _lci._copiedComponents;
 
                 int pastedCount = 0;
                 int createdCount = 0;
@@ -162,7 +164,7 @@ public partial class ComponentQuickView : EditorWindow
 
                     if (!hasDestComponent)
                     {
-                        var destComponent = _cqv._targetGO.AddComponent(copiedComponent.GetType());
+                        var destComponent = _lci._targetGO.AddComponent(copiedComponent.GetType());
                         EditorUtility.CopySerialized(copiedComponent, destComponent);
                         EditorUtility.SetDirty(destComponent);
                         createdCount++;
@@ -185,7 +187,7 @@ public partial class ComponentQuickView : EditorWindow
 
             btn.clicked += () =>
             {
-                var inspectorStates = _cqv._componentInspectorStates;
+                var inspectorStates = _lci._componentInspectorStates;
                 var newGO = new GameObject();
                 int count = 0;
 
