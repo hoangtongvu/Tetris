@@ -28,8 +28,7 @@ public partial class ComponentQuickView : EditorWindow
 
         private void CreateComponentToolbar()
         {
-            var styleSheet = USSUtils.LoadStyleSheet("styles/component-toolbar.uss");
-            this.styleSheets.Add(styleSheet);
+            this.styleSheets.Add(_cqv._inspectorConfigs.ComponentToolbarStyleSheet);
             this.AddToClassList("container");
         }
 

@@ -23,8 +23,7 @@ public partial class ComponentQuickView : EditorWindow
 
         private void CreateHeader()
         {
-            var styleSheet = USSUtils.LoadStyleSheet("styles/component-header.uss");
-            this.styleSheets.Add(styleSheet);
+            this.styleSheets.Add(_cqv._inspectorConfigs.ComponentHeaderStyleSheet);
             this.AddToClassList("header");
 
             // Copy component values button

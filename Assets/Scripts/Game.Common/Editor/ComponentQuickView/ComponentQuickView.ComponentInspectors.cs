@@ -16,8 +16,7 @@ public partial class ComponentQuickView : EditorWindow
             _cqv = componentQuickView;
             this.verticalScrollerVisibility = ScrollerVisibility.AlwaysVisible;
 
-            var styleSheet = USSUtils.LoadStyleSheet("styles/component-inspectors.uss");
-            this.styleSheets.Add(styleSheet);
+            this.styleSheets.Add(_cqv._inspectorConfigs.ComponentInspectorsStyleSheet);
         }
 
         public void Refresh()

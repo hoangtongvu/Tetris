@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 
 public partial class ComponentQuickView : EditorWindow
 {
+    private LCIConfigsSO _inspectorConfigs;
     private Object _targetObject;
     private GameObject _targetGO;
 
@@ -35,6 +36,8 @@ public partial class ComponentQuickView : EditorWindow
 
     public void CreateGUI()
     {
+        _inspectorConfigs = Resources.Load<LCIConfigsSO>(LCIConfigsSO.DefaultAssetPath);
+
         rootVisualElement.style.opacity = 0;
         rootVisualElement.style.flexDirection = FlexDirection.Column;
 
